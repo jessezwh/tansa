@@ -77,6 +77,7 @@ export interface Config {
     exec: Exec;
     registrations: Registration;
     exports: Export;
+    'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -94,6 +95,7 @@ export interface Config {
     exec: ExecSelect<false> | ExecSelect<true>;
     registrations: RegistrationsSelect<false> | RegistrationsSelect<true>;
     exports: ExportsSelect<false> | ExportsSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -102,6 +104,7 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
+  fallbackLocale: null;
   globals: {};
   globalsSelect: {};
   locale: null;
@@ -306,7 +309,16 @@ export interface Registration {
   email: string;
   phoneNumber: string;
   gender: 'male' | 'female' | 'non-binary' | 'other' | 'prefer-not-to-say';
-  ethnicity: 'asian' | 'nz-european' | 'maori' | 'pacific-peoples' | 'middle-eastern' | 'other' | 'prefer-not-to-say';
+  ethnicity:
+    | 'taiwanese'
+    | 'chinese'
+    | 'east-asian'
+    | 'southeast-asian'
+    | 'south-asian'
+    | 'maori'
+    | 'pasifika'
+    | 'nz-european'
+    | 'other';
   /**
    * UoA ID or AUT Student Number
    */
@@ -368,6 +380,23 @@ export interface Export {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv".
+ */
+export interface PayloadKv {
+  id: number;
+  key: string;
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -507,10 +536,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'exports';
         value: number | Export;
-      } | null)
-    | ({
-        relationTo: 'payload-jobs';
-        value: number | PayloadJob;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -732,6 +757,14 @@ export interface ExportsSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv_select".
+ */
+export interface PayloadKvSelect<T extends boolean = true> {
+  key?: T;
+  data?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -5,32 +5,20 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 export async function POST(request: NextRequest) {
   try {
-    const { amount, formData } = await request.json()
+    const { amount } = await request.json()
 
-    // Create a PaymentIntent with the order amount and currency
+    // Create a PaymentIntent without metadata (will be added before payment)
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount,
       currency: 'nzd',
       automatic_payment_methods: {
         enabled: true,
       },
-      metadata: {
-        type: 'signup',
-        firstName: formData?.firstName || '',
-        lastName: formData?.lastName || '',
-        email: formData?.email || '',
-        phoneNumber: formData?.phoneNumber || '',
-        gender: formData?.gender || '',
-        ethnicity: formData?.ethnicity || '',
-        universityId: formData?.universityId || '',
-        upi: formData?.upi || '',
-        areaOfStudy: formData?.areaOfStudy || '',
-        yearLevel: formData?.yearLevel || '',
-      },
     })
 
     return NextResponse.json({
       clientSecret: paymentIntent.client_secret,
+      paymentIntentId: paymentIntent.id, // Return the ID for updating later
     })
   } catch (err) {
     console.error('Error creating payment intent:', err)

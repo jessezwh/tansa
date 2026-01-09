@@ -30,10 +30,10 @@ const STATUS_CONFIG: Record<
   },
   success: {
     icon: <CheckCircle className="h-12 w-12 mx-auto mb-4 text-green-600" />,
-    title: 'Welcome!',
+    title: 'Welcome to TANSA!',
     description: 'Your registration is complete',
     color: 'text-green-700',
-    message: 'Payment successful! Your account has been created.',
+    message: 'Payment successful! Make sure to pick up your membership card.',
   },
   error: {
     icon: <XCircle className="h-12 w-12 mx-auto mb-4 text-red-600" />,

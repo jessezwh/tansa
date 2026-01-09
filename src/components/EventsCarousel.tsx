@@ -78,7 +78,7 @@ const EventsCarousel: React.FC<EventsCarouselProps> = ({
 
               {/* Image Overlay with Title and Description */}
               {(image.title || image.description) && (
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent py-4 px-6 sm:py-6 sm:px-14">
                   {image.title && (
                     <h3 className="text-white text-xl font-bold mb-2">{image.title}</h3>
                   )}

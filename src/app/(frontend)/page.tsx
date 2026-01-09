@@ -2,8 +2,45 @@ import EventsCarousel from '@/components/EventsCarousel'
 import InstagramWidget from '@/components/InstagramWidget'
 import Image from 'next/image'
 import React from 'react'
+import { getPayload } from 'payload'
+import config from '@/payload.config'
+import { Media } from '@/payload-types'
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch recent events with cover images for the carousel
+  let carouselImages: { id: string; src: string; alt: string; title: string; description?: string }[] = []
+
+  try {
+    const payload = await getPayload({ config })
+    const eventsData = await payload.find({
+      collection: 'events',
+      limit: 10,
+      sort: '-date',
+      where: {
+        coverImage: {
+          exists: true,
+        },
+      },
+    })
+
+    // Transform events into carousel format
+    carouselImages = eventsData.docs
+      .filter((event) => event.coverImage)
+      .map((event) => {
+        const media = event.coverImage as Media
+        return {
+          id: String(event.id),
+          src: media.url || '',
+          alt: event.title,
+          title: event.title,
+          description: event.description || undefined,
+        }
+      })
+      .filter((img) => img.src) // Only include images with valid URLs
+  } catch (error) {
+    // Database unavailable - carousel will show "No images to display"
+    console.error('Failed to fetch events for carousel:', error)
+  }
   return (
     <div className="relative bg-tansa-blue">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
@@ -44,9 +81,16 @@ export default function HomePage() {
         </section>
       </div>
 
-      <div className="bg-tansa-cream">
+      <div className="bg-tansa-cream pt-12 sm:pt-16 lg:pt-20">
+        <div className="flex flex-col items-center justify-center w-full">
+          <div className="w-full max-w-7xl px-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-tansa-blue mb-6 font-newkansas">
+              Recent Events
+            </h2>
+            <EventsCarousel images={carouselImages} />
+          </div>
+        </div>
         <InstagramWidget />
-        <EventsCarousel images={[]} />
       </div>
     </div>
   )

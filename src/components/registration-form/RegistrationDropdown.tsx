@@ -23,6 +23,7 @@ type RegistrationDropdownProps = {
   placeholder?: string
   required?: boolean
   id?: string
+  subtitle?: string
 }
 
 const RegistrationDropdown: React.FC<RegistrationDropdownProps> = ({
@@ -33,6 +34,7 @@ const RegistrationDropdown: React.FC<RegistrationDropdownProps> = ({
   placeholder = 'Select an option',
   required = false,
   id = label.toLowerCase().replace(/\s+/g, ''),
+  subtitle,
 }) => {
   return (
     <div className="space-y-2">
@@ -40,6 +42,7 @@ const RegistrationDropdown: React.FC<RegistrationDropdownProps> = ({
         {label}
         {required && <Required />}
       </Label>
+      {subtitle && <p className="text-xs text-muted-foreground -mt-1">{subtitle}</p>}
       <Select value={value} onValueChange={onValueChange} required={required}>
         <SelectTrigger>
           <SelectValue placeholder={placeholder} />

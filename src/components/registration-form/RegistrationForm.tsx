@@ -29,10 +29,18 @@ import {
   Mars,
   Venus,
   NonBinary,
+  Globe,
+  Users,
 } from 'lucide-react'
 import RegistrationTextInput from './RegistrationTextInput'
 import RegistrationDropdown from './RegistrationDropdown'
 import RegistrationHeading from './RegistrationHeading'
+
+type ExecMember = {
+  id: number
+  name: string
+  position: string
+}
 
 // production key
 // Use env var if available (for local dev), otherwise fallback to production key
@@ -92,16 +100,28 @@ function CheckoutForm({
   paymentIntentId,
   formData,
   onFormChange,
+  execMembers,
 }: {
   clientSecret: string
   paymentIntentId: string
   formData: any
   onFormChange: (field: string, value: string) => void
+  execMembers: ExecMember[]
 }) {
   const stripe = useStripe()
   const elements = useElements()
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
+
+  // Build committee member options for dropdown
+  const signedUpByOptions = [
+    { value: 'online', label: 'None / Online', icon: Globe },
+    ...execMembers.map((member) => ({
+      value: String(member.id),
+      label: `${member.name} - ${member.position}`,
+      icon: Users,
+    })),
+  ]
 
   const isFormValid = () => {
     return (
@@ -114,7 +134,8 @@ function CheckoutForm({
       formData.universityId &&
       formData.upi &&
       formData.areaOfStudy &&
-      formData.yearLevel
+      formData.yearLevel &&
+      formData.signedUpBy
     )
   }
 
@@ -270,6 +291,34 @@ function CheckoutForm({
         </div>
       </div>
 
+      {/* Additional Information Section */}
+      <div className="space-y-4">
+        <RegistrationHeading
+          label="Additional Information"
+          subtitle="Be in to win AirPods when you use a friend's referral code!"
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <RegistrationTextInput
+            label="Referral Code"
+            value={formData.referralCode}
+            subtitle="Enter a friend's referral code (e.g., TANSA-AB12)"
+            onChange={(e) => onFormChange('referralCode', e.target.value.toUpperCase())}
+            placeholder="TANSA-XXXX"
+          />
+
+          <RegistrationDropdown
+            label="Signed Up By"
+            value={formData.signedUpBy}
+            onValueChange={(value) => onFormChange('signedUpBy', value)}
+            placeholder="Select committee member"
+            subtitle="Which committee member helped you sign up?"
+            options={signedUpByOptions}
+            required
+          />
+        </div>
+      </div>
+
       {/* Payment Section - Always visible */}
       <div className="space-y-4">
         <RegistrationHeading label="Payment Details" />
@@ -307,6 +356,7 @@ export function StripeCheckoutForm() {
   const [paymentIntentId, setPaymentIntentId] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [execMembers, setExecMembers] = useState<ExecMember[]>([])
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -318,16 +368,26 @@ export function StripeCheckoutForm() {
     upi: '',
     areaOfStudy: '',
     yearLevel: '',
+    referralCode: '',
+    signedUpBy: '',
   })
 
   const handleFormChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
-  // Create payment intent ONCE on mount
+  // Fetch exec members and create payment intent on mount
   useEffect(() => {
-    const createPaymentIntent = async () => {
+    const initialize = async () => {
       try {
+        // Fetch exec members for dropdown
+        const execRes = await fetch('/api/exec')
+        if (execRes.ok) {
+          const execData = await execRes.json()
+          setExecMembers(execData.members || [])
+        }
+
+        // Create payment intent
         const res = await fetch('/api/create-payment-intent', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -353,7 +413,7 @@ export function StripeCheckoutForm() {
       }
     }
 
-    createPaymentIntent()
+    initialize()
   }, []) // Empty dependency array = runs once on mount
 
   const appearance = {
@@ -400,6 +460,7 @@ export function StripeCheckoutForm() {
         paymentIntentId={paymentIntentId}
         formData={formData}
         onFormChange={handleFormChange}
+        execMembers={execMembers}
       />
     </Elements>
   )

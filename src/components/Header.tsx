@@ -34,12 +34,12 @@ const Header = () => {
   }, [pathname])
 
   return (
-    <header className="sticky top-0 z-40 px-6 py-2 md:py-3 bg-tansa-blue">
+    <header className="sticky top-0 z-40 px-6 py-2 lg:py-3 bg-tansa-blue">
       <div className="flex items-center justify-between w-full">
         {/*Left Side Element*/}
         <Link href="/" className="flex-1">
           {/*Desktop Logo*/}
-          <div className="hidden md:flex items-center space-x-6 group">
+          <div className="hidden lg:flex items-center space-x-6 group">
             <div className="h-16 w-16 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
               <Image
                 src="/TANSA-LOGO.svg"
@@ -60,7 +60,7 @@ const Header = () => {
             </div>
           </div>
           {/*Mobile Logo*/}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="lg:hidden flex items-center space-x-2">
             <Image src="/TANSA-LOGO.svg" alt="TANSA bear logo" width={40} height={40} />
             <h1 className="text-sm font-semibold text-tansa-cream">
               Taiwanese and New Zealand
@@ -71,7 +71,7 @@ const Header = () => {
         </Link>
 
         {/* Navigation */}
-        <nav className="hidden md:block flex-2">
+        <nav className="hidden lg:block flex-2">
           <ul className="flex items-center justify-center space-x-10 text-tansa-cream">
             {navItems.map((item) => (
               <li key={item.href}>
@@ -103,7 +103,7 @@ const Header = () => {
         {/* Right Side Elements*/}
         <div className="flex items-center">
           {/* Desktop Right Side */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             <Link
               href="https://linktr.ee/tansa.ausa"
               target="_blank"
@@ -128,7 +128,7 @@ const Header = () => {
             </Link>
           </div>
           {/* Mobile Hamburger */}
-          <div className="md:hidden ml-2 z-50">
+          <div className="lg:hidden ml-2 z-50">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className={`group flex flex-col gap-1.5 w-8 h-8 justify-center items-center focus:outline-none ${
@@ -143,7 +143,7 @@ const Header = () => {
         </div>
         {/* Mobile Dropdown Menu */}
         {menuOpen && (
-          <div className="md:hidden absolute top-0 left-0 right-0 bg-tansa-cream shadow-lg z-40 px-6 py-2 transform transition-all duration-500 ease-out">
+          <div className="lg:hidden absolute top-0 left-0 right-0 bg-tansa-cream shadow-lg z-40 px-6 py-2 transform transition-all duration-500 ease-out">
             {/* Mobile Logo */}
             <div className="flex items-center space-x-2 mb-6">
               <Image src="/TANSA-LOGO.svg" alt="TANSA bear logo" width={40} height={40} />

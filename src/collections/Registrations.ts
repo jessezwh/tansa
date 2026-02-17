@@ -24,9 +24,10 @@ export const Registrations: CollectionConfig = {
     description: 'Member registrations with payment confirmation',
   },
   access: {
-    read: () => true,
-    create: () => true,
-    update: () => true,
+    read: ({ req }) => !!req.user,    // Admin only - contains personal data
+    create: () => true,                // Stripe webhook needs this
+    update: ({ req }) => !!req.user,
+    delete: ({ req }) => !!req.user,
   },
   fields: [
     {

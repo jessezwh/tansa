@@ -3,7 +3,10 @@ import { CollectionConfig } from 'payload'
 export const Exec: CollectionConfig = {
   slug: 'exec',
   access: {
-    read: () => true, // Public read access
+    read: () => true,
+    create: ({ req }) => !!req.user,
+    update: ({ req }) => !!req.user,
+    delete: ({ req }) => !!req.user,
   },
   fields: [
     {

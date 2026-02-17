@@ -7,6 +7,28 @@ type Sponsor = {
   name?: string
 }
 
+/**
+ * Normalize a string for fuzzy matching:
+ * - Lowercase
+ * - Remove punctuation and special characters
+ * - Remove extra whitespace
+ * - Trim
+ */
+function normalizeForMatching(str: string): string {
+  return str
+    .toLowerCase()
+    .replace(/[^\w\s]/g, '') // Remove punctuation
+    .replace(/\s+/g, ' ') // Collapse whitespace
+    .trim()
+}
+
+/**
+ * Remove file extension from filename
+ */
+function removeExtension(filename: string): string {
+  return filename.replace(/\.[^/.]+$/, '')
+}
+
 export const Sponsors: CollectionConfig = {
   slug: 'sponsors',
   access: {
@@ -154,8 +176,33 @@ export const Sponsors: CollectionConfig = {
               throw new Error('No valid sponsors found in the CSV file')
             }
 
+            // Fetch all logos to match against sponsor names
+            const allLogos = await req.payload.find({
+              collection: 'logos',
+              limit: 500, // Should be enough for most cases
+            })
+
+            // Create a map of normalized filename -> logo ID for fast lookup
+            const logoMap = new Map<string, number>()
+            for (const logo of allLogos.docs) {
+              if (logo.filename) {
+                const normalizedName = normalizeForMatching(removeExtension(logo.filename))
+                logoMap.set(normalizedName, logo.id as number)
+              }
+            }
+
+            let matchedCount = 0
             for (const sponsor of sponsors) {
               try {
+                // Try to find a matching logo by normalized sponsor name
+                const normalizedSponsorName = normalizeForMatching(sponsor.name)
+                const matchedLogoId = logoMap.get(normalizedSponsorName)
+
+                if (matchedLogoId) {
+                  sponsor.logo = matchedLogoId
+                  matchedCount++
+                }
+
                 await req.payload.create({
                   collection: 'sponsors',
                   data: sponsor,
@@ -164,6 +211,8 @@ export const Sponsors: CollectionConfig = {
                 console.error('Error creating sponsor:', error)
               }
             }
+
+            console.log(`CSV Import: Created ${sponsors.length} sponsors, matched ${matchedCount} logos`)
 
             return {
               __redirect: '/admin/collections/sponsors',

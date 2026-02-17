@@ -5,6 +5,12 @@ import path from 'path'
 
 export const CSVUploads: CollectionConfig = {
   slug: 'csv-uploads',
+  access: {
+    read: ({ req }) => !!req.user,
+    create: ({ req }) => !!req.user,
+    update: ({ req }) => !!req.user,
+    delete: ({ req }) => !!req.user,
+  },
   upload: {
     staticDir: 'media',
     mimeTypes: ['text/csv'],

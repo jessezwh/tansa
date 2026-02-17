@@ -18,7 +18,6 @@ const Header = () => {
     { href: '/sponsors', label: 'Sponsors' },
     { href: '/leaderboard', label: 'Leaderboard' },
     { href: '/contact', label: 'Contact' },
-    { href: '/sign-up', label: 'Sign Up' },
   ]
 
   const handleClick = (href: string) => {

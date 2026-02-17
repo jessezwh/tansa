@@ -37,14 +37,16 @@ const RegistrationDropdown: React.FC<RegistrationDropdownProps> = ({
   subtitle,
 }) => {
   return (
-    <div className="space-y-2">
-      <Label htmlFor={id}>
-        {label}
-        {required && <Required />}
-      </Label>
-      {subtitle && <p className="text-xs text-muted-foreground -mt-1">{subtitle}</p>}
+    <div className="flex flex-col">
+      <div className="mb-2">
+        <Label htmlFor={id}>
+          {label}
+          {required && <Required />}
+        </Label>
+        {subtitle && <p className="text-xs text-muted-foreground mt-1">{subtitle}</p>}
+      </div>
       <Select value={value} onValueChange={onValueChange} required={required}>
-        <SelectTrigger>
+        <SelectTrigger className="h-10">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>

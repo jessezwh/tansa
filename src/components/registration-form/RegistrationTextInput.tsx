@@ -23,12 +23,14 @@ const RegistrationTextInput: React.FC<RegistrationTextInputProps> = ({
   required = false,
 }) => {
   return (
-    <div className="space-y-2">
-      <Label htmlFor={label}>
-        {label}
-        {required && <Required />}
-      </Label>
-      {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
+    <div className="flex flex-col">
+      <div className="mb-2">
+        <Label htmlFor={label}>
+          {label}
+          {required && <Required />}
+        </Label>
+        {subtitle && <p className="text-xs text-muted-foreground mt-1">{subtitle}</p>}
+      </div>
       <Input
         id={label}
         type={type}
@@ -36,6 +38,7 @@ const RegistrationTextInput: React.FC<RegistrationTextInputProps> = ({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
+        className="h-10"
       />
     </div>
   )

@@ -298,7 +298,7 @@ function CheckoutForm({
           subtitle="Be in to win AirPods when you use a friend's referral code!"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
           <RegistrationTextInput
             label="Referral Code"
             value={formData.referralCode}

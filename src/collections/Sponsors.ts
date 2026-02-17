@@ -119,7 +119,7 @@ export const Sponsors: CollectionConfig = {
     {
       name: 'csvFile',
       type: 'upload',
-      relationTo: 'csv-uploads',
+      relationTo: 'sponsor-csv-uploads',
       label: 'Upload CSV File',
       required: true,
       admin: {
@@ -135,7 +135,7 @@ export const Sponsors: CollectionConfig = {
         if (operation === 'create' && data.csvFile) {
           try {
             const csvUpload = await req.payload.findByID({
-              collection: 'csv-uploads',
+              collection: 'sponsor-csv-uploads',
               id: data.csvFile,
             })
 

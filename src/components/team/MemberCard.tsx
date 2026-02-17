@@ -23,7 +23,7 @@ export default function MemberCard({ member, priority = false }: MemberCardProps
           fill
           sizes="(max-width: 640px) 150px, (max-width: 1024px) 20vw, 250px"
           priority={priority}
-          unoptimized
+          quality={90}
           className={`rounded-md object-cover transition-opacity duration-300 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}

@@ -9,7 +9,7 @@ import { Media } from './collections/Media'
 import { Events } from './collections/Events'
 import { NewsletterEmails } from './collections/NewsletterEmails'
 import { Sponsors } from './collections/Sponsors'
-import { CSVUploads } from './collections/CSVUploads'
+import { SponsorCSVUploads } from './collections/SponsorCSVUploads'
 import { Logos } from './collections/Logos'
 import { Exec } from './collections/Execs'
 import { Registrations } from './collections/Registrations'
@@ -32,7 +32,7 @@ export default buildConfig({
     Events,
     NewsletterEmails,
     Sponsors,
-    CSVUploads,
+    SponsorCSVUploads,
     Logos,
     Exec,
     Registrations,

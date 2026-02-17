@@ -381,7 +381,7 @@ export function StripeCheckoutForm() {
     const initialize = async () => {
       try {
         // Fetch exec members for dropdown
-        const execRes = await fetch('/api/exec')
+        const execRes = await fetch('/api/exec-members')
         if (execRes.ok) {
           const execData = await execRes.json()
           setExecMembers(execData.members || [])

@@ -3,8 +3,8 @@ import csv from 'csv-parser'
 import fs from 'fs'
 import path from 'path'
 
-export const CSVUploads: CollectionConfig = {
-  slug: 'csv-uploads',
+export const SponsorCSVUploads: CollectionConfig = {
+  slug: 'sponsor-csv-uploads',
   access: {
     read: ({ req }) => !!req.user,
     create: ({ req }) => !!req.user,
@@ -14,10 +14,12 @@ export const CSVUploads: CollectionConfig = {
   upload: {
     staticDir: 'media',
     mimeTypes: ['text/csv'],
+    bulkUpload: false,
   },
   admin: {
     useAsTitle: 'filename',
-    description: 'Upload a CSV file to add multiple sponsors at once.',
+    group: 'Sponsors',
+    description: 'Upload a CSV file to bulk import sponsors. Columns: Name, Location, Instagram, Sponsorship Details',
   },
   fields: [],
   hooks: {

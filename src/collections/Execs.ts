@@ -13,19 +13,19 @@ export const Exec: CollectionConfig = {
       name: 'name',
       type: 'text',
       required: true,
-      label: 'Title',
+      label: 'Name',
     },
     {
       name: 'position',
       type: 'text',
       required: true,
-      label: 'Alt Text', // Descriptive alt text for accessibility
+      label: 'Position',
     },
     {
       name: 'degree',
       type: 'text',
       required: true,
-      label: 'Degree Text',
+      label: 'Degree',
     },
     {
       name: 'category',
@@ -33,16 +33,15 @@ export const Exec: CollectionConfig = {
       required: true,
       options: [
         'Presidents',
-        'Admin',
-        'Marketing',
+        'Admin / Advisory',
         'Activities',
-        'AESIR',
         'Public Relations Officer',
-        'Design',
-        'Photography',
+        'Marketing',
+        'Design / Photography',
+        'AESIR',
         'Interns'
       ],
-      label: 'Category Text',
+      label: 'Category',
     },
     {
       name: 'profileImage',

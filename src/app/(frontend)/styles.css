@@ -5,13 +5,12 @@
 
 @theme {
   /* Brand colors - UPDATE THESE FOR REBRAND
-   * Also update hex equivalents in src/lib/brand.ts for JS usage (Stripe, etc.)
-   * Hex conversions: tansa-blue = #8ab4c8, tansa-cream = #fff5e6
+   * Also update the same hex values in src/lib/brand.ts for JS usage (Stripe, etc.)
    */
-  --color-tansa-blue: hsl(203, 37%, 65%);
-  --color-tansa-cream: hsl(36, 100%, 95%);
-  --color-tansa-primary-text: hsl(36, 100%, 95%);
-  --color-tansa-secondary-text: hsl(203, 37%, 65%);
+  --color-tansa-blue: #eff0f0;
+  --color-tansa-cream: #ee2b7a;
+  --color-tansa-primary-text: #fff5e6;
+  --color-tansa-secondary-text: #8ab4c8;
   
   /* Status colors - can be customized to match brand */
   --color-success: hsl(142, 71%, 45%);
@@ -38,15 +37,40 @@
   --color-podium-bronze-text: hsl(25, 75%, 30%);
   
   /* Font */
-  --font-newkansas: 'newkansas', 'sans-serif';
+  --font-draplink: 'draplink', 'sans-serif';
+  --font-neue-haas: 'neue-haas', 'sans-serif';
 }
 
 @font-face {
-  font-family: 'newkansas';
+  font-family: 'draplink';
   font-style: normal;
   font-weight: normal;
   font-display: swap;
-  src: url('/fonts/NewKansasBold.otf') format('opentype');
+  src: url('/fonts/draplink.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'neue-haas';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/neue-haas-grotesk-display-pro-cufonfonts/NeueHaasDisplayRoman.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'neue-haas';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/neue-haas-grotesk-display-pro-cufonfonts/NeueHaasDisplayMediu.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'neue-haas';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/neue-haas-grotesk-display-pro-cufonfonts/NeueHaasDisplayBold.ttf') format('truetype');
 }
 
 @theme inline {

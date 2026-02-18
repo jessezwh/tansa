@@ -10,7 +10,7 @@ This document outlines all brand assets, colors, fonts, and their usage location
 |------|----------|--------|
 | Brand Colors (CSS) | `src/app/(frontend)/styles.css` lines 7-10 | Update HSL values |
 | Brand Colors (JS) | `src/lib/brand.ts` | Update hex values (keep in sync with CSS) |
-| Heading Font | `/public/fonts/NewKansasBold.otf` | Replace file |
+| Heading Font | `/public/fonts/draplink.otf` | Replace file |
 | Body Font | `src/app/(frontend)/layout.tsx` line 5 | Change Google Font import |
 | Main Logo | `/public/TANSA-LOGO.svg` | Replace file |
 | Favicon | `/public/favicon.png` | Replace file |
@@ -25,10 +25,10 @@ This document outlines all brand assets, colors, fonts, and their usage location
 **CSS Variables** - Defined in `src/app/(frontend)/styles.css` lines 7-10:
 
 ```css
---color-tansa-blue: hsl(203, 37%, 65%);
---color-tansa-cream: hsl(36, 100%, 95%);
---color-tansa-primary-text: hsl(36, 100%, 95%);
---color-tansa-secondary-text: hsl(203, 37%, 65%);
+--color-tansa-blue: #8ab4c8;
+--color-tansa-cream: #fff5e6;
+--color-tansa-primary-text: #fff5e6;
+--color-tansa-secondary-text: #8ab4c8;
 ```
 
 **JavaScript Hex Values** - Defined in `src/lib/brand.ts`:
@@ -171,19 +171,19 @@ All in `leaderboard/page.tsx`:
 
 ## Fonts
 
-### Heading Font: New Kansas Bold
+### Heading Font: Draplink
 
-**File:** `/public/fonts/NewKansasBold.otf`
+**File:** `/public/fonts/draplink.otf`
 
 **CSS Definition** in `src/app/(frontend)/styles.css`:
 ```css
 @font-face {
-  font-family: 'newkansas';
-  src: url('/fonts/NewKansasBold.otf') format('opentype');
+  font-family: 'draplink';
+  src: url('/fonts/draplink.otf') format('opentype');
 }
 ```
 
-**Tailwind Class:** `font-newkansas`
+**Tailwind Class:** `font-draplink`
 
 #### Usage Locations
 
@@ -217,7 +217,7 @@ const dmSans = DM_Sans({
 })
 ```
 
-**Usage:** Applied to `<body>` element globally - all text defaults to this font unless overridden by `font-newkansas`.
+**Usage:** Applied to `<body>` element globally - all text defaults to this font unless overridden by `font-draplink`.
 
 ---
 
@@ -345,7 +345,7 @@ To change Stripe's accent color, update `BRAND_COLORS.primaryDark` in `brand.ts`
 
 ## Notes for Designers
 
-1. **Color Format:** Colors are defined in HSL format for easy adjustment. The pattern is `hsl(hue, saturation%, lightness%)`.
+1. **Color Format:** Brand colors are in hex format. Other UI colors (status, skeleton, etc.) use HSL - the pattern is `hsl(hue, saturation%, lightness%)`.
 
 2. **Bear Assets:** Keep the same filenames when replacing to avoid code changes. All bears are SVG format.
 

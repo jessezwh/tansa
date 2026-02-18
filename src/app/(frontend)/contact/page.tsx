@@ -7,7 +7,7 @@ export default function ContactPage() {
     <div>
       {/* Hero Section */}
       <div className="relative bg-tansa-blue min-h-[200px] md:min-h-[300px] flex items-center justify-center overflow-hidden">
-        <h1 className="font-newkansas text-white text-4xl md:text-6xl">Contact Us</h1>
+        <h1 className="font-draplink text-white text-4xl md:text-6xl">Contact Us</h1>
 
         {/* Bear poking out */}
         <div className="absolute right-0 bottom-[-60px] sm:bottom-[-80px] md:bottom-[-100px] sm:right-4 md:right-[200px]">
@@ -25,7 +25,7 @@ export default function ContactPage() {
 
       {/* Contact Info Section */}
       <div className="bg-tansa-cream min-h-[300px] flex flex-col items-center justify-center px-6 py-10">
-        <h2 className="text-3xl font-newkansas mb-8 text-muted-text">Get in Touch</h2>
+        <h2 className="text-3xl font-draplink mb-8 text-muted-text">Get in Touch</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl w-full">
           {/* Email */}

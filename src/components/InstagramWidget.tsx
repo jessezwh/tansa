@@ -32,7 +32,7 @@ const InstagramWidget: React.FC = () => {
   return (
     <div className="bg-tansa-cream pt-14 sm:pt-16 pb-10">
       <div className="w-full max-w-7xl mx-auto px-4 mb-0">
-        <h2 className="text-2xl sm:text-3xl font-bold text-tansa-blue font-newkansas">
+        <h2 className="text-2xl sm:text-3xl font-bold text-tansa-blue font-draplink">
           Our Instagram!
         </h2>
       </div>

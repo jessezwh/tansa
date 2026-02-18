@@ -87,7 +87,7 @@ export default function SuccessPage() {
     <main className="min-h-screen">
       {/* Hero Header */}
       <div className="bg-tansa-blue relative h-[300px] flex items-center justify-center flex-col text-center space-y-4 rounded-b-4x overflow-clip">
-        <h1 className="text-6xl md:text-8xl font-bold text-white font-newkansas z-10">Join Us</h1>
+        <h1 className="text-6xl md:text-8xl font-bold text-white font-draplink z-10">Join Us</h1>
         <p className="text-lg md:text-2xl text-white z-10">
           Join TANSA this year and get access to
           <br /> exclusive events, deals, and a vibrant community!

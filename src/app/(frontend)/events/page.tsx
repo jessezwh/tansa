@@ -45,7 +45,7 @@ export default function PastEventsPage() {
       {/* Header Section */}
       <div className="max-w-6xl h-[200px] sm:h-[250px] md:h-[300px] mx-auto flex items-center justify-between py-8 sm:py-12 md:py-16 relative overflow-clip">
         {/* Left text */}
-        <div className="font-newkansas font-bold text-white leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl relative z-10 pl-4 sm:pl-8 lg:pl-0">
+        <div className="font-draplink font-bold text-white leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl relative z-10 pl-4 sm:pl-8 lg:pl-0">
           <h1>Past</h1>
           <h1>Events</h1>
         </div>

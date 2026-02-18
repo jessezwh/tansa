@@ -151,7 +151,7 @@ export default function LeaderboardPage() {
       {/* Hero Header */}
       <div className="bg-tansa-blue relative h-[300px] flex items-center justify-center flex-col text-center space-y-4 rounded-b-4x overflow-clip">
         <Trophy className="w-16 h-16 text-podium-gold mb-2" />
-        <h1 className="text-5xl md:text-7xl font-bold text-white font-newkansas z-10">
+        <h1 className="text-5xl md:text-7xl font-bold text-white font-draplink z-10">
           Referral Leaderboard
         </h1>
         <p className="text-lg md:text-xl text-white/90 z-10">

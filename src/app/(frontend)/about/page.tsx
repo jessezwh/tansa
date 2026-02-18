@@ -49,10 +49,10 @@ async function TeamContent() {
         >
           <div className="pl-4 sm:pl-8 md:pl-12 mt-[clamp(0.5rem,2vw,1rem)] lg:mt-0 relative z-10">
             {/* Text scales on small screens, fixed look on large screens */}
-            <h1 className="text-[clamp(2.5rem,5.5vw,4rem)] sm:text-[clamp(3rem,7vw,5rem)] lg:text-6xl text-white font-newkansas">
+            <h1 className="text-[clamp(2.5rem,5.5vw,4rem)] sm:text-[clamp(3rem,7vw,5rem)] lg:text-6xl text-white font-draplink">
               Meet our
             </h1>
-            <h1 className="text-[clamp(3.5rem,9vw,6rem)] sm:text-[clamp(4rem,10vw,6.5rem)] lg:text-8xl text-white font-newkansas mt-0 sm:mt-4 lg:mt-0">
+            <h1 className="text-[clamp(3.5rem,9vw,6rem)] sm:text-[clamp(4rem,10vw,6.5rem)] lg:text-8xl text-white font-draplink mt-0 sm:mt-4 lg:mt-0">
               Team!
             </h1>
           </div>

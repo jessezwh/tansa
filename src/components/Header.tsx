@@ -114,7 +114,7 @@ const Header = () => {
 
             <Link
               href="/sign-up"
-              className="bg-tansa-cream text-tansa-blue px-3 py-2 rounded-full font-bold transition-transform duration-200 group-hover:-translate-x-6 flex items-center group relative min-w-[110px]"
+              className="bg-[#417b3a] text-white px-3 py-2 rounded-full font-bold transition-transform duration-200 group-hover:-translate-x-6 flex items-center group relative min-w-[110px]"
             >
               <span className="inline-block h-4 w-4 relative">
                 <PawPrint className="absolute h-4 w-4 left-0 top-0 transition-transform duration-200 group-hover:-translate-x-6 opacity-100 group-hover:opacity-0" />

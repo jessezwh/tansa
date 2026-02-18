@@ -33,13 +33,13 @@ export default function MemberCard({ member, priority = false }: MemberCardProps
           <div className="absolute inset-0 bg-gradient-to-br from-skeleton to-skeleton-dark animate-pulse" />
         )}
       </div>
-      <p className="mt-2 text-center text-[clamp(1rem,2vw,1.5rem)] text-tansa-blue font-newkansas">
+      <p className="mt-2 text-center text-[clamp(1rem,2vw,1.5rem)] text-tansa-blue font-draplink">
         {member.name}
       </p>
-      <p className="text-center text-[clamp(0.8rem,1.5vw,1rem)] text-tansa-blue font-newkansas">
+      <p className="text-center text-[clamp(0.8rem,1.5vw,1rem)] text-tansa-blue font-draplink">
         {member.position}
       </p>
-      <p className="text-center text-[clamp(0.8rem,1.5vw,1rem)] text-tansa-blue font-newkansas">
+      <p className="text-center text-[clamp(0.8rem,1.5vw,1rem)] text-tansa-blue font-draplink">
         {member.degree}
       </p>
     </div>

@@ -7,10 +7,17 @@
   /* Brand colors - UPDATE THESE FOR REBRAND
    * Also update the same hex values in src/lib/brand.ts for JS usage (Stripe, etc.)
    */
-  --color-tansa-blue: #eff0f0;
-  --color-tansa-cream: #ee2b7a;
-  --color-tansa-primary-text: #fff5e6;
-  --color-tansa-secondary-text: #8ab4c8;
+  --color-brand-bg: #F0F3F3;
+  --color-brand-pink: #ED2E88;
+  --color-brand-blue: #4A9BAD;
+  --color-brand-green: #417B3A;
+  --color-brand-orange: #F58120;
+  
+  /* Legacy aliases - can remove after full rebrand */
+  --color-tansa-blue: #4A9BAD;
+  --color-tansa-cream: #F0F3F3;
+  --color-tansa-primary-text: #F0F3F3;
+  --color-tansa-secondary-text: #4A9BAD;
   
   /* Status colors - can be customized to match brand */
   --color-success: hsl(142, 71%, 45%);

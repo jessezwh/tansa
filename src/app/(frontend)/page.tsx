@@ -42,49 +42,82 @@ export default async function HomePage() {
     console.error('Failed to fetch events for carousel:', error)
   }
   return (
-    <div className="relative bg-tansa-blue">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-        <section className="relative grid min-h-[50vh] sm:min-h-[60vh] lg:h-[calc(100vh-80px)] grid-cols-2 items-center gap-6 py-6 sm:py-8 md:py-10 overflow-hidden">
-          <div className="z-10 text-tansa-cream">
-            <div className="flex items-baseline gap-3 font-neue-haas">
-              {/* <h2 className="font-bold leading-none text-[clamp(1.875rem,4.5vw,4.5rem)]"></h2> */}
-              <h3 className="font-semibold leading-none text-[clamp(1.25rem,3vw,3rem)]">HELLO! We are</h3>
-            </div>
-            <h1 className="mt-4 font-draplink font-extrabold leading-none text-[clamp(3.575rem,10.4vw,11.7rem)]">
-              TANSA!
-            </h1>
-            <p className="font-neue-haas text-[clamp(1rem,2.2vw,1.5rem)] font-medium leading-snug">
-              The largest socio-cultural club at the
-              <br className="hidden sm:block" />
-              <span className="sm:whitespace-nowrap"> University of Auckland and AUT.</span>
-            </p>
+    <div className="relative bg-brand-bg">
+      {/* Hero Section */}
+      <section className="min-h-[calc(100vh-80px)] flex flex-col items-center justify-end px-4 pb-0 overflow-hidden">
+        {/* Text content - stacked from top */}
+        <div className="flex flex-col items-center text-center flex-1 justify-center gap-6">
+          {/* Hello text */}
+          <h2 className="font-neue-haas font-semibold text-brand-blue text-[clamp(1.25rem,3vw,2rem)]">
+            Hello! We are
+          </h2>
+          
+          {/* TANSA text SVG */}
+          <div className="w-[45%] min-w-[280px]">
+            <Image
+              src="/tansa-text.svg"
+              alt="TANSA"
+              width={500}
+              height={100}
+              className="w-full h-auto"
+              priority
+            />
           </div>
-          <div className="absolute bottom-0 right-0 z-10 w-[clamp(220px,40vw,600px)]">
-            <div className="relative aspect-[617/624]">
-              <Image
-                src="/bears/homeBear.svg"
-                alt="Tansa Bear"
-                fill
-                priority
-                sizes="(min-width:1024px) 600px, 40vw"
-                className="object-contain object-bottom pointer-events-none"
-              />
-            </div>
+          
+          {/* Stars SVG */}
+          <div className="w-[20%] min-w-[120px]">
+            <Image
+              src="/stars.svg"
+              alt="Stars"
+              width={200}
+              height={50}
+              className="w-full h-auto"
+            />
           </div>
+        </div>
+        
+        {/* Bottom section: 20 - Bear - 26 */}
+        <div className="flex items-end justify-center w-full">
+          {/* 20 - slightly tucked behind bear */}
+          <div className="w-[15%] min-w-[80px] -mr-[3%] z-0">
+            <Image
+              src="/20.svg"
+              alt="20"
+              width={200}
+              height={200}
+              className="w-full h-auto"
+            />
+          </div>
+          
+          {/* Peek Bear - flush with bottom */}
+          <div className="w-[30%] min-w-[180px] z-10">
+            <Image
+              src="/bears/peek bear.svg"
+              alt="TANSA Bear peeking"
+              width={400}
+              height={300}
+              className="w-full h-auto"
+              priority
+            />
+          </div>
+          
+          {/* 26 - slightly tucked behind bear */}
+          <div className="w-[15%] min-w-[80px] -ml-[3%] z-0">
+            <Image
+              src="/26.svg"
+              alt="26"
+              width={200}
+              height={200}
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+      </section>
 
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 hidden sm:block">
-            <div className="flex flex-col items-center text-tansa-cream animate-bounce">
-              <p className="text-xs sm:text-sm font-medium">Scroll Down</p>
-              <div className="text-xl sm:text-2xl">↓</div>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <div className="bg-tansa-cream pt-12 sm:pt-16 lg:pt-20">
+      <div className="bg-brand-bg pt-12 sm:pt-16 lg:pt-20">
         <div className="flex flex-col items-center justify-center w-full">
           <div className="w-full max-w-7xl px-4">
-            <h2 className="text-2xl sm:text-3xl font-bold text-tansa-blue mb-6 font-draplink">
+            <h2 className="text-2xl sm:text-3xl font-bold text-brand-pink mb-6 font-draplink">
               Recent Events
             </h2>
             <EventsCarousel images={carouselImages} />

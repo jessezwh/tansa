@@ -51,10 +51,10 @@ const Header = () => {
             </div>
 
             <div className="text-white select-none">
-              <h1 className="font-bold text-lg text-tansa-cream leading-tight transition-colors duration-300 group-hover:text-white">
+              <h1 className="font-bold text-lg text-brand-pink leading-tight transition-colors duration-300 group-hover:text-white">
                 Taiwanese and New Zealand
               </h1>
-              <h2 className="text-lg text-tansa-cream leading-tight transition-colors duration-300 group-hover:text-white">
+              <h2 className="text-lg text-brand-pink leading-tight transition-colors duration-300 group-hover:text-white">
                 Students' Association
               </h2>
             </div>
@@ -72,14 +72,14 @@ const Header = () => {
 
         {/* Navigation */}
         <nav className="hidden lg:block flex-2">
-          <ul className="flex items-center justify-center space-x-10 text-tansa-cream">
+          <ul className="flex items-center justify-center space-x-10 text-brand-pink">
             {navItems.map((item) => (
               <li key={item.href}>
                 <button
                   onClick={() => handleClick(item.href)}
                   disabled={loadingPath === item.href}
                   className={`relative px-2 py-1 font-bold group flex items-center transition-colors duration-200 ${
-                    pathname === item.href ? 'text-tansa-cream' : 'hover:text-white'
+                    pathname === item.href ? 'text-brand-pink' : 'hover:text-white'
                   } ${loadingPath === item.href ? 'opacity-50 cursor-wait' : ''}`}
                 >
                   <span className="flex items-center relative">

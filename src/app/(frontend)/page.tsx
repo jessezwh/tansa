@@ -46,14 +46,14 @@ export default async function HomePage() {
       {/* Hero Section */}
       <section className="min-h-[calc(100vh-80px)] flex flex-col items-center justify-end px-4 pb-0 overflow-hidden">
         {/* Text content - stacked from top */}
-        <div className="flex flex-col items-center text-center flex-1 justify-center gap-6">
+        <div className="flex flex-col items-center text-center flex-1 justify-end pb-4">
           {/* Hello text */}
-          <h2 className="font-neue-haas font-semibold text-brand-blue text-[clamp(1.25rem,3vw,2rem)]">
+          <h2 className="font-neue-haas font-medium text-brand-blue text-[clamp(2.19rem,5.25vw,3.5rem)]">
             Hello! We are
           </h2>
           
           {/* TANSA text SVG */}
-          <div className="w-[45%] min-w-[280px]">
+          <div className="w-[40vw] min-w-[280px] mt-5">
             <Image
               src="/tansa-text.svg"
               alt="TANSA"
@@ -65,7 +65,7 @@ export default async function HomePage() {
           </div>
           
           {/* Stars SVG */}
-          <div className="w-[20%] min-w-[120px]">
+          <div className="w-[10vw] min-w-[120px] mt-9">
             <Image
               src="/stars.svg"
               alt="Stars"
@@ -78,8 +78,8 @@ export default async function HomePage() {
         
         {/* Bottom section: 20 - Bear - 26 */}
         <div className="flex items-end justify-center w-full">
-          {/* 20 - slightly tucked behind bear */}
-          <div className="w-[15%] min-w-[80px] -mr-[3%] z-0">
+          {/* 20 - height matches bear */}
+          <div className="w-[28vw] min-w-[100px] -mr-[15vw] z-0">
             <Image
               src="/20.svg"
               alt="20"
@@ -90,7 +90,7 @@ export default async function HomePage() {
           </div>
           
           {/* Peek Bear - flush with bottom */}
-          <div className="w-[30%] min-w-[180px] z-10">
+          <div className="w-[40vw] min-w-[200px] z-10">
             <Image
               src="/bears/peek bear.svg"
               alt="TANSA Bear peeking"
@@ -101,8 +101,8 @@ export default async function HomePage() {
             />
           </div>
           
-          {/* 26 - slightly tucked behind bear */}
-          <div className="w-[15%] min-w-[80px] -ml-[3%] z-0">
+          {/* 26 - height matches bear */}
+          <div className="w-[28vw] min-w-[100px] -ml-[15vw] z-0">
             <Image
               src="/26.svg"
               alt="26"

@@ -34,7 +34,7 @@ const Header = () => {
   }, [pathname])
 
   return (
-    <header className="sticky top-0 z-40 px-6 py-2 lg:py-3 bg-tansa-blue">
+    <header className="sticky top-0 z-40 px-6 py-2 lg:py-3 bg-brand-bg">
       <div className="flex items-center justify-between w-full">
         {/*Left Side Element*/}
         <Link href="/" className="flex-1">

@@ -55,7 +55,7 @@ const EventsCarousel: React.FC<EventsCarouselProps> = ({
   return (
     <div className={`relative w-full ${className}`}>
       {/* Main Image Container */}
-      <div className="relative h-96 overflow-hidden rounded-lg bg-gray-100">
+      <div className="relative h-96 overflow-hidden rounded-lg bg-skeleton/50">
         {images.length > 0 ? (
           images.map((image, index) => (
             <div
@@ -91,7 +91,7 @@ const EventsCarousel: React.FC<EventsCarouselProps> = ({
           ))
         ) : (
           <div className="flex items-center justify-center h-full">
-            <p className="text-gray-500 text-lg">No images to display</p>
+            <p className="text-muted-text text-lg">No images to display</p>
           </div>
         )}
 
@@ -101,7 +101,7 @@ const EventsCarousel: React.FC<EventsCarouselProps> = ({
             <Button
               variant="ghost"
               size="icon"
-              className={`absolute left-4 top-1/2 -translate-y-1/2 ${images.length > 1 ? 'bg-black/20 hover:bg-black/40 text-white' : 'bg-black/10 text-gray-400 cursor-not-allowed'} border-0 rounded-full h-12 w-12`}
+              className={`absolute left-4 top-1/2 -translate-y-1/2 ${images.length > 1 ? 'bg-black/20 hover:bg-black/40 text-white' : 'bg-black/10 text-muted-text cursor-not-allowed'} border-0 rounded-full h-12 w-12`}
               onClick={images.length > 1 ? goToPrevious : undefined}
               aria-label="Previous image"
               disabled={images.length === 0}
@@ -112,7 +112,7 @@ const EventsCarousel: React.FC<EventsCarouselProps> = ({
             <Button
               variant="ghost"
               size="icon"
-              className={`absolute right-4 top-1/2 -translate-y-1/2 ${images.length > 1 ? 'bg-black/20 hover:bg-black/40 text-white' : 'bg-black/10 text-gray-400 cursor-not-allowed'} border-0 rounded-full h-12 w-12`}
+              className={`absolute right-4 top-1/2 -translate-y-1/2 ${images.length > 1 ? 'bg-black/20 hover:bg-black/40 text-white' : 'bg-black/10 text-muted-text cursor-not-allowed'} border-0 rounded-full h-12 w-12`}
               onClick={images.length > 1 ? goToNext : undefined}
               aria-label="Next image"
               disabled={images.length === 0}
@@ -130,14 +130,14 @@ const EventsCarousel: React.FC<EventsCarouselProps> = ({
             <button
               key={index}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentIndex ? 'bg-tansa-blue scale-110' : 'bg-gray-300 hover:bg-gray-400'
+                index === currentIndex ? 'bg-tansa-blue scale-110' : 'bg-skeleton-dark hover:bg-muted-text'
               }`}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))
         ) : (
-          <span className="h-3 w-3 bg-gray-300 rounded-full mx-1 inline-block opacity-50" />
+          <span className="h-3 w-3 bg-skeleton-dark rounded-full mx-1 inline-block opacity-50" />
         )}
       </div>
 

@@ -17,15 +17,15 @@ export default function TeamSkeleton() {
       {[1, 2, 3].map((section) => (
         <div key={section} className="bg-tansa-cream">
           <div className="container mx-auto px-4 pt-12 text-center">
-            <div className="h-[clamp(1.5rem,3vw,2rem)] w-[clamp(150px,25vw,200px)] bg-gray-300 rounded animate-pulse mx-auto" />
+            <div className="h-[clamp(1.5rem,3vw,2rem)] w-[clamp(150px,25vw,200px)] bg-skeleton-dark rounded animate-pulse mx-auto" />
           </div>
           <div className="mx-auto flex flex-wrap justify-center gap-[clamp(1rem,3vw,2.5rem)] pt-6 pb-6">
             {[1, 2, 3, 4].map((card) => (
               <div key={card} className="flex flex-col items-center w-[clamp(150px,20vw,250px)] min-h-[clamp(220px,28vw,350px)]">
-                <div className="w-full aspect-square bg-gray-300 rounded-md animate-pulse" />
-                <div className="mt-2 h-[clamp(1rem,2vw,1.5rem)] w-[clamp(100px,15vw,150px)] bg-gray-300 rounded animate-pulse" />
-                <div className="mt-1 h-[clamp(0.8rem,1.5vw,1rem)] w-[clamp(80px,12vw,120px)] bg-gray-300 rounded animate-pulse" />
-                <div className="mt-1 h-[clamp(0.8rem,1.5vw,1rem)] w-[clamp(90px,13vw,140px)] bg-gray-300 rounded animate-pulse" />
+                <div className="w-full aspect-square bg-skeleton-dark rounded-md animate-pulse" />
+                <div className="mt-2 h-[clamp(1rem,2vw,1.5rem)] w-[clamp(100px,15vw,150px)] bg-skeleton-dark rounded animate-pulse" />
+                <div className="mt-1 h-[clamp(0.8rem,1.5vw,1rem)] w-[clamp(80px,12vw,120px)] bg-skeleton-dark rounded animate-pulse" />
+                <div className="mt-1 h-[clamp(0.8rem,1.5vw,1rem)] w-[clamp(90px,13vw,140px)] bg-skeleton-dark rounded animate-pulse" />
               </div>
             ))}
           </div>

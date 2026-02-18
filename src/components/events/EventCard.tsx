@@ -38,8 +38,8 @@ function EventCard({ title, date, photoUrls, slug, priority = false }: EventCard
         {/* Cover Image */}
         <div className="relative aspect-[4/3] overflow-hidden">
           {!imageLoaded && (
-            <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
-              <div className="w-12 h-12 bg-gray-300 rounded-full animate-pulse"></div>
+            <div className="absolute inset-0 bg-skeleton animate-pulse flex items-center justify-center">
+              <div className="w-12 h-12 bg-skeleton-dark rounded-full animate-pulse"></div>
             </div>
           )}
 
@@ -82,7 +82,7 @@ function EventCard({ title, date, photoUrls, slug, priority = false }: EventCard
           <h3 className="font-bold text-lg text-tansa-blue font-newkansas line-clamp-2 group-hover:text-tansa-blue/80 transition-colors">
             {title}
           </h3>
-          <p className="text-sm text-gray-600 mt-1">{formattedDate}</p>
+          <p className="text-sm text-muted-text mt-1">{formattedDate}</p>
         </div>
       </div>
     </Link>

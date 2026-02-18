@@ -35,6 +35,7 @@ import {
 import RegistrationTextInput from './RegistrationTextInput'
 import RegistrationDropdown from './RegistrationDropdown'
 import RegistrationHeading from './RegistrationHeading'
+import { STRIPE_APPEARANCE } from '@/lib/brand'
 
 type ExecMember = {
   id: number
@@ -416,12 +417,8 @@ export function StripeCheckoutForm() {
     initialize()
   }, []) // Empty dependency array = runs once on mount
 
-  const appearance = {
-    theme: 'stripe' as const,
-    variables: {
-      colorPrimary: '#0f172a',
-    },
-  }
+  // Stripe appearance imported from centralized brand config
+  const appearance = STRIPE_APPEARANCE
 
   if (loading) {
     return (

@@ -1,7 +1,6 @@
 'use client'
 import React, { useState, ChangeEvent, MouseEvent } from 'react'
 import { Send, Snowflake, Mail, Instagram, Facebook } from 'lucide-react'
-import Image from 'next/image'
 
 const Footer = () => {
   const [email, setEmail] = useState<string>('')
@@ -138,12 +137,12 @@ const Footer = () => {
                     value={email}
                     onChange={handleEmailChange}
                     placeholder="Your email address"
-                    className="bg-white px-4 py-2 w-full rounded-l text-gray-800"
+                    className="bg-white px-4 py-2 w-full rounded-l text-foreground"
                     aria-label="Insert your email here!"
                   />
                   <button
                     onClick={handleSubmit}
-                    className="bg-amber-100 text-gray-800 px-2 rounded-r hover:bg-amber-200"
+                    className="bg-accent-light text-foreground px-2 rounded-r hover:bg-accent-light-hover"
                     aria-label="Subscribe to our newsletter!"
                   >
                     <Send size={18} />
@@ -151,34 +150,27 @@ const Footer = () => {
                 </div>
               </div>
             ) : (
-              <div className="w-full flex justify-end">
-                <h3 className="font-bold text-l mb-4">Thank you for subscribing!</h3>
-                <Image
-                  src="/bears/bear 1.svg"
-                  className="w-20"
-                  alt="Bear waving thanking you for subscribing to our newsletter."
-                  width={100}
-                  height={100}
-                />
+              <div className="w-full">
+                <h3 className="font-bold text-xl mb-4">Thank you for subscribing!</h3>
               </div>
             )}
 
             {/* Social Media Icons */}
             <div className="flex space-x-4 mt-4 py-2">
-              <a href="#" className="hover:text-amber-100" aria-label="Linktree Icon">
+              <a href="#" className="hover:text-accent-light" aria-label="Linktree Icon">
                 <Snowflake size={24} />
               </a>
-              <a href="#" className="hover:text-amber-100" aria-label="Email Icon">
+              <a href="#" className="hover:text-accent-light" aria-label="Email Icon">
                 <Mail size={24} />
               </a>
-              <a href="#" className="hover:text-amber-100" aria-label="Instagram Icon">
+              <a href="#" className="hover:text-accent-light" aria-label="Instagram Icon">
                 <Instagram size={24} />
               </a>
-              <a href="#" className="hover:text-amber-100" aria-label="Facebook Icon">
+              <a href="#" className="hover:text-accent-light" aria-label="Facebook Icon">
                 <Facebook size={24} />
               </a>
               {/* TikTok icon not available in lucide-react, using a text alternative */}
-              <a href="#" className="hover:text-amber-100" aria-label="TikTok Icon">
+              <a href="#" className="hover:text-accent-light" aria-label="TikTok Icon">
                 <span className="text-xl">♪</span>
               </a>
             </div>

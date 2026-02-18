@@ -77,7 +77,7 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
         className="flex flex-wrap justify-center max-w-7xl w-full gap-4 mx-auto px-4"
       >
         {filteredSponsors.length === 0 ? (
-          <div className="w-full text-center text-red-500">No sponsors found.</div>
+          <div className="w-full text-center text-muted-text">No sponsors found.</div>
         ) : (
           filteredSponsors.map(({ id, name, logo, instagram, sponsorshipDetails }) => {
             const imageSrc =

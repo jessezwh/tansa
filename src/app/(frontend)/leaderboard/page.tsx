@@ -35,24 +35,24 @@ function PodiumSpot({
   const positionConfig = {
     1: {
       height: 'h-32',
-      bgColor: 'bg-yellow-400',
-      textColor: 'text-yellow-600',
+      bgColor: 'bg-podium-gold',
+      textColor: 'text-podium-gold-text',
       label: '1st',
       order: 'order-2',
       marginTop: 'mt-0',
     },
     2: {
       height: 'h-24',
-      bgColor: 'bg-slate-300',
-      textColor: 'text-slate-600',
+      bgColor: 'bg-podium-silver',
+      textColor: 'text-podium-silver-text',
       label: '2nd',
       order: 'order-1',
       marginTop: 'mt-8',
     },
     3: {
       height: 'h-20',
-      bgColor: 'bg-amber-600',
-      textColor: 'text-amber-700',
+      bgColor: 'bg-podium-bronze',
+      textColor: 'text-podium-bronze-text',
       label: '3rd',
       order: 'order-3',
       marginTop: 'mt-12',
@@ -67,10 +67,10 @@ function PodiumSpot({
       <div className="mb-2 text-center">
         {isEmpty ? (
           <>
-            <div className="w-16 h-16 rounded-full bg-slate-200 flex items-center justify-center mx-auto mb-1">
-              <User className="w-8 h-8 text-slate-400" />
+            <div className="w-16 h-16 rounded-full bg-skeleton flex items-center justify-center mx-auto mb-1">
+              <User className="w-8 h-8 text-muted-text" />
             </div>
-            <p className="text-sm text-slate-400">---</p>
+            <p className="text-sm text-muted-text">---</p>
           </>
         ) : (
           <>
@@ -83,7 +83,7 @@ function PodiumSpot({
             <p className="text-sm font-semibold text-tansa-blue">
               {entry?.firstName} {entry?.lastName}
             </p>
-            <p className="text-xs text-slate-600">{entry?.points} points</p>
+            <p className="text-xs text-muted-text">{entry?.points} points</p>
           </>
         )}
       </div>
@@ -150,7 +150,7 @@ export default function LeaderboardPage() {
     <main className="min-h-screen">
       {/* Hero Header */}
       <div className="bg-tansa-blue relative h-[300px] flex items-center justify-center flex-col text-center space-y-4 rounded-b-4x overflow-clip">
-        <Trophy className="w-16 h-16 text-yellow-400 mb-2" />
+        <Trophy className="w-16 h-16 text-podium-gold mb-2" />
         <h1 className="text-5xl md:text-7xl font-bold text-white font-newkansas z-10">
           Referral Leaderboard
         </h1>
@@ -190,8 +190,8 @@ export default function LeaderboardPage() {
                       <PodiumSpot position={1} isEmpty={true} />
                       <PodiumSpot position={3} isEmpty={true} />
                     </div>
-                    <p className="text-slate-500 text-lg">The race hasn&apos;t started yet...</p>
-                    <p className="text-slate-400">Be the first to refer a friend!</p>
+                    <p className="text-muted-text text-lg">The race hasn&apos;t started yet...</p>
+                    <p className="text-muted-text/70">Be the first to refer a friend!</p>
                   </div>
                 ) : (
                   // Podium with entries (handles partial states)
@@ -215,7 +215,7 @@ export default function LeaderboardPage() {
                     {restOfList.map((entry) => (
                       <div
                         key={entry.rank}
-                        className="flex items-center justify-between p-3 bg-slate-50 rounded-lg"
+                        className="flex items-center justify-between p-3 bg-skeleton/30 rounded-lg"
                       >
                         <div className="flex items-center gap-3">
                           <span className="w-8 h-8 rounded-full bg-tansa-blue text-white flex items-center justify-center text-sm font-bold">
@@ -241,7 +241,7 @@ export default function LeaderboardPage() {
                 <CardTitle className="text-tansa-blue">Check Your Score</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-sm text-slate-600">
+                <p className="text-sm text-muted-text">
                   Don&apos;t see yourself on the leaderboard? Enter your referral code to check your
                   score and ranking.
                 </p>
@@ -264,7 +264,7 @@ export default function LeaderboardPage() {
                 </div>
 
                 {lookupError && (
-                  <p className="text-sm text-red-600">{lookupError}</p>
+                  <p className="text-sm text-error">{lookupError}</p>
                 )}
 
                 {lookupResult && (
@@ -275,7 +275,7 @@ export default function LeaderboardPage() {
                     <p className="text-2xl font-bold text-tansa-blue">
                       {lookupResult.points} points
                     </p>
-                    <p className="text-slate-600">
+                    <p className="text-muted-text">
                       Rank #{lookupResult.rank}
                     </p>
                   </div>

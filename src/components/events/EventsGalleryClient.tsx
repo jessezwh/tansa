@@ -142,7 +142,7 @@ export default function EventGalleryClient({ title, date, photos }: EventGallery
 
         {photos.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-gray-500 text-lg">No photos available for this event.</p>
+            <p className="text-muted-text text-lg">No photos available for this event.</p>
           </div>
         )}
       </div>

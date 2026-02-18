@@ -4,10 +4,40 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  /* Brand colors - UPDATE THESE FOR REBRAND
+   * Also update hex equivalents in src/lib/brand.ts for JS usage (Stripe, etc.)
+   * Hex conversions: tansa-blue = #8ab4c8, tansa-cream = #fff5e6
+   */
   --color-tansa-blue: hsl(203, 37%, 65%);
   --color-tansa-cream: hsl(36, 100%, 95%);
   --color-tansa-primary-text: hsl(36, 100%, 95%);
   --color-tansa-secondary-text: hsl(203, 37%, 65%);
+  
+  /* Status colors - can be customized to match brand */
+  --color-success: hsl(142, 71%, 45%);
+  --color-success-light: hsl(142, 76%, 95%);
+  --color-error: hsl(0, 84%, 60%);
+  --color-error-light: hsl(0, 86%, 97%);
+  --color-warning: hsl(45, 93%, 47%);
+  
+  /* UI colors */
+  --color-skeleton: hsl(220, 14%, 90%);
+  --color-skeleton-dark: hsl(220, 13%, 80%);
+  --color-muted-text: hsl(220, 9%, 46%);
+  
+  /* Accent color for interactive elements (buttons, hover states) */
+  --color-accent-light: hsl(45, 100%, 88%);
+  --color-accent-light-hover: hsl(45, 100%, 80%);
+  
+  /* Leaderboard podium colors */
+  --color-podium-gold: hsl(48, 96%, 53%);
+  --color-podium-gold-text: hsl(45, 92%, 30%);
+  --color-podium-silver: hsl(210, 14%, 76%);
+  --color-podium-silver-text: hsl(215, 14%, 40%);
+  --color-podium-bronze: hsl(30, 75%, 47%);
+  --color-podium-bronze-text: hsl(25, 75%, 30%);
+  
+  /* Font */
   --font-newkansas: 'newkansas', 'sans-serif';
 }
 

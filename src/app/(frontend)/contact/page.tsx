@@ -25,7 +25,7 @@ export default function ContactPage() {
 
       {/* Contact Info Section */}
       <div className="bg-tansa-cream min-h-[300px] flex flex-col items-center justify-center px-6 py-10">
-        <h2 className="text-3xl font-newkansas mb-8 text-gray-600">Get in Touch</h2>
+        <h2 className="text-3xl font-newkansas mb-8 text-muted-text">Get in Touch</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl w-full">
           {/* Email */}

@@ -22,24 +22,24 @@ const STATUS_CONFIG: Record<
   }
 > = {
   loading: {
-    icon: <Loader2 className="h-12 w-12 animate-spin mx-auto mb-4 text-slate-600" />,
+    icon: <Loader2 className="h-12 w-12 animate-spin mx-auto mb-4 text-muted-text" />,
     title: 'Processing...',
     description: 'Please wait while we confirm your payment',
-    color: 'text-slate-600',
+    color: 'text-muted-text',
     message: 'We’re verifying your payment details...',
   },
   success: {
-    icon: <CheckCircle className="h-12 w-12 mx-auto mb-4 text-green-600" />,
+    icon: <CheckCircle className="h-12 w-12 mx-auto mb-4 text-success" />,
     title: 'Welcome to TANSA!',
     description: 'Your registration is complete',
-    color: 'text-green-700',
+    color: 'text-success',
     message: 'Payment successful! Make sure to pick up your membership card.',
   },
   error: {
-    icon: <XCircle className="h-12 w-12 mx-auto mb-4 text-red-600" />,
+    icon: <XCircle className="h-12 w-12 mx-auto mb-4 text-error" />,
     title: 'Payment Failed',
     description: 'There was an issue with your payment',
-    color: 'text-red-700',
+    color: 'text-error',
     message: 'Something went wrong with your payment.',
   },
 }
@@ -120,7 +120,7 @@ export default function SuccessPage() {
             </CardHeader>
 
             <CardContent className="text-center space-y-4">
-              <p className="text-slate-600">{message}</p>
+              <p className="text-muted-text">{message}</p>
 
               {status === 'success' && (
                 <div className="space-y-4">
@@ -139,13 +139,13 @@ export default function SuccessPage() {
                           className="h-8 px-2"
                         >
                           {copied ? (
-                            <Check className="h-4 w-4 text-green-600" />
+                            <Check className="h-4 w-4 text-success" />
                           ) : (
                             <Copy className="h-4 w-4" />
                           )}
                         </Button>
                       </div>
-                      <p className="text-xs text-slate-600">
+                      <p className="text-xs text-muted-text">
                         Share this code with friends! You both earn points when they sign up.
                       </p>
                     </div>

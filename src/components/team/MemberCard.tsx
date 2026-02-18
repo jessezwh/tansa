@@ -13,7 +13,7 @@ export default function MemberCard({ member, priority = false }: MemberCardProps
 
   return (
     <div className="flex flex-col items-center w-[clamp(150px,20vw,250px)] min-h-[clamp(220px,28vw,350px)]">
-      <div className="relative w-full aspect-square rounded-md overflow-hidden bg-gray-200">
+      <div className="relative w-full aspect-square rounded-md overflow-hidden bg-skeleton">
         <Image
           src={
             member.profileImage?.url ||
@@ -30,7 +30,7 @@ export default function MemberCard({ member, priority = false }: MemberCardProps
           onLoad={() => setImageLoaded(true)}
         />
         {!imageLoaded && (
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse" />
+          <div className="absolute inset-0 bg-gradient-to-br from-skeleton to-skeleton-dark animate-pulse" />
         )}
       </div>
       <p className="mt-2 text-center text-[clamp(1rem,2vw,1.5rem)] text-tansa-blue font-newkansas">

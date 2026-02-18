@@ -56,22 +56,22 @@ export const CSVUpload: React.FC = () => {
           type="file"
           accept=".csv"
           onChange={handleFileChange}
-          className="block w-full text-sm text-gray-500
+          className="block w-full text-sm text-muted-text
             file:mr-4 file:py-2 file:px-4
             file:rounded-full file:border-0
             file:text-sm file:font-semibold
-            file:bg-blue-50 file:text-blue-700
-            hover:file:bg-blue-100"
+            file:bg-tansa-blue/10 file:text-tansa-blue
+            hover:file:bg-tansa-blue/20"
         />
         <button
           onClick={handleUpload}
           disabled={!file || uploading}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md disabled:opacity-50"
+          className="px-4 py-2 bg-tansa-blue text-white rounded-md disabled:opacity-50"
         >
           {uploading ? 'Uploading...' : 'Upload CSV'}
         </button>
-        {error && <p className="text-red-500">{error}</p>}
-        {success && <p className="text-green-500">CSV uploaded successfully!</p>}
+        {error && <p className="text-error">{error}</p>}
+        {success && <p className="text-success">CSV uploaded successfully!</p>}
       </div>
     </div>
   )

@@ -130,7 +130,7 @@ const EventsCarousel: React.FC<EventsCarouselProps> = ({
             <button
               key={index}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentIndex ? 'bg-brand-blue scale-110' : 'bg-brand-bg hover:bg-brand-blue/50'
+                index === currentIndex ? 'bg-black scale-110' : 'bg-brand-bg hover:bg-brand-blue/50'
               }`}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}

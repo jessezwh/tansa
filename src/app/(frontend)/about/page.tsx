@@ -17,13 +17,12 @@ function processTeamCategories(exec: Awaited<ReturnType<typeof getExecMembers>>)
   // Define category order
   const categoryOrder = [
     'Presidents',
-    'Admin',
-    'Marketing',
+    'Admin / Advisory',
     'Activities',
-    'AESIR',
     'Public Relations Officer',
-    'Design',
-    'Photography',
+    'Marketing',
+    'Design / Photography',
+    'AESIR',
     'Interns',
   ]
 
@@ -40,8 +39,8 @@ async function TeamContent() {
   const categories = processTeamCategories(exec)
 
   return (
-    <div className="bg-tansa-blue">
-      <div className="bg-tansa-blue overflow-hidden">
+    <div className="bg-brand-orange pb-10">
+      <div className="bg-brand-bg overflow-hidden">
         {/* HERO SECTION - stays like original */}
         <div
           className="max-w-6xl relative mx-auto flex items-center justify-between 
@@ -49,11 +48,11 @@ async function TeamContent() {
         >
           <div className="pl-4 sm:pl-8 md:pl-12 mt-[clamp(0.5rem,2vw,1rem)] lg:mt-0 relative z-10">
             {/* Text scales on small screens, fixed look on large screens */}
-            <h1 className="text-[clamp(2.5rem,5.5vw,4rem)] sm:text-[clamp(3rem,7vw,5rem)] lg:text-6xl text-white font-draplink">
-              Meet our
+            <h1 className="text-[clamp(2.5rem,5.5vw,4rem)] sm:text-[clamp(3rem,7vw,5rem)] lg:text-6xl text-brand-orange font-draplink">
+              Meet Our
             </h1>
-            <h1 className="text-[clamp(3.5rem,9vw,6rem)] sm:text-[clamp(4rem,10vw,6.5rem)] lg:text-8xl text-white font-draplink mt-0 sm:mt-4 lg:mt-0">
-              Team!
+            <h1 className="text-[clamp(3.5rem,9vw,6rem)] sm:text-[clamp(4rem,10vw,6.5rem)] lg:text-8xl text-brand-orange font-draplink mt-0 sm:mt-4 lg:mt-0">
+              TEAM!
             </h1>
           </div>
 
@@ -73,7 +72,7 @@ async function TeamContent() {
 
       {/* TEAM SECTIONS - responsive improvements preserved */}
       {categories.map(({ title, members }, index) => (
-        <TeamSection key={title} title={title} members={members} isFirst={index === 0} />
+        <TeamSection key={title} title={title.toUpperCase()} members={members} isFirst={index === 0} />
       ))}
     </div>
   )

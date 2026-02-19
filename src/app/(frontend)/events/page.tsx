@@ -41,7 +41,7 @@ function EventsLoading() {
 
 export default function PastEventsPage() {
   return (
-    <div className="bg-tansa-blue">
+    <div className="bg-brand-bg">
       {/* Header Section */}
       <div className="max-w-6xl h-[200px] sm:h-[250px] md:h-[300px] mx-auto flex items-center justify-between py-8 sm:py-12 md:py-16 relative overflow-clip">
         {/* Left text */}
@@ -63,7 +63,7 @@ export default function PastEventsPage() {
       </div>
 
       {/* Events Grid */}
-      <div className="bg-tansa-cream py-12 border-t-8 border-tansa-cream">
+      <div className="bg-brand-bg py-12 border-t-8 border-tansa-cream">
         <Suspense fallback={<EventsLoading />}>
           <EventsContent />
         </Suspense>

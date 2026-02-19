@@ -60,13 +60,13 @@ export const CSVUpload: React.FC = () => {
             file:mr-4 file:py-2 file:px-4
             file:rounded-full file:border-0
             file:text-sm file:font-semibold
-            file:bg-tansa-blue/10 file:text-tansa-blue
-            hover:file:bg-tansa-blue/20"
+            file:bg-brand-bg/10 file:text-tansa-blue
+            hover:file:bg-brand-bg/20"
         />
         <button
           onClick={handleUpload}
           disabled={!file || uploading}
-          className="px-4 py-2 bg-tansa-blue text-white rounded-md disabled:opacity-50"
+          className="px-4 py-2 bg-brand-bg text-white rounded-md disabled:opacity-50"
         >
           {uploading ? 'Uploading...' : 'Upload CSV'}
         </button>

@@ -44,9 +44,9 @@ export default async function EventGalleryPage({ params }: EventGalleryPageProps
   })
 
   return (
-    <div className="min-h-screen bg-tansa-cream">
+    <div className="min-h-screen bg-brand-bg">
       {/* Header */}
-      <div className="bg-tansa-blue h-[300px]">
+      <div className="bg-brand-bg h-[300px]">
         <div className="max-w-6xl mx-auto px-4 py-8">
           <Link
             href="/events"

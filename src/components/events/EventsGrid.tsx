@@ -52,7 +52,7 @@ export default function EventsGrid({ events, initialLoad = 8 }: EventsGridProps)
           <button
             onClick={loadMore}
             disabled={isLoadingMore}
-            className="bg-tansa-blue text-white px-6 py-3 rounded-full font-medium hover:bg-tansa-blue/90 transition-colors disabled:opacity-50"
+            className="bg-brand-bg text-white px-6 py-3 rounded-full font-medium hover:bg-brand-bg/90 transition-colors disabled:opacity-50"
           >
             {isLoadingMore ? 'Loading...' : `Load More (${events.length - displayCount} remaining)`}
           </button>

@@ -1,7 +1,7 @@
 export default function TeamSkeleton() {
   return (
-    <div className="bg-tansa-blue">
-      <div className="bg-tansa-blue overflow-hidden">
+    <div className="bg-brand-bg">
+      <div className="bg-brand-bg overflow-hidden">
         <div className="max-w-6xl relative mx-auto flex items-center justify-between py-[clamp(2rem,6vw,4rem)] h-[clamp(180px,30vw,300px)]">
           <div>
             <div className="h-[clamp(2rem,4vw,4rem)] w-[clamp(150px,25vw,250px)] bg-white/20 rounded animate-pulse mb-4" />
@@ -15,7 +15,7 @@ export default function TeamSkeleton() {
 
       {/* Skeleton for team sections */}
       {[1, 2, 3].map((section) => (
-        <div key={section} className="bg-tansa-cream">
+        <div key={section} className="bg-brand-bg">
           <div className="container mx-auto px-4 pt-12 text-center">
             <div className="h-[clamp(1.5rem,3vw,2rem)] w-[clamp(150px,25vw,200px)] bg-skeleton-dark rounded animate-pulse mx-auto" />
           </div>

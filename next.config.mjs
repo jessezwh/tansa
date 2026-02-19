@@ -1,8 +1,11 @@
 import { withPayload } from '@payloadcms/next/withPayload'
 
+const isDev = process.env.NODE_ENV !== 'production'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    ...(isDev && { unoptimized: true }),
     remotePatterns: [
       {
         protocol: 'https',
@@ -20,13 +23,6 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-  },
-  webpack: (config, { dev, isServer }) => {
-    // Disable webpack caching in development to avoid snapshot errors
-    if (dev) {
-      config.cache = false
-    }
-    return config
   },
 }
 

@@ -86,7 +86,7 @@ export default function SuccessPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Header */}
-      <div className="bg-tansa-blue relative h-[300px] flex items-center justify-center flex-col text-center space-y-4 rounded-b-4x overflow-clip">
+      <div className="bg-brand-bg relative h-[300px] flex items-center justify-center flex-col text-center space-y-4 rounded-b-4x overflow-clip">
         <h1 className="text-6xl md:text-8xl font-bold text-white font-draplink z-10">Join Us</h1>
         <p className="text-lg md:text-2xl text-white z-10">
           Join TANSA this year and get access to
@@ -126,7 +126,7 @@ export default function SuccessPage() {
                 <div className="space-y-4">
                   {/* Referral Code Section */}
                   {referralCode && (
-                    <div className="bg-tansa-cream rounded-lg p-4 space-y-2">
+                    <div className="bg-brand-bg rounded-lg p-4 space-y-2">
                       <p className="text-sm font-medium text-tansa-blue">Your Referral Code</p>
                       <div className="flex items-center justify-center gap-2">
                         <span className="text-2xl font-bold text-tansa-blue font-mono tracking-wider">

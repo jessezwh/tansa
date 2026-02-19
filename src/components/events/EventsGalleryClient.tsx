@@ -114,7 +114,7 @@ export default function EventGalleryClient({ title, date, photos }: EventGallery
             {row.map((photo) => (
               <div
                 key={photo.idx}
-                className="relative cursor-pointer group overflow-hidden bg-tansa-cream rounded-md"
+                className="relative cursor-pointer group overflow-hidden bg-brand-bg rounded-md"
                 style={{ width: `${photo.width}px`, height: `${photo.height}px`, flex: 'none' }}
                 onClick={() => handlePhotoClick(photo.idx)}
               >

@@ -60,7 +60,7 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
   }
 
   return (
-    <div className="mt-15 bg-tansa-cream">
+    <div className="mt-15 bg-brand-bg">
       <div className="max-w-6xl mx-auto px-4 pb-8">
         <input
           type="text"
@@ -125,7 +125,7 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
                           className="object-contain max-w-[80px] max-h-[80px]"
                         />
                         {/* External link icon - visible on hover */}
-                        <div className="absolute top-1 right-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 bg-tansa-blue rounded p-0.5">
+                        <div className="absolute top-1 right-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 bg-brand-bg rounded p-0.5">
                           <ExternalLink className="w-3.5 h-3.5 text-white" />
                         </div>
                       </a>

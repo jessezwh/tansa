@@ -74,7 +74,7 @@ function PodiumSpot({
           </>
         ) : (
           <>
-            <div className="w-16 h-16 rounded-full bg-tansa-blue flex items-center justify-center mx-auto mb-1">
+            <div className="w-16 h-16 rounded-full bg-brand-bg flex items-center justify-center mx-auto mb-1">
               <span className="text-white text-xl font-bold">
                 {entry?.firstName?.charAt(0)}
                 {entry?.lastName?.charAt(0)}
@@ -149,7 +149,7 @@ export default function LeaderboardPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Header */}
-      <div className="bg-tansa-blue relative h-[300px] flex items-center justify-center flex-col text-center space-y-4 rounded-b-4x overflow-clip">
+      <div className="bg-brand-bg relative h-[300px] flex items-center justify-center flex-col text-center space-y-4 rounded-b-4x overflow-clip">
         <Trophy className="w-16 h-16 text-podium-gold mb-2" />
         <h1 className="text-5xl md:text-7xl font-bold text-white font-draplink z-10">
           Referral Leaderboard
@@ -218,7 +218,7 @@ export default function LeaderboardPage() {
                         className="flex items-center justify-between p-3 bg-skeleton/30 rounded-lg"
                       >
                         <div className="flex items-center gap-3">
-                          <span className="w-8 h-8 rounded-full bg-tansa-blue text-white flex items-center justify-center text-sm font-bold">
+                          <span className="w-8 h-8 rounded-full bg-brand-bg text-white flex items-center justify-center text-sm font-bold">
                             {entry.rank}
                           </span>
                           <span className="font-medium">
@@ -268,7 +268,7 @@ export default function LeaderboardPage() {
                 )}
 
                 {lookupResult && (
-                  <div className="bg-tansa-cream rounded-lg p-4 text-center">
+                  <div className="bg-brand-bg rounded-lg p-4 text-center">
                     <p className="font-semibold text-tansa-blue text-lg">
                       {lookupResult.firstName} {lookupResult.lastName}
                     </p>

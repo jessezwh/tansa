@@ -23,7 +23,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <html lang="en">
       <body className={`antialiased ${dmSans.className}`} suppressHydrationWarning>
         <main>
-          <div className="bg-tansa-cream min-h-screen flex flex-col">
+          <div className="bg-brand-bg min-h-screen flex flex-col">
             <Header />
             {children}
             <Footer />

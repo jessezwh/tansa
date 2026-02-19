@@ -337,7 +337,7 @@ function CheckoutForm({
       <Button
         type="submit"
         disabled={!stripe || isLoading}
-        className="w-full bg-tansa-blue text-white"
+        className="w-full bg-brand-bg text-white"
       >
         {isLoading ? (
           <>

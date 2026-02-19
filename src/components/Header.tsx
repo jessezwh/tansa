@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { ArrowRight, PawPrint } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
@@ -62,9 +62,11 @@ const Header = () => {
   const router = useRouter()
   const [loadingPath, setLoadingPath] = useState<string | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
+  const headerRef = useRef<HTMLElement>(null)
 
   const handleClick = (href: string) => {
     if (pathname !== href) {
+      headerRef.current?.setAttribute('data-page-theme', getPageTheme(href))
       setLoadingPath(href)
       router.push(href)
       setMenuOpen(false)
@@ -76,7 +78,7 @@ const Header = () => {
   }, [pathname])
 
   return (
-    <header className="sticky top-0 z-40 px-6 py-4 lg:py-3 bg-brand-bg" data-page-theme={getPageTheme(pathname)}>
+    <header ref={headerRef} className="sticky top-0 z-40 px-6 py-4 lg:py-3 bg-brand-bg" data-page-theme={getPageTheme(loadingPath || pathname)}>
       <div className="flex items-center justify-between w-full">
         {/*Left Side Element*/}
         <Link href="/" className="flex-1">

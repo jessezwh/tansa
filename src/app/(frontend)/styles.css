@@ -237,6 +237,11 @@ header:has([data-theme="green"]:hover) { --nav-theme: #417B3A; }
   transition: color 0.2s ease;
 }
 
+.nav-themed-fill {
+  fill: var(--nav-theme);
+  transition: fill 0.2s ease;
+}
+
 .nav-join-btn {
   background-color: var(--nav-theme);
   transition: background-color 0.2s ease;
@@ -250,7 +255,8 @@ header:has([data-theme="green"]:hover) { --nav-theme: #417B3A; }
 /* --- End page theme --- */
 
 .hamburger-line {
-  @apply block h-[3px] w-full bg-brand-pink rounded transition-all duration-300 ease-out;
+  @apply block h-[3px] w-full rounded transition-all duration-300 ease-out;
+  background-color: var(--nav-theme, #ED2E88);
 }
 
 /* Transform animation when menu is open */
@@ -266,7 +272,7 @@ header:has([data-theme="green"]:hover) { --nav-theme: #417B3A; }
   @apply -translate-y-2.5 -rotate-45;
 }
 
-/* Change to BLUE when open */
+/* Keep theme color when open */
 .open .hamburger-line {
-  @apply bg-brand-pink;
+  background-color: var(--nav-theme, #ED2E88);
 }

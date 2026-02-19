@@ -34,7 +34,7 @@ const Header = () => {
   }, [pathname])
 
   return (
-    <header className="sticky top-0 z-40 px-6 py-2 lg:py-3 bg-brand-bg">
+    <header className="sticky top-0 z-40 px-6 py-4 lg:py-3 bg-brand-bg">
       <div className="flex items-center justify-between w-full">
         {/*Left Side Element*/}
         <Link href="/" className="flex-1">
@@ -61,18 +61,18 @@ const Header = () => {
           </div>
           {/*Mobile Logo*/}
           <div className="lg:hidden flex items-center space-x-2">
-            <Image src="/TANSA-LOGO.svg" alt="TANSA bear logo" width={40} height={40} />
-            <h1 className="text-sm font-semibold text-tansa-cream">
+            <Image src="/TANSA-LOGO.svg" alt="TANSA bear logo" width={40} height={40} className="shrink-0" />
+            <h1 className="text-sm font-semibold text-brand-pink whitespace-nowrap">
               Taiwanese and New Zealand
               <br />
-              Students' Association
+              Students&apos; Association
             </h1>
           </div>
         </Link>
 
         {/* Navigation */}
-        <nav className="hidden lg:block flex-2">
-          <ul className="flex items-center justify-center space-x-10 text-brand-pink">
+        <nav className="hidden lg:flex flex-1 justify-center">
+          <ul className="flex items-center justify-center space-x-10 text-brand-pink whitespace-nowrap">
             {navItems.map((item) => (
               <li key={item.href}>
                 <button
@@ -101,7 +101,7 @@ const Header = () => {
         </nav>
 
         {/* Right Side Elements*/}
-        <div className="flex items-center">
+        <div className="flex items-center flex-1 justify-end">
           {/* Desktop Right Side */}
           <div className="hidden lg:flex items-center space-x-4">
             <Link
@@ -114,7 +114,7 @@ const Header = () => {
 
             <Link
               href="/sign-up"
-              className="bg-[#417b3a] text-white px-3 py-2 rounded-full font-bold transition-transform duration-200 group-hover:-translate-x-6 flex items-center group relative min-w-[110px]"
+              className="bg-brand-pink text-white px-3 py-2 rounded-full font-bold transition-transform duration-200 group-hover:-translate-x-6 flex items-center group relative min-w-[110px]"
             >
               <span className="inline-block h-4 w-4 relative">
                 <PawPrint className="absolute h-4 w-4 left-0 top-0 transition-transform duration-200 group-hover:-translate-x-6 opacity-100 group-hover:opacity-0" />
@@ -141,37 +141,26 @@ const Header = () => {
             </button>
           </div>
         </div>
-        {/* Mobile Dropdown Menu */}
-        {menuOpen && (
-          <div className="lg:hidden absolute top-0 left-0 right-0 bg-tansa-cream shadow-lg z-40 px-6 py-2 transform transition-all duration-500 ease-out">
-            {/* Mobile Logo */}
-            <div className="flex items-center space-x-2 mb-6">
-              <Image src="/TANSA-LOGO.svg" alt="TANSA bear logo" width={40} height={40} />
-              <h1 className="text-sm font-semibold text-tansa-blue">
-                Taiwanese and New Zealand
-                <br />
-                Students' Association
-              </h1>
-            </div>
-
-            <ul className="flex flex-col items-start space-y-6 text-lg text-tansa-blue font-semibold pb-6">
-              {/* Links */}
-              {navItems
-                .filter((item) => item.href !== '/') // skip Home
-                .map((item) => (
-                  <li key={item.href}>
-                    <button
-                      onClick={() => handleClick(item.href)}
-                      className="text-lg text-tansa-blue"
-                    >
-                      {item.label}
-                    </button>
-                  </li>
-                ))}
-            </ul>
-          </div>
-        )}
       </div>
+      {/* Mobile Nav Links - overlay below navbar */}
+      {menuOpen && (
+        <div className="lg:hidden absolute left-0 right-0 top-full bg-brand-bg shadow-lg z-40 px-6 pb-6 pt-4">
+          <ul className="flex flex-col items-start space-y-4 text-lg text-brand-pink font-semibold">
+            {navItems
+              .filter((item) => item.href !== '/')
+              .map((item) => (
+                <li key={item.href}>
+                  <button
+                    onClick={() => handleClick(item.href)}
+                    className="text-lg text-brand-pink"
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
     </header>
   )
 }

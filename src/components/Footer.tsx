@@ -45,7 +45,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-tansa-blue text-white p-6 mt-auto">
+    <footer className="bg-brand-bg text-brand-pink p-6 mt-auto">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-6 gap-8 mb-4">
           {/* About Us Section */}
@@ -178,7 +178,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright Section */}
-        <div className="border-t border-white/30 pt-4">
+        <div className="border-t border-brand-pink/30 pt-4">
           <p className="font-bold">© 2025 TANSA + WDCC</p>
         </div>
       </div>

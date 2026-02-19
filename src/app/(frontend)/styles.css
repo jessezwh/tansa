@@ -187,6 +187,15 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+@keyframes gentle-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.animate-gentle-bounce {
+  animation: gentle-bounce 2s ease-in-out infinite;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -197,7 +206,7 @@
 }
 
 .hamburger-line {
-  @apply block h-[3px] w-full bg-tansa-cream rounded transition-all duration-300 ease-out;
+  @apply block h-[3px] w-full bg-brand-pink rounded transition-all duration-300 ease-out;
 }
 
 /* Transform animation when menu is open */
@@ -215,5 +224,5 @@
 
 /* Change to BLUE when open */
 .open .hamburger-line {
-  @apply bg-tansa-blue;
+  @apply bg-brand-pink;
 }

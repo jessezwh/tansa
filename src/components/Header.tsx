@@ -2,23 +2,65 @@
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { ArrowRight, MoveRight, PawPrint, Menu, X } from 'lucide-react'
+import { ArrowRight, PawPrint } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
+import { getPageTheme } from '@/lib/page-themes'
+
+const navItems = [
+  { href: '/', label: 'Home', theme: 'pink' },
+  { href: '/about', label: 'About Us', theme: 'orange' },
+  { href: '/events', label: 'Events', theme: 'blue' },
+  { href: '/sponsors', label: 'Sponsors', theme: 'green' },
+  { href: '/leaderboard', label: 'Leaderboard', theme: null },
+  { href: '/contact', label: 'Contact', theme: null },
+]
+
+function InlineLogo({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 586.8 586.8" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+      <defs>
+        <mask id="logo-mask" x="20.2" y="66.3" width="506.2" height="502" maskUnits="userSpaceOnUse">
+          <circle fill="#fff" cx="296.6" cy="296.1" r="229.8"/>
+        </mask>
+      </defs>
+      <circle className="logo-circle" cx="296.6" cy="295.1" r="229.8"/>
+      <g mask="url(#logo-mask)">
+        <g>
+          <ellipse fill="#141414" cx="222.2" cy="378.3" rx="189.4" ry="202.5" transform="translate(-193.1 519.8) rotate(-78.4)"/>
+          <ellipse fill="#fff" cx="143.4" cy="355.3" rx="42.9" ry="57.4" transform="translate(-233.5 424.3) rotate(-78.4)"/>
+          <path fill="#141414" d="M194.3,365.7c-5,24.2-40,33-58.4,27.4-4.3-1.3-6.9-3.2-7.9-3.9-15.3-11.4-11.2-37.1-10.9-38.5,2.2-12.3,10.3-30,24.8-33.2,1.9-.4,5-.9,9.6,0,18.6,3.2,47.8,23.9,42.8,48.2Z"/>
+          <path fill="#fff" d="M177.3,362.3c-10-2-24,7.2-26,17.1,2-10-7.2-24-17.1-26,10,2,24-7.2,26-17.1-2,10,7.2,24,17.1,26Z"/>
+          <ellipse fill="#fff" cx="303.7" cy="388.2" rx="42.9" ry="57.4" transform="translate(-137.7 607.5) rotate(-78.4)"/>
+          <path fill="#141414" d="M354.5,398.6c-5,24.2-40,33-58.4,27.4-4.3-1.3-6.9-3.2-7.9-3.9-15.3-11.4-11.2-37.1-10.9-38.5,2.2-12.3,10.3-30,24.8-33.2,1.9-.4,5-.9,9.6,0,18.6,3.2,47.8,23.9,42.8,48.2Z"/>
+          <path fill="#fff" d="M337.6,395.2c-10-2-24,7.2-26,17.1,2-10-7.2-24-17.1-26,10,2,24-7.2,26-17.1-2,10,7.2,24,17.1,26Z"/>
+          <rect fill="#fff" x="194.2" y="411.1" width="38.8" height="17.9" rx="8.9" ry="8.9" transform="translate(88.9 -34.4) rotate(11.6)"/>
+          <ellipse fill="#141414" cx="391" cy="264.2" rx="68.3" ry="87.2" transform="translate(-80.6 279.3) rotate(-35.9)"/>
+          <path fill="#fff" d="M374.7,248.1c17.8-12,37.9-13.1,49.8-6.7,12.5,6.7,19.3,19.1,19.3,19.2.3.6.6,1.1.7,1.4,1.5,3,7.6,15.7,4.2,31.5-5.1,24-27.3,34-29.7,35.1-2.4-8.4-5.6-17.6-9.9-27.2-10.3-23.1-23.3-40.7-34.4-53.2Z"/>
+          <ellipse fill="#141414" cx="111.6" cy="206.8" rx="87.2" ry="68.3" transform="translate(-90.3 86.7) rotate(-30.9)"/>
+          <path fill="#fff" d="M133,198.4c-11.6-18-29.7-27-43.1-25.8-14.1,1.2-25.3,10-25.3,10-.5.4-.9.8-1.2,1-2.6,2.1-13.2,11.4-16.3,27.3-4.8,24,11.7,42.1,13.4,43.9,5.5-6.8,12.1-14,19.8-21.1,18.6-17.2,37.5-28.2,52.6-35.3Z"/>
+        </g>
+      </g>
+    </svg>
+  )
+}
+
+function InlineLinktree({ className }: { className?: string }) {
+  return (
+    <svg className={className} width="20" height="24" viewBox="0 0 38 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect className="linktree-fill" x="15.1352" width="7.06313" height="23.2074"/>
+      <rect className="linktree-fill" x="15.1352" y="30.2725" width="7.06313" height="15.1353"/>
+      <rect className="linktree-fill" x="37.3337" y="15.1357" width="7.06313" height="37.3337" transform="rotate(90 37.3337 15.1357)"/>
+      <rect className="linktree-fill" x="34.7499" y="29.0654" width="7.06313" height="37.3337" transform="rotate(134.779 34.7499 29.0654)"/>
+      <rect className="linktree-fill" width="7.06313" height="37.3337" transform="matrix(0.704376 0.709827 0.709827 -0.704376 3.27435 29.0654)"/>
+    </svg>
+  )
+}
 
 const Header = () => {
   const pathname = usePathname()
   const router = useRouter()
   const [loadingPath, setLoadingPath] = useState<string | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
-
-  const navItems = [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'About Us' },
-    { href: '/events', label: 'Events' },
-    { href: '/sponsors', label: 'Sponsors' },
-    { href: '/leaderboard', label: 'Leaderboard' },
-    { href: '/contact', label: 'Contact' },
-  ]
 
   const handleClick = (href: string) => {
     if (pathname !== href) {
@@ -28,40 +70,33 @@ const Header = () => {
     }
   }
 
-  // Reset loading state when route changes
   useEffect(() => {
     setLoadingPath(null)
   }, [pathname])
 
   return (
-    <header className="sticky top-0 z-40 px-6 py-4 lg:py-3 bg-brand-bg">
+    <header className="sticky top-0 z-40 px-6 py-4 lg:py-3 bg-brand-bg" data-page-theme={getPageTheme(pathname)}>
       <div className="flex items-center justify-between w-full">
         {/*Left Side Element*/}
         <Link href="/" className="flex-1">
           {/*Desktop Logo*/}
           <div className="hidden lg:flex items-center space-x-6 group">
             <div className="h-16 w-16 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-              <Image
-                src="/TANSA-LOGO.svg"
-                width={500}
-                height={500}
-                alt="tansa bear logo"
-                className="transition-all duration-300 group-hover:rotate-6"
-              />
+              <InlineLogo className="w-full h-full transition-all duration-300 group-hover:rotate-6" />
             </div>
 
-            <div className="text-white select-none">
-              <h1 className="font-bold text-lg text-brand-pink leading-tight transition-colors duration-300 group-hover:text-white">
+            <div className="select-none">
+              <h1 className="nav-themed-text font-bold text-lg leading-tight transition-colors duration-200">
                 Taiwanese and New Zealand
               </h1>
-              <h2 className="text-lg text-brand-pink leading-tight transition-colors duration-300 group-hover:text-white">
-                Students' Association
+              <h2 className="nav-themed-text text-lg leading-tight transition-colors duration-200">
+                Students&apos; Association
               </h2>
             </div>
           </div>
           {/*Mobile Logo*/}
           <div className="lg:hidden flex items-center space-x-2">
-            <Image src="/TANSA-LOGO.svg" alt="TANSA bear logo" width={40} height={40} className="shrink-0" />
+            <InlineLogo className="w-10 h-10 shrink-0" />
             <h1 className="text-sm font-semibold text-brand-pink whitespace-nowrap">
               Taiwanese and New Zealand
               <br />
@@ -72,14 +107,15 @@ const Header = () => {
 
         {/* Navigation */}
         <nav className="hidden lg:flex flex-1 justify-center">
-          <ul className="flex items-center justify-center space-x-10 text-brand-pink whitespace-nowrap">
+          <ul className="flex items-center justify-center space-x-10 whitespace-nowrap">
             {navItems.map((item) => (
               <li key={item.href}>
                 <button
                   onClick={() => handleClick(item.href)}
                   disabled={loadingPath === item.href}
-                  className={`relative px-2 py-1 font-bold group flex items-center transition-colors duration-200 ${
-                    pathname === item.href ? 'text-brand-pink' : 'hover:text-white'
+                  data-theme={item.theme || undefined}
+                  className={`nav-link relative px-2 py-1 font-bold group flex items-center transition-colors duration-200 ${
+                    pathname === item.href ? 'nav-themed-text' : 'nav-themed-text hover:!text-white'
                   } ${loadingPath === item.href ? 'opacity-50 cursor-wait' : ''}`}
                 >
                   <span className="flex items-center relative">
@@ -107,14 +143,14 @@ const Header = () => {
             <Link
               href="https://linktr.ee/tansa.ausa"
               target="_blank"
-              className="text-white transition-all duration-300 hover:scale-110"
+              className="transition-all duration-300 hover:scale-110"
             >
-              <Image src="/icons/linktree.svg" width={20} height={20} alt="LinkTree" />
+              <InlineLinktree />
             </Link>
 
             <Link
               href="/sign-up"
-              className="bg-brand-pink text-white px-3 py-2 rounded-full font-bold transition-transform duration-200 group-hover:-translate-x-6 flex items-center group relative min-w-[110px]"
+              className="nav-join-btn text-white px-3 py-2 rounded-full font-bold transition-all duration-200 group-hover:-translate-x-6 flex items-center group relative min-w-[110px]"
             >
               <span className="inline-block h-4 w-4 relative">
                 <PawPrint className="absolute h-4 w-4 left-0 top-0 transition-transform duration-200 group-hover:-translate-x-6 opacity-100 group-hover:opacity-0" />

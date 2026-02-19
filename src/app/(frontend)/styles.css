@@ -205,6 +205,50 @@
   }
 }
 
+/* --- Page theme system --- */
+[data-page-theme="pink"] { --page-theme: #ED2E88; }
+[data-page-theme="orange"] { --page-theme: #F58120; }
+[data-page-theme="blue"] { --page-theme: #4A9BAD; }
+[data-page-theme="green"] { --page-theme: #417B3A; }
+
+/* Nav default uses page theme */
+header {
+  --nav-theme: var(--page-theme, #ED2E88);
+}
+
+/* Hover overrides */
+header:has([data-theme="pink"]:hover) { --nav-theme: #ED2E88; }
+header:has([data-theme="orange"]:hover) { --nav-theme: #F58120; }
+header:has([data-theme="blue"]:hover) { --nav-theme: #4A9BAD; }
+header:has([data-theme="green"]:hover) { --nav-theme: #417B3A; }
+
+.logo-circle {
+  fill: var(--nav-theme);
+  transition: fill 0.2s ease;
+}
+
+.linktree-fill {
+  fill: var(--nav-theme);
+  transition: fill 0.2s ease;
+}
+
+.nav-themed-text {
+  color: var(--nav-theme);
+  transition: color 0.2s ease;
+}
+
+.nav-join-btn {
+  background-color: var(--nav-theme);
+  transition: background-color 0.2s ease;
+}
+
+/* Footer uses page theme for text color */
+.footer-themed {
+  color: var(--page-theme, #ED2E88);
+}
+
+/* --- End page theme --- */
+
 .hamburger-line {
   @apply block h-[3px] w-full bg-brand-pink rounded transition-all duration-300 ease-out;
 }

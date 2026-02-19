@@ -64,7 +64,7 @@ function EventCard({ title, date, photoUrls, slug, priority = false }: EventCard
 
           {/* Hover overlay */}
           <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <div className="bg-white/90 px-4 py-2 rounded-full font-medium text-tansa-blue">
+            <div className="bg-white/90 px-4 py-2 rounded-full font-medium text-brand-blue">
               View Gallery
             </div>
           </div>
@@ -72,14 +72,14 @@ function EventCard({ title, date, photoUrls, slug, priority = false }: EventCard
           {/* Loading overlay */}
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-white/70">
-              <div className="h-8 w-8 border-4 border-tansa-blue border-t-transparent rounded-full animate-spin"></div>
+              <div className="h-8 w-8 border-4 border-brand-blue border-t-transparent rounded-full animate-spin"></div>
             </div>
           )}
         </div>
 
         {/* Event Info */}
         <div className="p-4">
-          <h3 className="font-bold text-lg text-tansa-blue font-draplink line-clamp-2 group-hover:text-tansa-blue/80 transition-colors">
+          <h3 className="font-semibold text-lg text-brand-blue font-neue-haas truncate group-hover:text-brand-blue/80 transition-colors">
             {title}
           </h3>
           <p className="text-sm text-muted-text mt-1">{formattedDate}</p>

@@ -60,7 +60,7 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
   }
 
   return (
-    <div className="mt-15 bg-brand-bg">
+    <div className="mt-15">
       <div className="max-w-6xl mx-auto px-4 pb-8">
         <input
           type="text"
@@ -124,9 +124,9 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
                           height={100}
                           className="object-contain max-w-[80px] max-h-[80px]"
                         />
-                        {/* External link icon - visible on hover */}
-                        <div className="absolute top-1 right-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 bg-brand-bg rounded p-0.5">
-                          <ExternalLink className="w-3.5 h-3.5 text-white" />
+                        {/* External link icon - always visible on desktop */}
+                        <div className="absolute top-1 right-1 bg-brand-bg rounded p-0.5">
+                          <ExternalLink className="w-3.5 h-3.5 text-brand-green" />
                         </div>
                       </a>
                     ) : (
@@ -166,7 +166,7 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
                           href={instagram}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-block text-tansa-blue font-bold hover:underline"
+                          className="inline-block text-brand-green font-bold hover:underline"
                         >
                           More Info!
                         </a>
@@ -187,7 +187,7 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
                 </div>
 
                 {/* Sponsor name below card - both mobile and desktop */}
-                <h3 className="mt-2 font-bold text-xs text-tansa-blue text-center w-[100px] truncate">
+                <h3 className="mt-2 font-bold text-xs text-white text-center w-[100px] truncate">
                   {name}
                 </h3>
               </div>

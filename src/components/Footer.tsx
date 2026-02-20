@@ -2,7 +2,7 @@
 import React, { useState, ChangeEvent, MouseEvent } from 'react'
 import { Send, Snowflake, Mail, Instagram, Facebook } from 'lucide-react'
 import { usePathname } from 'next/navigation'
-import { getPageTheme, isFooterInverted } from '@/lib/page-themes'
+import { getPageTheme } from '@/lib/page-themes'
 
 const Footer = () => {
   const pathname = usePathname()
@@ -48,7 +48,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-brand-bg p-6 mt-auto footer-themed" data-page-theme={getPageTheme(pathname)} {...(isFooterInverted(pathname) ? { 'data-footer-inverted': '' } : {})}>
+    <footer className="bg-brand-bg p-6 mt-auto footer-themed" data-page-theme={getPageTheme(pathname)}>
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-6 gap-8 mb-4">
           {/* About Us Section */}

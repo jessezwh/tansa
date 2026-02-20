@@ -41,16 +41,14 @@ function EventsLoading() {
 
 export default function PastEventsPage() {
   return (
-    <div className="bg-brand-blue">
+    <div className="bg-brand-bg">
       {/* Header Section */}
       <div className="bg-brand-bg">
         <div className="max-w-6xl h-[200px] sm:h-[250px] md:h-[300px] mx-auto flex items-center justify-between py-8 sm:py-12 md:py-16 relative overflow-clip">
-          {/* Left text */}
           <div className="font-draplink font-bold text-brand-blue leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl relative z-10 pl-4 sm:pl-8 lg:pl-0">
             <h1>PAST</h1>
             <h1>EVENTS</h1>
           </div>
-          {/* Bear image */}
           <div className="absolute right-0 bottom-[-120px] sm:bottom-[-150px] md:bottom-[-190px] select-none z-0 w-[250px] sm:w-[350px] md:w-[450px]">
             <Image
               src="/bears/hooray 1.svg"
@@ -64,11 +62,19 @@ export default function PastEventsPage() {
         </div>
       </div>
 
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-0">
+        <hr className="border-brand-blue/30" />
+      </div>
+
       {/* Events Grid */}
       <div className="py-12">
         <Suspense fallback={<EventsLoading />}>
           <EventsContent />
         </Suspense>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-0">
+        <hr className="border-brand-blue/30" />
       </div>
     </div>
   )

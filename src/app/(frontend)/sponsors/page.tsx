@@ -8,7 +8,7 @@ export default async function SponsorsPage() {
   const sponsors = await getSponsors()
 
   return (
-    <div className="bg-brand-green">
+    <div className="bg-brand-bg">
       <div className="bg-brand-bg">
         {/* Header Section */}
         <div className="max-w-6xl h-[200px] sm:h-[250px] md:h-[300px] mx-auto flex items-center justify-between pt-8 sm:pt-12 md:pt-16 relative overflow-clip">
@@ -30,6 +30,10 @@ export default async function SponsorsPage() {
         </div>
       </div>
 
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-0">
+        <hr className="border-brand-green/30" />
+      </div>
+
       {/* Sponsors list with search */}
       <SponsorsList sponsors={sponsors} />
 
@@ -43,6 +47,10 @@ export default async function SponsorsPage() {
           className="border-0"
           loading="lazy"
         />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-0">
+        <hr className="border-brand-green/30" />
       </div>
     </div>
   )

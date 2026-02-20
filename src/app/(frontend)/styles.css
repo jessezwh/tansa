@@ -255,11 +255,6 @@ header:has([data-theme="brown"]:hover) { --nav-theme: #5C3E1F; }
   color: var(--page-theme, #ED2E88);
 }
 
-/* Inverted footer for specific pages */
-footer[data-footer-inverted] {
-  background-color: var(--page-theme, #ED2E88);
-  color: white;
-}
 
 /* --- End page theme --- */
 

@@ -39,15 +39,14 @@ async function TeamContent() {
   const categories = processTeamCategories(exec)
 
   return (
-    <div className="bg-brand-orange pb-10">
+    <div className="bg-brand-bg pb-10">
       <div className="bg-brand-bg overflow-hidden">
-        {/* HERO SECTION - stays like original */}
+        {/* HERO SECTION */}
         <div
           className="max-w-6xl relative mx-auto flex items-center justify-between 
                 py-[clamp(1.5rem,4vw,4.5rem)] h-[clamp(180px,25vw,300px)] lg:h-[300px] lg:py-16"
         >
           <div className="pl-4 sm:pl-8 md:pl-12 mt-[clamp(0.5rem,2vw,1rem)] lg:mt-0 relative z-10">
-            {/* Text scales on small screens, fixed look on large screens */}
             <h1 className="text-[clamp(2.5rem,5.5vw,4rem)] sm:text-[clamp(3rem,7vw,5rem)] lg:text-6xl text-brand-orange font-draplink">
               Meet Our
             </h1>
@@ -56,7 +55,6 @@ async function TeamContent() {
             </h1>
           </div>
 
-          {/* Bear scales on small screens, fixed position/size on large screens */}
           <div className="w-[clamp(180px,30vw,400px)] lg:w-[400px] absolute right-2 sm:right-4 md:right-10 bottom-[-40px] sm:bottom-[-50px] lg:bottom-[-70px] select-none z-0">
             <Image
               src="/bears/lying_on_stomach.svg"
@@ -70,10 +68,18 @@ async function TeamContent() {
         </div>
       </div>
 
-      {/* TEAM SECTIONS - responsive improvements preserved */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-0">
+        <hr className="border-brand-orange/30" />
+      </div>
+
+      {/* TEAM SECTIONS */}
       {categories.map(({ title, members }, index) => (
         <TeamSection key={title} title={title.toUpperCase()} members={members} isFirst={index === 0} />
       ))}
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-0">
+        <hr className="border-brand-orange/30" />
+      </div>
     </div>
   )
 }

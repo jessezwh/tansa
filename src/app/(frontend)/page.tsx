@@ -120,16 +120,24 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <div className="bg-brand-pink pt-12 sm:pt-16 lg:pt-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-0">
+        <hr className="border-brand-pink/30" />
+      </div>
+
+      <div className="bg-brand-bg pt-12 sm:pt-16 lg:pt-20">
         <div className="flex flex-col items-center justify-center w-full">
           <div className="w-full max-w-7xl px-4">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 font-neue-haas">
+            <h2 className="text-2xl sm:text-3xl font-bold text-brand-pink mb-6 font-neue-haas">
               Recent Events
             </h2>
             <EventsCarousel images={carouselImages} />
           </div>
         </div>
         <InstagramWidget />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-0">
+        <hr className="border-brand-pink/30" />
       </div>
     </div>
   )

@@ -11,14 +11,8 @@ const PAGE_THEMES: Record<string, string> = {
   '/leaderboard': 'pink',
 }
 
-const INVERTED_FOOTER_PAGES = new Set(['/leaderboard'])
-
 export function getPageTheme(pathname: string): string {
   if (PAGE_THEMES[pathname]) return PAGE_THEMES[pathname]
   if (pathname.startsWith('/events/')) return 'blue'
   return 'pink'
-}
-
-export function isFooterInverted(pathname: string): boolean {
-  return INVERTED_FOOTER_PAGES.has(pathname)
 }

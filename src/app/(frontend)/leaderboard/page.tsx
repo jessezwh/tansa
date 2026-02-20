@@ -149,18 +149,17 @@ export default function LeaderboardPage() {
   return (
     <main className="min-h-screen bg-brand-bg">
       {/* Hero Header */}
-      <div className="bg-brand-pink">
+      <div className="bg-brand-bg">
         <div className="max-w-6xl h-[200px] sm:h-[250px] md:h-[300px] mx-auto flex items-center justify-between py-8 sm:py-12 md:py-16 relative overflow-clip">
           <div className="relative z-10 pl-4 sm:pl-8 lg:pl-0">
-            <div className="font-draplink font-bold text-white leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
+            <div className="font-draplink font-bold text-brand-pink leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
               <h1>Referral</h1>
               <h1>LEADERBOARD</h1>
             </div>
-            <p className="text-lg md:text-xl text-white/80">
+            <p className="text-lg md:text-xl text-brand-pink/80">
               Refer friends and climb the ranks!
             </p>
           </div>
-          {/* Bear image */}
           <div className="absolute right-0 bottom-[-120px] sm:bottom-[-150px] md:bottom-[-190px] select-none z-0 w-[250px] sm:w-[350px] md:w-[450px]">
             <Image
               src="/bears/hooray 1.svg"
@@ -171,6 +170,10 @@ export default function LeaderboardPage() {
             />
           </div>
         </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-0">
+        <hr className="border-brand-pink/30" />
       </div>
 
       <div className="max-w-4xl mx-auto px-4 py-8 space-y-8">
@@ -288,6 +291,10 @@ export default function LeaderboardPage() {
             </Card>
           </>
         )}
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-0">
+        <hr className="border-brand-pink/30" />
       </div>
     </main>
   )

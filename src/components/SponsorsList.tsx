@@ -70,7 +70,7 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
           onChange={(e) => setSearch(e.target.value)}
           aria-label="Search sponsors"
         />
-        <p className="text-white/70 text-sm mt-6 -mb-2 text-center font-neue-haas italic">
+        <p className="text-brand-green/80 text-sm mt-6 -mb-2 text-center font-neue-haas italic">
           <span className="[@media(hover:hover)]:hidden">Tap a sponsor to see details</span>
           <span className="hidden [@media(hover:hover)]:inline">Hover over a sponsor to see details</span>
         </p>
@@ -191,7 +191,7 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
                 </div>
 
                 {/* Sponsor name below card - both mobile and desktop */}
-                <h3 className="mt-2 font-bold text-xs text-white text-center w-[100px] truncate">
+                <h3 className="mt-2 font-bold text-xs text-brand-green text-center w-[100px] truncate">
                   {name}
                 </h3>
               </div>

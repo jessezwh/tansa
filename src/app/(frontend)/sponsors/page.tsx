@@ -13,8 +13,8 @@ export default async function SponsorsPage() {
         {/* Header Section */}
         <div className="max-w-6xl h-[200px] sm:h-[250px] md:h-[300px] mx-auto flex items-center justify-between pt-8 sm:pt-12 md:pt-16 relative overflow-clip">
           <div className="font-draplink font-bold text-brand-green leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl relative z-10 pl-4 sm:pl-8 lg:pl-0">
-            <h1>Our</h1>
-            <h1>Sponsors</h1>
+            <h1>OUR</h1>
+            <h1>SPONSORS</h1>
           </div>
 
           <div className="absolute right-[-20px] bottom-[-180px] sm:bottom-[-220px] md:bottom-[-250px] z-0 w-[280px] sm:w-[370px] md:w-[450px]">

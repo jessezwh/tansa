@@ -11,7 +11,7 @@ const navItems = [
   { href: '/about', label: 'About Us', theme: 'orange' },
   { href: '/events', label: 'Events', theme: 'blue' },
   { href: '/sponsors', label: 'Sponsors', theme: 'green' },
-  { href: '/leaderboard', label: 'Leaderboard', theme: null },
+  { href: '/leaderboard', label: 'Leaderboard', theme: 'pink' },
   { href: '/contact', label: 'Contact', theme: 'brown' },
 ]
 

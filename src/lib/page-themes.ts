@@ -7,6 +7,7 @@ const PAGE_THEMES: Record<string, string> = {
   '/about': 'orange',
   '/events': 'blue',
   '/sponsors': 'green',
+  '/contact': 'brown',
 }
 
 export function getPageTheme(pathname: string): string {

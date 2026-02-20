@@ -65,11 +65,15 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
         <input
           type="text"
           placeholder="Search sponsors..."
-          className="w-full p-3 rounded border border-gray-300 mb-8 bg-white font-bold"
+          className="w-full p-3 rounded border border-gray-300 mb-2 bg-white font-bold"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           aria-label="Search sponsors"
         />
+        <p className="text-white/70 text-sm mt-6 -mb-2 text-center font-neue-haas italic">
+          <span className="[@media(hover:hover)]:hidden">Tap a sponsor to see details</span>
+          <span className="hidden [@media(hover:hover)]:inline">Hover over a sponsor to see details</span>
+        </p>
       </div>
 
       <div
@@ -124,8 +128,8 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
                           height={100}
                           className="object-contain max-w-[80px] max-h-[80px]"
                         />
-                        {/* External link icon - always visible on desktop */}
-                        <div className="absolute top-1 right-1 bg-brand-bg rounded p-0.5">
+                        {/* External link icon - visible on hover */}
+                        <div className="absolute top-1 right-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 bg-brand-bg rounded p-0.5">
                           <ExternalLink className="w-3.5 h-3.5 text-brand-green" />
                         </div>
                       </a>

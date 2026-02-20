@@ -12,7 +12,7 @@ const navItems = [
   { href: '/events', label: 'Events', theme: 'blue' },
   { href: '/sponsors', label: 'Sponsors', theme: 'green' },
   { href: '/leaderboard', label: 'Leaderboard', theme: null },
-  { href: '/contact', label: 'Contact', theme: null },
+  { href: '/contact', label: 'Contact', theme: 'brown' },
 ]
 
 function InlineLogo({ className, id = 'desktop' }: { className?: string; id?: string }) {
@@ -82,8 +82,8 @@ const Header = () => {
       <div className="flex items-center justify-between w-full">
         {/*Left Side Element*/}
         <Link href="/" className="flex-1">
-          {/*Desktop Logo - compact (lg to 2xl) */}
-          <div className="hidden lg:flex 2xl:hidden items-center space-x-4 group">
+          {/*Desktop Logo*/}
+          <div className="hidden lg:flex items-center space-x-4 group">
             <div className="h-16 w-16 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
               <InlineLogo className="w-full h-full transition-all duration-300 group-hover:rotate-6" />
             </div>
@@ -94,21 +94,6 @@ const Header = () => {
               <path d="M682.85 1.55H606.25C599.92 53.82 584.91 104.41 571.84 155.38H630.45C631.1 145.68 631.74 136.75 632.65 127.95C636.92 126.92 640.8 126.4 644.55 126.4C648.17 126.4 651.92 126.79 656.19 127.95C657.1 136.49 657.75 145.81 658.39 155.38H717C703.93 104.41 688.93 53.82 682.59 1.55H682.85ZM644.55 91.47C644.55 79.18 630.19 64.69 617.77 64.69C630.06 64.69 644.55 50.33 644.55 37.91C644.55 50.2 658.91 64.69 671.33 64.69C659.04 64.69 644.55 79.05 644.55 91.47Z" className="nav-themed-fill"/>
               <path d="M238.7 1.55H162.11C155.77 53.82 140.76 104.41 127.69 155.38H186.3C186.95 145.68 187.6 136.75 188.5 127.95C192.77 126.92 196.65 126.4 200.4 126.4C204.16 126.4 207.78 126.79 212.05 127.95C212.95 136.49 213.6 145.81 214.25 155.38H272.85C259.79 104.41 244.78 53.82 238.44 1.55H238.7ZM200.4 91.47C200.4 79.18 186.04 64.69 173.62 64.69C185.91 64.69 200.4 50.33 200.4 37.91C200.4 50.2 214.76 64.69 227.18 64.69C214.89 64.69 200.4 79.05 200.4 91.47Z" className="nav-themed-fill"/>
             </svg>
-          </div>
-          {/*Desktop Logo - full (2xl+) */}
-          <div className="hidden 2xl:flex items-center space-x-6 group">
-            <div className="h-16 w-16 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-              <InlineLogo className="w-full h-full transition-all duration-300 group-hover:rotate-6" />
-            </div>
-
-            <div className="select-none">
-              <h1 className="nav-themed-text font-bold text-lg leading-tight transition-colors duration-200">
-                Taiwanese and New Zealand
-              </h1>
-              <h2 className="nav-themed-text text-lg leading-tight transition-colors duration-200">
-                Students&apos; Association
-              </h2>
-            </div>
           </div>
           {/*Mobile Logo*/}
           <div className="lg:hidden flex items-center space-x-2">

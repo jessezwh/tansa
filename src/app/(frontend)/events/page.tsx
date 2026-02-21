@@ -41,8 +41,8 @@ function EventsLoading() {
 
 export default function PastEventsPage() {
   return (
-    <div className="bg-brand-blue">
-      {/* Header Section */}
+    <div className="bg-brand-bg">
+      {/* Hero Section */}
       <div className="bg-brand-bg">
         <div className="max-w-6xl h-[200px] sm:h-[250px] md:h-[300px] mx-auto flex items-center justify-between py-8 sm:py-12 md:py-16 relative overflow-clip">
           {/* Left text */}
@@ -53,7 +53,7 @@ export default function PastEventsPage() {
           {/* Bear image */}
           <div className="absolute right-0 bottom-[-120px] sm:bottom-[-150px] md:bottom-[-190px] select-none z-0 w-[250px] sm:w-[350px] md:w-[450px]">
             <Image
-              src="/bears/hooray 1.svg"
+              src="/bears/snowboard_bear.svg"
               alt="Bear"
               width={450}
               height={450}

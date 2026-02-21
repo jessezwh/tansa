@@ -59,8 +59,8 @@ async function TeamContent() {
           {/* Bear scales on small screens, fixed position/size on large screens */}
           <div className="w-[clamp(180px,30vw,400px)] lg:w-[400px] absolute right-2 sm:right-4 md:right-10 bottom-[-40px] sm:bottom-[-50px] lg:bottom-[-70px] select-none z-0">
             <Image
-              src="/bears/lying_on_stomach.svg"
-              alt="bear lying on stomach"
+              src="/bears/waving_bear.svg"
+              alt="Bear waving hello"
               width={400}
               height={400}
               className="object-contain w-full h-auto"

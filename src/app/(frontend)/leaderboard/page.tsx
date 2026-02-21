@@ -161,9 +161,9 @@ export default function LeaderboardPage() {
             </p>
           </div>
           {/* Bear image */}
-          <div className="absolute right-0 bottom-[-120px] sm:bottom-[-150px] md:bottom-[-190px] select-none z-0 w-[250px] sm:w-[350px] md:w-[450px]">
+          <div className="absolute right-0 bottom-[-120px] sm:bottom-[-150px] md:bottom-[0px] select-none z-0 w-[250px] sm:w-[350px] md:w-[400px]">
             <Image
-              src="/bears/hooray 1.svg"
+              src="/bears/flexing_bear.svg"
               alt="Bear"
               width={450}
               height={450}

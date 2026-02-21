@@ -152,16 +152,16 @@ export default function LeaderboardPage() {
       <div className="bg-brand-pink">
         <div className="max-w-6xl h-[200px] sm:h-[250px] md:h-[300px] mx-auto flex items-center justify-between py-8 sm:py-12 md:py-16 relative overflow-clip">
           <div className="relative z-10 pl-4 sm:pl-8 lg:pl-0">
-            <div className="font-draplink font-bold text-white leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
+            <div className="font-draplink font-bold text-white leading-none text-4xl lg:text-8xl">
               <h1>Referral</h1>
               <h1>LEADERBOARD</h1>
             </div>
-            <p className="text-lg md:text-xl text-white/80">
+            <p className="text-m md:text-xl text-white/80">
               Refer friends and climb the ranks!
             </p>
           </div>
           {/* Bear image */}
-          <div className="absolute right-0 bottom-[-120px] sm:bottom-[-150px] md:bottom-[0px] select-none z-0 w-[250px] sm:w-[350px] md:w-[400px]">
+          <div className="absolute -right-[75px] bottom-[0px] md:bottom-[0px] select-none z-0 w-[250px] md:w-[400px]">
             <Image
               src="/bears/flexing_bear.svg"
               alt="Bear"

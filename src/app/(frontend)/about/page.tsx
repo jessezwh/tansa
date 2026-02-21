@@ -39,25 +39,25 @@ async function TeamContent() {
   const categories = processTeamCategories(exec)
 
   return (
-    <div className="bg-brand-orange pb-10">
-      <div className="bg-brand-bg overflow-hidden">
-        {/* HERO SECTION - stays like original */}
+    <div className="bg-brand-bg pb-10">
+      <div className="bg-brand-orange overflow-hidden">
+        {/* HERO SECTION */}
         <div
           className="max-w-6xl relative mx-auto flex items-center justify-between 
                 py-[clamp(1.5rem,4vw,4.5rem)] h-[clamp(180px,25vw,300px)] lg:h-[300px] lg:py-16"
         >
-          <div className="pl-4 sm:pl-8 md:pl-12 mt-[clamp(0.5rem,2vw,1rem)] lg:mt-0 relative z-10">
+          <div className="pl-4 sm:pl-8 md:pl-12 mt-[clamp(0.5rem,2vw,1rem)] lg:mt-8 relative z-10">
             {/* Text scales on small screens, fixed look on large screens */}
-            <h1 className="text-[clamp(2.5rem,5.5vw,4rem)] sm:text-[clamp(3rem,7vw,5rem)] lg:text-6xl text-brand-orange font-draplink">
+            <h1 className="text-[clamp(2.5rem,5.5vw,4rem)] sm:text-[clamp(3rem,7vw,5rem)] lg:text-7xl text-white font-draplink">
               Meet Our
             </h1>
-            <h1 className="text-[clamp(3.5rem,9vw,6rem)] sm:text-[clamp(4rem,10vw,6.5rem)] lg:text-8xl text-brand-orange font-draplink mt-0 sm:mt-4 lg:mt-0">
+            <h1 className="text-[clamp(3.5rem,9vw,6rem)] sm:text-[clamp(4rem,10vw,6.5rem)] lg:text-7rem text-white font-draplink -mt-6 lg:-mt-6">
               TEAM!
             </h1>
           </div>
 
           {/* Bear scales on small screens, fixed position/size on large screens */}
-          <div className="w-[clamp(180px,30vw,400px)] lg:w-[400px] absolute right-2 sm:right-4 md:right-10 bottom-[-40px] sm:bottom-[-50px] lg:bottom-[-70px] select-none z-0">
+          <div className="w-[clamp(180px,30vw,400px)] lg:w-[300px] absolute right-2 sm:right-4 md:right-10 bottom-[-100px] sm:bottom-[-150px] lg:bottom-[-200px] select-none z-0">
             <Image
               src="/bears/waving_bear.svg"
               alt="Bear waving hello"

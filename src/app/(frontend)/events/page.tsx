@@ -44,14 +44,14 @@ export default function PastEventsPage() {
     <div className="bg-brand-blue">
       {/* Hero Section */}
       <div className="bg-brand-bg">
-        <div className="max-w-6xl h-[200px] sm:h-[250px] md:h-[300px] mx-auto flex items-center justify-between py-8 sm:py-12 md:py-16 relative overflow-clip">
+  <div className="max-w-6xl h-[200px] md:h-[300px] mx-auto flex items-center justify-between py-8 md:py-16 relative overflow-visible">
           {/* Left text */}
-          <div className="font-draplink font-bold text-brand-blue leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl relative z-10 pl-4 sm:pl-8 lg:pl-0">
+          <div className="font-draplink font-bold text-brand-blue leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl relative z-10 pl-4 lg:pl-0">
             <h1>PAST</h1>
             <h1>EVENTS</h1>
           </div>
           {/* Bear image */}
-          <div className="absolute right-0 bottom-[-120px] sm:bottom-[-150px] md:bottom-[-190px] select-none z-0 w-[250px] sm:w-[350px] md:w-[450px]">
+          <div className="absolute right-0 bottom-[-100px] md:bottom-[-160px] select-none z-0 w-[220px] md:w-[380px]">
             <Image
               src="/bears/snowboard_bear.svg"
               alt="Bear"

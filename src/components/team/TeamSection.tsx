@@ -12,7 +12,7 @@ export default function TeamSection({ title, members, isFirst = false }: TeamSec
   return (
     <div className="bg-none">
       <div className="container mx-auto px-4 pt-12 text-center">
-        <h1 className="text-[clamp(1.5rem,3vw,2rem)] text-white font-draplink">{title}</h1>
+        <h1 className="text-[clamp(1.5rem,3vw,2rem)] text-brand-orange font-draplink">{title}</h1>
       </div>
       <div className="mx-auto flex flex-wrap justify-center gap-[clamp(1rem,3vw,2.5rem)] pt-6 pb-6">
         {members.map((member, index) => (

@@ -111,7 +111,7 @@ export default async function HomePage() {
 
         {/* Mobile: 2026 above bear, stacked */}
         <div className="flex lg:hidden flex-col items-center w-full">
-          <div className="w-[125%] -mb-[7vh] z-0">
+          <div className="w-[125%] -mb-[8vh] z-0">
             <Image src="/2026.svg" alt="2026" width={400} height={200} className="w-full h-auto" />
           </div>
           <div className="w-[75vw] z-10">

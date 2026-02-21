@@ -12,7 +12,7 @@ const dmSans = DM_Sans({
 export const metadata = {
   title: "Taiwanese and New Zealand Students' Association",
   icons: {
-    icon: '/favicon.png',
+    icon: '/favicon2026.png',
   },
 }
 

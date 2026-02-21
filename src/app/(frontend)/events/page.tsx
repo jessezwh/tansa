@@ -41,7 +41,7 @@ function EventsLoading() {
 
 export default function PastEventsPage() {
   return (
-    <div className="bg-brand-bg">
+    <div className="bg-brand-blue">
       {/* Hero Section */}
       <div className="bg-brand-bg">
         <div className="max-w-6xl h-[200px] sm:h-[250px] md:h-[300px] mx-auto flex items-center justify-between py-8 sm:py-12 md:py-16 relative overflow-clip">

@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, ChangeEvent, MouseEvent } from 'react'
-import { Send, Snowflake, Mail, Instagram, Facebook } from 'lucide-react'
+import { Send, Mail, Instagram, Facebook, Linkedin } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { getPageTheme, isFooterInverted } from '@/lib/page-themes'
 
@@ -50,87 +50,63 @@ const Footer = () => {
   return (
     <footer className="bg-brand-bg p-6 mt-auto footer-themed" data-page-theme={getPageTheme(pathname)} {...(isFooterInverted(pathname) ? { 'data-footer-inverted': '' } : {})}>
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-8 mb-4">
-          {/* About Us Section */}
-          <div className="md:col-span-1">
-            <h3 className="font-bold text-xl mb-4">About Us</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="/about" className="hover:underline">
-                  Our Team
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Our Mission
-                </a>
-              </li>
-              <li>
-                <a href="/sponsors" className="hover:underline">
-                  Our Sponsors
-                </a>
-              </li>
-            </ul>
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 mb-4">
+          {/* Left links group - stacks on mobile, row on md+ */}
+          <div className="flex flex-col md:flex-row md:space-x-12 gap-8 md:gap-0">
+            {/* About Us Section */}
+            <div>
+              <h3 className="font-bold text-xl mb-4">About Us</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a href="/about" className="hover:underline">
+                    Our Team
+                  </a>
+                </li>
+                <li>
+                  <a href="/sponsors" className="hover:underline">
+                    Our Sponsors
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Events Section */}
+            <div>
+              <h3 className="font-bold text-xl mb-4">Events</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a href="/events" className="hover:underline">
+                    Upcoming Events
+                  </a>
+                </li>
+                <li>
+                  <a href="/events" className="hover:underline">
+                    Past Events
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Sponsor Section */}
+            <div>
+              <h3 className="font-bold text-xl mb-4">Sponsor</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a href="/sponsors" className="hover:underline">
+                    Sponsorship Perks
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:tansa.ausa@gmail.com" className="hover:underline">
+                    Become a Sponsor
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
 
-          {/* Events Section */}
-          <div className="md:col-span-1">
-            <h3 className="font-bold text-xl mb-4">Events</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="hover:underline">
-                  Upcoming Events
-                </a>
-              </li>
-              <li>
-                <a href="/events" className="hover:underline">
-                  Past Events
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Recruitment Section */}
-          <div className="md:col-span-1">
-            <h3 className="font-bold text-xl mb-4">Recruitment</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="hover:underline">
-                  Open Roles
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Recruitment Timeline
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Expression of Interest
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Sponsor Section */}
-          <div className="md:col-span-1">
-            <h3 className="font-bold text-xl mb-4">Sponsor</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="/sponsors" className="hover:underline">
-                  Sponsorship Perks
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Become a Sponsor
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Newsletter Section */}
-          <div className="md:col-span-2">
+          {/* Newsletter Section (right aligned on md+) */}
+          <div className="w-full md:w-1/3">
             {!subbed ? (
               <div className="">
                 <h3 className="font-bold text-xl mb-4">Subscribe to our newsletter!</h3>
@@ -160,21 +136,17 @@ const Footer = () => {
 
             {/* Social Media Icons */}
             <div className="flex space-x-4 mt-4 py-2">
-              <a href="#" className="hover:text-accent-light" aria-label="Linktree Icon">
-                <Snowflake size={24} />
-              </a>
-              <a href="#" className="hover:text-accent-light" aria-label="Email Icon">
-                <Mail size={24} />
-              </a>
-              <a href="#" className="hover:text-accent-light" aria-label="Instagram Icon">
-                <Instagram size={24} />
-              </a>
-              <a href="#" className="hover:text-accent-light" aria-label="Facebook Icon">
+              <a href="https://www.facebook.com/TANSA.UoA" className="hover:text-accent-light" aria-label="Facebook Icon" target='_blank'>
                 <Facebook size={24} />
               </a>
-              {/* TikTok icon not available in lucide-react, using a text alternative */}
-              <a href="#" className="hover:text-accent-light" aria-label="TikTok Icon">
-                <span className="text-xl">♪</span>
+              <a href="mailto:tansa.ausa@gmail.com" className="hover:text-accent-light" aria-label="Email Icon">
+                <Mail size={24} />
+              </a>
+              <a href="https://instagram.com/tansa.uoa" className="hover:text-accent-light" aria-label="Instagram Icon" target='_blank'>
+                <Instagram size={24} />
+              </a>
+              <a href="https://www.linkedin.com/company/taiwanese-newzealand-students-association" className="hover:text-accent-light" aria-label="LinkedIn Icon" target='_blank'>
+                <Linkedin size={24} />
               </a>
             </div>
           </div>

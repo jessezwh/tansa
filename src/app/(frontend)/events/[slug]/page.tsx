@@ -46,17 +46,17 @@ export default async function EventGalleryPage({ params }: EventGalleryPageProps
   return (
     <div className="min-h-screen bg-brand-bg">
       {/* Header */}
-      <div className="bg-brand-bg h-[300px]">
+      <div className="bg-brand-blue h-[300px]">
         <div className="max-w-6xl mx-auto px-4 py-8">
           <Link
             href="/events"
-            className="inline-flex items-center text-tansa-cream hover:text-tansa-cream/80 transition-colors mb-6"
+            className="inline-flex items-center text-white hover:text-white/80 transition-colors mb-6"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Past Events
           </Link>
-          <div className="text-tansa-cream">
-            <h1 className="text-6xl md:text-5xl font-bold font-draplink mb-2">{title}</h1>
+          <div className="text-white">
+            <h1 className="text-6xl lg:text-7xl font-bold font-neue-haas mb-2">{title}</h1>
             <p className="text-lg opacity-90">{formattedDate}</p>
             <p className="text-sm opacity-75 mt-2">{photos.length} photos</p>
           </div>

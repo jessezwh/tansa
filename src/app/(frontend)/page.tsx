@@ -10,7 +10,20 @@ import { Media } from '@/payload-types'
 
 export default async function HomePage() {
   // Fetch recent events with cover images for the carousel
-  let carouselImages: { id: string; src: string; alt: string; title: string; description?: string }[] = []
+  let carouselImages: {
+    id: string
+    src: string
+    alt: string
+    title: string
+    description?: string
+    href: string
+  }[] = []
+
+  const eventTitleToSlug = (title: string) =>
+    title
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
 
   try {
     const payload = await getPayload({ config })
@@ -25,17 +38,19 @@ export default async function HomePage() {
       },
     })
 
-    // Transform events into carousel format
+    // Transform events into carousel format (each links to its event page)
     carouselImages = eventsData.docs
       .filter((event) => event.coverImage)
       .map((event) => {
         const media = event.coverImage as Media
+        const slug = eventTitleToSlug(event.title)
         return {
           id: String(event.id),
           src: media.url || '',
           alt: event.title,
           title: event.title,
           description: event.description || undefined,
+          href: `/events/${slug}`,
         }
       })
       .filter((img) => img.src) // Only include images with valid URLs

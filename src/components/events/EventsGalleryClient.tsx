@@ -1,7 +1,7 @@
 // src/components/EventGalleryClient.tsx
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import Image from 'next/image'
 import { Download } from 'lucide-react'
 import { PhotoModal } from './PhotoModal'
@@ -12,7 +12,20 @@ interface EventGalleryClientProps {
   photos: string[]
 }
 
-// --- Your original layout logic ---
+// Responsive layout params by container width (matches common breakpoints)
+function getLayoutParams(containerWidth: number) {
+  if (containerWidth <= 0) {
+    return { targetHeight: 120, minPhotosPerRow: 2, maxPhotosPerRow: 3 }
+  }
+  if (containerWidth < 640) {
+    return { targetHeight: 120, minPhotosPerRow: 2, maxPhotosPerRow: 3 }
+  }
+  if (containerWidth < 1024) {
+    return { targetHeight: 150, minPhotosPerRow: 3, maxPhotosPerRow: 5 }
+  }
+  return { targetHeight: 180, minPhotosPerRow: 5, maxPhotosPerRow: 7 }
+}
+
 function getImageDimensions(url: string, idx: number) {
   const aspectRatios = [
     { width: 4, height: 3 },
@@ -29,13 +42,13 @@ function getImageDimensions(url: string, idx: number) {
 function calculateRowLayout(
   photos: Array<{ url: string; idx: number }>,
   containerWidth: number,
-  targetHeight = 180,
+  targetHeight: number,
+  minPhotosPerRow: number,
+  maxPhotosPerRow: number,
 ) {
   const rows: Array<Array<{ url: string; idx: number; width: number; height: number }>> = []
   let currentRow: Array<{ url: string; idx: number; width: number; height: number }> = []
   let currentRowWidth = 0
-  const minPhotosPerRow = 5
-  const maxPhotosPerRow = 7
 
   for (const photo of photos) {
     const dimensions = getImageDimensions(photo.url, photo.idx)
@@ -80,10 +93,38 @@ function calculateRowLayout(
 export default function EventGalleryClient({ title, date, photos }: EventGalleryClientProps) {
   const [modalOpen, setModalOpen] = useState(false)
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [containerWidth, setContainerWidth] = useState(0)
 
-  const photosWithIdx = photos.map((url, idx) => ({ url, idx }))
-  const containerWidth = 1200
-  const rows = calculateRowLayout(photosWithIdx, containerWidth)
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const ro = new ResizeObserver((entries) => {
+      const entry = entries[0]
+      if (entry) setContainerWidth(entry.contentRect.width)
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
+  const photosWithIdx = useMemo(
+    () => photos.map((url, idx) => ({ url, idx })),
+    [photos],
+  )
+
+  const effectiveWidth = containerWidth > 0 ? containerWidth : 320
+  const layoutParams = useMemo(() => getLayoutParams(effectiveWidth), [effectiveWidth])
+  const rows = useMemo(
+    () =>
+      calculateRowLayout(
+        photosWithIdx,
+        effectiveWidth,
+        layoutParams.targetHeight,
+        layoutParams.minPhotosPerRow,
+        layoutParams.maxPhotosPerRow,
+      ),
+    [photosWithIdx, effectiveWidth, layoutParams.targetHeight, layoutParams.minPhotosPerRow, layoutParams.maxPhotosPerRow],
+  )
 
   const handlePhotoClick = (idx: number) => {
     setCurrentPhotoIndex(idx)
@@ -108,7 +149,7 @@ export default function EventGalleryClient({ title, date, photos }: EventGallery
 
   return (
     <>
-      <div className="max-w-6xl mx-auto px-4 py-8 space-y-1">
+      <div ref={containerRef} className="max-w-6xl mx-auto px-4 py-8 space-y-1">
         {rows.map((row, rowIdx) => (
           <div key={rowIdx} className="flex gap-1">
             {row.map((photo) => (

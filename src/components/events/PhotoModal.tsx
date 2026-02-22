@@ -1,8 +1,11 @@
 'use client'
 
 import type React from 'react'
+import { useRef } from 'react'
 import Image from 'next/image'
 import { X, Download, ChevronLeft, ChevronRight } from 'lucide-react'
+
+const SWIPE_THRESHOLD = 50
 
 interface PhotoModalProps {
   isOpen: boolean
@@ -21,6 +24,8 @@ export function PhotoModal({
   onNavigate,
   eventTitle,
 }: PhotoModalProps) {
+  const touchStartX = useRef<number | null>(null)
+
   if (!isOpen) return null
 
   const currentPhoto = photos[currentIndex]
@@ -56,6 +61,18 @@ export function PhotoModal({
     if (e.key === 'Escape') onClose()
     if (e.key === 'ArrowLeft') handlePrevious()
     if (e.key === 'ArrowRight') handleNext()
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || photos.length <= 1) return
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current
+    touchStartX.current = null
+    if (deltaX < -SWIPE_THRESHOLD) handleNext()
+    else if (deltaX > SWIPE_THRESHOLD) handlePrevious()
   }
 
   return (
@@ -110,10 +127,12 @@ export function PhotoModal({
         {currentIndex + 1} of {photos.length}
       </div>
 
-      {/* Main image */}
+      {/* Main image - swipe on touch to navigate */}
       <div
-        className="relative max-w-[90vw] max-h-[90vh] w-full h-full"
+        className="relative max-w-[90vw] max-h-[90vh] w-full h-full touch-none"
         onClick={(e) => e.stopPropagation()}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         <Image
           src={currentPhoto || '/placeholder.svg'}

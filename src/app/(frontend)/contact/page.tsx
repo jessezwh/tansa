@@ -7,21 +7,24 @@ export default function ContactPage() {
     <div className="bg-brand-bg">
       {/* Hero Section */}
       <div className="bg-brand-bg">
-        <div className="relative min-h-[150px] md:min-h-[220px] max-w-6xl mx-auto flex items-center justify-between overflow-hidden">
-          <div className="font-draplink font-bold text-brand-brown leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl relative z-10 pl-4 sm:pl-8 lg:pl-0">
-            <h1>CONTACT US</h1>
+        <div className="max-w-6xl h-30 lg:h-55 mx-auto flex items-center justify-between relative overflow-visible">
+          <div className="relative z-20 pl-4 lg:pl-0 lg:mt-10 ">
+            <div className="font-draplink font-bold text-brand-brown leading-none text-5xl lg:text-8xl">
+              <h1>CONTACT US</h1>
+            </div>
           </div>
 
-          {/* Bear poking out */}
-          {/* <div className="absolute right-0 bottom-[-60px] sm:bottom-[-80px] md:bottom-[-100px] sm:right-4 md:right-10 select-none z-0 w-[200px] sm:w-[280px] md:w-[400px]">
+          {/* Bear image */}
+          <div className="absolute right-2 lg:right-20 -bottom-2 lg:-bottom-4 select-none z-10 w-25 lg:w-45">
             <Image
-              src="/bears/running-pointing.svg"
-              alt="Bear"
-              width={420}
-              height={420}
+              src="/bears/guitar_bear.svg"
+              alt="Bear playing guitar"
+              width={240}
+              height={291.05}
               className="object-contain w-full h-auto"
+              priority
             />
-          </div> */}
+          </div>
         </div>
       </div>
 

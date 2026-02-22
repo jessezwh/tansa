@@ -9,18 +9,21 @@ export default async function SponsorsPage() {
 
   return (
     <div className="bg-brand-green">
+      {/* Hero Section */}
       <div className="bg-brand-bg">
-        {/* Header Section */}
-        <div className="max-w-6xl h-[200px] sm:h-[250px] md:h-[300px] mx-auto flex items-center justify-between pt-8 sm:pt-12 md:pt-16 relative overflow-clip">
-          <div className="font-draplink font-bold text-brand-green leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl relative z-10 pl-4 sm:pl-8 lg:pl-0">
+        <div className="max-w-6xl h-48 lg:h-72 mx-auto flex items-center justify-between relative overflow-y-clip overflow-x-visible">
+          <div className="relative z-20 pl-4 lg:pl-0">
+            <div className="font-draplink font-bold text-brand-green leading-none text-5xl lg:text-8xl">
             <h1>OUR</h1>
             <h1>SPONSORS</h1>
+            </div>
           </div>
 
-          <div className="absolute -right-[70px] bottom-[-100px] md:bottom-[-110px] z-0 w-[250px] md:w-[350px]">
+          {/* Bear image */}
+          <div className="absolute -right-12 lg:right-2 -bottom-20 lg:-bottom-42 select-none z-10 w-55 lg:w-100">
             <Image
               src="/bears/noodles_bear.svg"
-              alt="Bear"
+              alt="Bear eating ramen"
               width={450}
               height={450}
               quality={50}

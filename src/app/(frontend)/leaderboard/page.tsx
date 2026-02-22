@@ -148,20 +148,19 @@ export default function LeaderboardPage() {
 
   return (
     <main className="min-h-screen bg-brand-bg">
-      {/* Hero Header */}
+      {/* Hero Section */}
       <div className="bg-brand-pink">
-        <div className="max-w-6xl h-[200px] sm:h-[250px] md:h-[300px] mx-auto flex items-center justify-between py-8 sm:py-12 md:py-16 relative overflow-clip">
-          <div className="relative z-10 pl-4 sm:pl-8 lg:pl-0">
+        <div className="max-w-6xl h-48 lg:h-72 mx-auto flex items-center justify-between relative overflow-y-clip overflow-x-visible">
+          <div className="relative z-20 pl-4 lg:pl-0">
             <div className="font-draplink font-bold text-white leading-none text-4xl lg:text-8xl">
               <h1>Referral</h1>
               <h1>LEADERBOARD</h1>
             </div>
-            <p className="text-m md:text-xl text-white/80">
-              Refer friends and climb the ranks!
-            </p>
+            <p className="text-base lg:text-xl text-white/80">Refer friends and climb the ranks!</p>
           </div>
+
           {/* Bear image */}
-          <div className="absolute -right-[75px] bottom-[0px] md:bottom-[0px] select-none z-0 w-[250px] md:w-[400px]">
+          <div className="absolute -right-15 lg:right-0 bottom-0 select-none z-10 w-64 lg:w-100">
             <Image
               src="/bears/flexing_bear.svg"
               alt="Bear"

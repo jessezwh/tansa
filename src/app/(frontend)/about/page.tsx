@@ -40,24 +40,18 @@ async function TeamContent() {
 
   return (
     <div className="bg-brand-bg pb-10">
-      <div className="bg-brand-orange overflow-hidden">
-        {/* HERO SECTION */}
-        <div
-          className="max-w-6xl relative mx-auto flex items-center justify-between 
-                py-[clamp(1.5rem,4vw,4.5rem)] h-[clamp(180px,25vw,300px)] lg:h-[300px] lg:py-16"
-        >
-          <div className="pl-4 sm:pl-8 md:pl-12 mt-[clamp(0.5rem,2vw,1rem)] lg:mt-8 relative z-10">
-            {/* Text scales on small screens, fixed look on large screens */}
-            <h1 className="text-[clamp(2.5rem,5.5vw,4rem)] sm:text-[clamp(3rem,7vw,5rem)] lg:text-7xl text-white font-draplink">
-              Meet Our
-            </h1>
-            <h1 className="text-[clamp(3.5rem,9vw,6rem)] sm:text-[clamp(4rem,10vw,6.5rem)] lg:text-7rem text-white font-draplink -mt-6 lg:-mt-6">
-              TEAM!
-            </h1>
+      {/* Hero Section */}
+      <div className="bg-brand-orange">
+        <div className="max-w-6xl h-48 lg:h-72 mx-auto flex items-center justify-between relative overflow-y-clip overflow-x-visible">
+          <div className="relative z-20 pl-4 lg:pl-0 lg:mt-4">
+            <div className="font-draplink font-bold text-white leading-none text-6xl lg:text-9xl">
+              <h1 className='text-4xl lg:text-7xl'>Meet Our</h1>
+              <h1>TEAM!</h1>
+            </div>
           </div>
 
-          {/* Bear scales on small screens, fixed position/size on large screens */}
-          <div className="w-[clamp(180px,30vw,400px)] lg:w-[300px] absolute right-2 sm:right-4 md:right-10 bottom-[-100px] sm:bottom-[-150px] lg:bottom-[-200px] select-none z-0">
+          {/* Bear image */}
+          <div className="absolute right-5 -bottom-25 lg:-bottom-50 select-none z-10 w-45 lg:w-75">
             <Image
               src="/bears/waving_bear.svg"
               alt="Bear waving hello"

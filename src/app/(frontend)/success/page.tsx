@@ -85,22 +85,42 @@ export default function SuccessPage() {
 
   return (
     <main className="min-h-screen">
-      {/* Hero Header */}
-      <div className="bg-brand-bg relative h-[300px] flex items-center justify-center flex-col text-center space-y-4 rounded-b-4x overflow-clip">
-        <h1 className="text-6xl md:text-8xl font-bold text-white font-draplink z-10">Join Us</h1>
-        <p className="text-lg md:text-2xl text-white z-10">
-          Join TANSA this year and get access to
-          <br /> exclusive events, deals, and a vibrant community!
-        </p>
-        {/* Bear image */}
-        <div className="absolute right-0 bottom-[-190px] select-none">
-          <Image
-            src="/bears/hooray 1.svg"
-            alt="Bear"
-            width={450}
-            height={450}
-            className="object-contain"
-          />
+      {/* Hero Section */}
+      <div className="bg-brand-pink mb-10">
+        <div className="max-w-6xl h-48 lg:h-72 mx-auto flex items-center justify-center relative overflow-clip">
+          {/* Bear image */}
+          <div className="absolute -left-5 -bottom-25 lg:-bottom-50 select-none z-10 w-45 lg:w-75">
+            <Image
+              src="/bears/waving_bear.svg"
+              alt="Bear waving hello"
+              width={400}
+              height={400}
+              className="object-contain w-full h-auto"
+              priority
+            />
+          </div>
+
+          <div className="relative text-center z-20 pl-4 lg:pl-0 lg:mt-4">
+            <h1 className="text-7xl lg:text-9xl font-bold text-white font-draplink z-10 relative">
+              JOIN US
+            </h1>
+            <p className="text-xs lg:text-xl text-white z-10 relative px-4">
+              Join TANSA this year and get access to exclusive events,
+              <br />amazing sponsor perks, and a vibrant community!
+            </p>
+          </div>
+
+          {/* Bear image */}
+          <div className="absolute -right-5 -bottom-25 lg:-bottom-50 select-none z-10 w-45 lg:w-75">
+            <Image
+              src="/bears/waving_bear.svg"
+              alt="Bear waving hello"
+              width={400}
+              height={400}
+              className="object-contain w-full h-auto"
+              priority
+            />
+          </div>
         </div>
       </div>
 

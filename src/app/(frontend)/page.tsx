@@ -117,7 +117,7 @@ export default async function HomePage() {
             <Image src="/20.svg" alt="20" width={200} height={200} className="w-full h-auto" />
           </div>
           <div className="w-[35vw] z-10">
-            <Image src="/bears/peek bear.svg" alt="TANSA Bear peeking" width={400} height={300} className="w-full h-auto" priority />
+            <Image src="/bears/peek_bear.svg" alt="TANSA Bear peeking" width={400} height={300} className="w-full h-auto" priority />
           </div>
           <div className="w-[28vw] -ml-[11vw] z-0">
             <Image src="/26.svg" alt="26" width={200} height={200} className="w-full h-auto" />
@@ -130,7 +130,7 @@ export default async function HomePage() {
             <Image src="/2026.svg" alt="2026" width={400} height={200} className="w-full h-auto" />
           </div>
           <div className="w-[75vw] z-10">
-            <Image src="/bears/peek bear.svg" alt="TANSA Bear peeking" width={400} height={300} className="w-full h-auto" priority />
+            <Image src="/bears/peek_bear.svg" alt="TANSA Bear peeking" width={400} height={300} className="w-full h-auto" priority />
           </div>
         </div>
       </section>

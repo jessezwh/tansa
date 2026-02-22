@@ -8,12 +8,12 @@ const page = () => {
     <main className="min-h-screen select-none">
       {/* Hero Section */}
       <div className="bg-brand-pink">
-        <div className="max-w-6xl h-48 lg:h-72 mx-auto flex items-center justify-center relative overflow-clip">
+        <div className="max-w-6xl h-48 lg:h-72 mx-auto flex items-center justify-center relative overflow-visible">
           {/* Bear image */}
-          <div className="absolute -left-5 -bottom-25 lg:-bottom-50 select-none z-10 w-45 lg:w-75">
+          <div className="absolute left-1 lg:left-32 -bottom-6 lg:-bottom-14 select-none z-10 w-16 lg:w-40">
             <Image
-              src="/bears/waving_bear.svg"
-              alt="Bear waving hello"
+              src="/bears/sitting_bear.svg"
+              alt="Bear sitting"
               width={400}
               height={400}
               className="object-contain w-full h-auto"
@@ -32,10 +32,10 @@ const page = () => {
           </div>
 
           {/* Bear image */}
-          <div className="absolute -right-5 -bottom-25 lg:-bottom-50 select-none z-10 w-45 lg:w-75">
+          <div className="absolute -right-2 lg:right-6 -bottom-4 lg:-bottom-13 select-none z-10 w-25 lg:w-70">
             <Image
-              src="/bears/waving_bear.svg"
-              alt="Bear waving hello"
+              src="/bears/sleeping_bear.svg"
+              alt="Bear sleeping"
               width={400}
               height={400}
               className="object-contain w-full h-auto"

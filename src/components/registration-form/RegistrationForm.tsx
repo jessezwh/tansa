@@ -45,14 +45,14 @@ type ExecMember = {
 
 // production key
 // Use env var if available (for local dev), otherwise fallback to production key
-// const STRIPE_PUBLISHABLE_KEY =
-//   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ||
-//   'pk_live_51RoeLtRxcM1qFmfCrdgLuCY9mUOb52aPngRqdeW9HeTl1bj2WPKDuUGpYFlCq0LzMd0OJ1UY5PFnIjTVTxxnWd5100V8FwIKvD'
-
-// sandbox key
 const STRIPE_PUBLISHABLE_KEY =
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ||
-  'pk_test_51SmgeERsJ3sFHxypIRfpoNFR1kV4sFKqYcUQ6T6lj8eGcicUsaXgDlukPzOn6RRmwDhBqGcjd8wN9XoNku1QeYhC00LoU7CNI5'
+  'pk_live_51RoeLtRxcM1qFmfCrdgLuCY9mUOb52aPngRqdeW9HeTl1bj2WPKDuUGpYFlCq0LzMd0OJ1UY5PFnIjTVTxxnWd5100V8FwIKvD'
+
+// sandbox key
+// const STRIPE_PUBLISHABLE_KEY =
+//   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ||
+//   'pk_test_51SmgeERsJ3sFHxypIRfpoNFR1kV4sFKqYcUQ6T6lj8eGcicUsaXgDlukPzOn6RRmwDhBqGcjd8wN9XoNku1QeYhC00LoU7CNI5'
 
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY)
 

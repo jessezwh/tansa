@@ -11,7 +11,7 @@ export default async function SponsorsPage() {
     <div className="bg-brand-green">
       {/* Hero Section */}
       <div className="bg-brand-bg">
-        <div className="max-w-6xl h-48 lg:h-72 mx-auto flex items-center justify-between relative overflow-y-clip overflow-x-visible">
+        <div className="max-w-6xl h-48 lg:h-72 mx-auto flex items-center justify-between relative overflow-y-clip overflow-x-clip lg:overflow-x-visible">
           <div className="relative z-20 pl-4 lg:pl-0">
             <div className="font-draplink font-bold text-brand-green leading-none text-5xl lg:text-8xl">
             <h1>OUR</h1>

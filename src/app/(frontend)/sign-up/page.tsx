@@ -8,7 +8,7 @@ const page = () => {
     <main className="min-h-screen select-none">
       {/* Hero Section */}
       <div className="bg-brand-pink">
-        <div className="max-w-6xl h-48 lg:h-72 mx-auto flex items-center justify-center relative overflow-visible">
+        <div className="max-w-6xl h-48 lg:h-72 mx-auto flex items-center justify-center relative overflow-x-clip lg:overflow-x-visible">
           {/* Bear image */}
           <div className="absolute left-1 lg:left-32 -bottom-6 lg:-bottom-14 select-none z-10 w-16 lg:w-40">
             <Image

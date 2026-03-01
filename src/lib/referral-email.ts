@@ -15,7 +15,7 @@ function buildReferralEmailHtml(params: {
   referralCode: string
   siteUrl?: string
 }): string {
-  const { firstName, referralCode, siteUrl = 'https://tansa.org.nz' } = params
+  const { firstName, referralCode, siteUrl = 'https://tansa.co.nz' } = params
 
   return `
 <!DOCTYPE html>

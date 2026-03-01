@@ -23,7 +23,7 @@ function buildReferralEmailHtml(params: {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your TANSA referral code</title>
+  <title>Welcome to TANSA! - Here's your referral code</title>
 </head>
 <body style="margin:0; padding:0; background-color:${EMAIL_COLORS.bg}; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${EMAIL_COLORS.bg}; padding: 24px 16px;">

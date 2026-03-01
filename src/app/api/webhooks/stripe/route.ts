@@ -3,6 +3,7 @@ import Stripe from 'stripe'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { generateUniqueReferralCode, awardReferralPoint } from '@/lib/referral'
+import { sendReferralCodeEmail } from '@/lib/referral-email'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
@@ -93,6 +94,19 @@ export async function POST(request: NextRequest) {
           })
 
           console.log('Registration created successfully:', registration.id, 'with referral code:', newMemberReferralCode)
+
+          // Send referral code by email so the member has a persistent copy (fire-and-forget)
+          sendReferralCodeEmail({
+            to: metadata.email,
+            firstName: metadata.firstName,
+            referralCode: newMemberReferralCode,
+          })
+            .then((result) => {
+              if (!result.ok) console.error('Referral email failed:', result.error)
+            })
+            .catch((err) => {
+              console.error('Referral email error:', err)
+            })
         } catch (err) {
           console.error('Error creating registration:', err)
           // Don't return error to Stripe - log it instead

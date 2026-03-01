@@ -155,6 +155,14 @@ function CheckoutForm({
     setMessage('')
 
     try {
+      // Trigger Stripe's built-in validation
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        setMessage(submitError.message || 'Please check your payment details.');
+        setIsLoading(false);
+        return; // Stop the process if their card/form is invalid
+      }
+
       // Update payment intent with form data BEFORE confirming
       const updateRes = await fetch('/api/update-payment-intent', {
         method: 'POST',
@@ -379,13 +387,15 @@ export function StripeCheckoutForm() {
 
   // Fetch exec members and create payment intent on mount
   useEffect(() => {
+    let ignore = false // Add this cleanup flag!
+
     const initialize = async () => {
       try {
         // Fetch exec members for dropdown
         const execRes = await fetch('/api/exec-members')
         if (execRes.ok) {
           const execData = await execRes.json()
-          setExecMembers(execData.members || [])
+          if (!ignore) setExecMembers(execData.members || [])
         }
 
         // Create payment intent
@@ -395,26 +405,33 @@ export function StripeCheckoutForm() {
           body: JSON.stringify({ amount: 700 }), // $7.00
         })
 
-        if (!res.ok) {
-          throw new Error('Failed to create payment intent')
-        }
+        if (!res.ok) throw new Error('Failed to create payment intent')
 
         const data = await res.json()
-        if (data.error) {
-          throw new Error(data.error)
-        }
+        if (data.error) throw new Error(data.error)
 
-        setClientSecret(data.clientSecret)
-        setPaymentIntentId(data.paymentIntentId)
+        // Only update state if this is the final, valid render
+        if (!ignore) {
+          setClientSecret(data.clientSecret)
+          setPaymentIntentId(data.paymentIntentId)
+          setLoading(false)
+        }
       } catch (err: any) {
         console.error('Error:', err)
-        setError(err.message)
-      } finally {
-        setLoading(false)
+        if (!ignore) {
+          setError(err.message)
+          setLoading(false)
+        }
       }
     }
 
     initialize()
+
+    // This cleanup function runs during Strict Mode's unmount,
+    // telling the first ghost fetch to cancel its state updates!
+    return () => {
+      ignore = true
+    }
   }, []) // Empty dependency array = runs once on mount
 
   // Stripe appearance imported from centralized brand config

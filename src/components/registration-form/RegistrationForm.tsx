@@ -304,7 +304,7 @@ function CheckoutForm({
       <div className="space-y-4">
         <RegistrationHeading
           label="Additional Information"
-          subtitle="Be in to win AirPods when you use a friend's referral code!"
+          subtitle="Be in to win Sony XM4s when you use a friend's referral code!"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">

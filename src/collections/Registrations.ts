@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload'
+import { appendRegistrationRow } from '@/lib/google-sheets'
 
 export const Registrations: CollectionConfig = {
   slug: 'registrations',
@@ -211,4 +212,46 @@ export const Registrations: CollectionConfig = {
       },
     },
   ],
+  hooks: {
+    afterChange: [
+      async ({ doc, operation, req }) => {
+        if (operation !== 'create') return
+
+        // Resolve signedUpBy to a display name
+        let signedUpByName = 'Online'
+        if (doc.signedUpBy) {
+          if (typeof doc.signedUpBy === 'object' && doc.signedUpBy.name) {
+            signedUpByName = doc.signedUpBy.name
+          } else {
+            try {
+              const exec = await req.payload.findByID({
+                collection: 'exec',
+                id: doc.signedUpBy,
+              })
+              signedUpByName = exec.name as string
+            } catch {
+              signedUpByName = String(doc.signedUpBy)
+            }
+          }
+        }
+
+        appendRegistrationRow({
+          createdAt: doc.createdAt ?? new Date().toISOString(),
+          email: doc.email,
+          firstName: doc.firstName,
+          lastName: doc.lastName,
+          upi: doc.upi,
+          phoneNumber: doc.phoneNumber,
+          universityId: doc.universityId,
+          areaOfStudy: doc.areaOfStudy,
+          yearLevel: doc.yearLevel,
+          gender: doc.gender,
+          ethnicity: doc.ethnicity,
+          signedUpBy: signedUpByName,
+        }).catch((err) => {
+          console.error('[google-sheets] Failed to append registration row:', err)
+        })
+      },
+    ],
+  },
 }

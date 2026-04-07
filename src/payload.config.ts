@@ -44,6 +44,8 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
+      max: 5,
+      idleTimeoutMillis: 30000,
     },
   }),
   sharp,
@@ -52,13 +54,17 @@ export default buildConfig({
       collections: {
         media: {
           prefix: 'media',
+          generateFileURL: ({ filename, prefix }) =>
+            `https://media.tansa.co.nz/${prefix}/${filename}`,
         },
         logos: {
           prefix: 'logos',
+          generateFileURL: ({ filename, prefix }) =>
+            `https://media.tansa.co.nz/${prefix}/${filename}`,
         },
       } as {
-        media: { prefix: string }
-        logos: { prefix: string }
+        media: { prefix: string; generateFileURL: (args: { filename: string; prefix: string }) => string }
+        logos: { prefix: string; generateFileURL: (args: { filename: string; prefix: string }) => string }
       },
       bucket: process.env.S3_BUCKET as string,
       config: {

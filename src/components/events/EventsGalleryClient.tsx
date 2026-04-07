@@ -89,10 +89,13 @@ function calculateRowLayout(
   return rows
 }
 
+const PAGE_SIZE = 20
+
 // --- Client Component ---
 export default function EventGalleryClient({ title, date, photos }: EventGalleryClientProps) {
   const [modalOpen, setModalOpen] = useState(false)
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0)
+  const [displayCount, setDisplayCount] = useState(PAGE_SIZE)
   const containerRef = useRef<HTMLDivElement>(null)
   const [containerWidth, setContainerWidth] = useState(0)
 
@@ -112,18 +115,23 @@ export default function EventGalleryClient({ title, date, photos }: EventGallery
     [photos],
   )
 
+  const visiblePhotos = useMemo(
+    () => photosWithIdx.slice(0, displayCount),
+    [photosWithIdx, displayCount],
+  )
+
   const effectiveWidth = containerWidth > 0 ? containerWidth : 320
   const layoutParams = useMemo(() => getLayoutParams(effectiveWidth), [effectiveWidth])
   const rows = useMemo(
     () =>
       calculateRowLayout(
-        photosWithIdx,
+        visiblePhotos,
         effectiveWidth,
         layoutParams.targetHeight,
         layoutParams.minPhotosPerRow,
         layoutParams.maxPhotosPerRow,
       ),
-    [photosWithIdx, effectiveWidth, layoutParams.targetHeight, layoutParams.minPhotosPerRow, layoutParams.maxPhotosPerRow],
+    [visiblePhotos, effectiveWidth, layoutParams.targetHeight, layoutParams.minPhotosPerRow, layoutParams.maxPhotosPerRow],
   )
 
   const handlePhotoClick = (idx: number) => {
@@ -184,6 +192,17 @@ export default function EventGalleryClient({ title, date, photos }: EventGallery
         {photos.length === 0 && (
           <div className="text-center py-20">
             <p className="text-muted-text text-lg">No photos available for this event.</p>
+          </div>
+        )}
+
+        {displayCount < photos.length && (
+          <div className="flex justify-center pt-6 pb-2">
+            <button
+              onClick={() => setDisplayCount((c) => Math.min(c + PAGE_SIZE, photos.length))}
+              className="bg-brand-blue text-white px-6 py-3 rounded-full font-medium hover:bg-brand-blue/90 transition-colors"
+            >
+              Load More ({photos.length - displayCount} remaining)
+            </button>
           </div>
         )}
       </div>

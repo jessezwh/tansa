@@ -1,3 +1,4 @@
+import { unstable_cache } from 'next/cache'
 import { payloadClient } from './payloadclient'
 import { Sponsor } from '@/payload-types'
 
@@ -5,26 +6,43 @@ import { Sponsor } from '@/payload-types'
 export async function getMediaPhotos(): Promise<MediaItem[]> {
   const client = await payloadClient()
 
-  // Fetch media photos with a limit of 12
   const mediaPhotos = await client.find({
-    collection: 'media', // Collection name
-    limit: 100, // Limit to 12 items
+    collection: 'media',
+    limit: 100,
   })
 
-  // Return the fetched media photos as MediaItem[] array
   return mediaPhotos.docs as MediaItem[]
 }
 
-// Get events
-export async function getEvents(): Promise<EventItem[]> {
-  const client = await payloadClient()
+// Get events (cached — gallery content is static; invalidated by afterChange hook on Events)
+export const getEvents = unstable_cache(
+  async (): Promise<EventItem[]> => {
+    const client = await payloadClient()
+    const events = await client.find({
+      collection: 'events',
+      limit: 20,
+    })
+    return events.docs as EventItem[]
+  },
+  ['events'],
+  { revalidate: 3600, tags: ['events'] },
+)
 
-  const events = await client.find({
-    collection: 'events',
-    limit: 20,
-  })
-
-  return events.docs as EventItem[]
+// Get a single event by its slug field (cached per slug)
+export async function getEventBySlug(slug: string): Promise<EventItem | null> {
+  return unstable_cache(
+    async (s: string) => {
+      const client = await payloadClient()
+      const result = await client.find({
+        collection: 'events',
+        where: { slug: { equals: s } },
+        limit: 1,
+      })
+      return (result.docs[0] as EventItem) ?? null
+    },
+    ['event-by-slug', slug],
+    { revalidate: 3600, tags: ['events'] },
+  )(slug)
 }
 
 // Get exec members
@@ -32,7 +50,7 @@ export async function getExecMembers(): Promise<ExecMember[]> {
   const client = await payloadClient()
 
   const execMembers = await client.find({
-    collection: 'exec', // Collection name in Payload CMS
+    collection: 'exec',
     limit: 100,
   })
 
@@ -44,8 +62,8 @@ export async function getSponsors(): Promise<Sponsor[]> {
   const client = await payloadClient()
 
   const sponsors = await client.find({
-    collection: 'sponsors', // name of your Payload collection
-    limit: 100, // adjust if needed
+    collection: 'sponsors',
+    limit: 100,
   })
 
   return sponsors.docs as Sponsor[]

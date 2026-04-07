@@ -11,6 +11,7 @@ type MediaItem = {
 type EventItem = {
   id: number
   title: string
+  slug?: string
   date: string
   description?: string
   coverImage?: string

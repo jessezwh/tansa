@@ -1,3 +1,4 @@
+import { revalidateTag } from 'next/cache'
 import { CollectionConfig } from 'payload'
 
 export const Events: CollectionConfig = {
@@ -9,6 +10,11 @@ export const Events: CollectionConfig = {
     delete: ({ req }) => !!req.user,
   },
   hooks: {
+    afterChange: [
+      () => {
+        revalidateTag('events')
+      },
+    ],
     afterDelete: [
       async ({ req, doc }) => {
         const { payload } = req as any
@@ -71,6 +77,27 @@ export const Events: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Event Title',
+    },
+    {
+      name: 'slug',
+      type: 'text',
+      unique: true,
+      index: true,
+      admin: { readOnly: true, description: 'Auto-generated from title' },
+      hooks: {
+        beforeValidate: [
+          ({ value, data }) => {
+            const title = data?.title ?? ''
+            if (title) {
+              return title
+                .toLowerCase()
+                .replace(/\s+/g, '-')
+                .replace(/[^a-z0-9-]/g, '')
+            }
+            return value
+          },
+        ],
+      },
     },
     {
       name: 'date',

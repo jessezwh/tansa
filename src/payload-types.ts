@@ -72,7 +72,7 @@ export interface Config {
     events: Event;
     newsletter_emails: NewsletterEmail;
     sponsors: Sponsor;
-    'sponsor-csv-uploads': SponsorCsvUpload;
+    'csv-uploads': CsvUpload;
     logos: Logo;
     exec: Exec;
     registrations: Registration;
@@ -90,7 +90,7 @@ export interface Config {
     events: EventsSelect<false> | EventsSelect<true>;
     newsletter_emails: NewsletterEmailsSelect<false> | NewsletterEmailsSelect<true>;
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
-    'sponsor-csv-uploads': SponsorCsvUploadsSelect<false> | SponsorCsvUploadsSelect<true>;
+    'csv-uploads': CsvUploadsSelect<false> | CsvUploadsSelect<true>;
     logos: LogosSelect<false> | LogosSelect<true>;
     exec: ExecSelect<false> | ExecSelect<true>;
     registrations: RegistrationsSelect<false> | RegistrationsSelect<true>;
@@ -193,6 +193,10 @@ export interface Media {
 export interface Event {
   id: number;
   title: string;
+  /**
+   * Auto-generated from title
+   */
+  slug?: string | null;
   date: string;
   description?: string | null;
   coverImage?: (number | null) | Media;
@@ -228,7 +232,7 @@ export interface Sponsor {
   /**
    * Upload a CSV file to add multiple sponsors at once.
    */
-  csvFile?: (number | null) | SponsorCsvUpload;
+  csvFile?: (number | null) | CsvUpload;
   updatedAt: string;
   createdAt: string;
 }
@@ -254,12 +258,12 @@ export interface Logo {
   focalY?: number | null;
 }
 /**
- * Upload a CSV file to bulk import sponsors. Columns: Name, Location, Instagram, Sponsorship Details
+ * Stores CSV files used for bulk sponsor import. Use the Sponsors collection to trigger an import.
  *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sponsor-csv-uploads".
+ * via the `definition` "csv-uploads".
  */
-export interface SponsorCsvUpload {
+export interface CsvUpload {
   id: number;
   updatedAt: string;
   createdAt: string;
@@ -533,8 +537,8 @@ export interface PayloadLockedDocument {
         value: number | Sponsor;
       } | null)
     | ({
-        relationTo: 'sponsor-csv-uploads';
-        value: number | SponsorCsvUpload;
+        relationTo: 'csv-uploads';
+        value: number | CsvUpload;
       } | null)
     | ({
         relationTo: 'logos';
@@ -643,6 +647,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface EventsSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   date?: T;
   description?: T;
   coverImage?: T;
@@ -676,9 +681,9 @@ export interface SponsorsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sponsor-csv-uploads_select".
+ * via the `definition` "csv-uploads_select".
  */
-export interface SponsorCsvUploadsSelect<T extends boolean = true> {
+export interface CsvUploadsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   url?: T;

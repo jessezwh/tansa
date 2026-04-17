@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { Sponsor } from '@/payload-types'
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, ChevronDown } from 'lucide-react'
 
 type SponsorsListProps = {
   sponsors: Sponsor[]
@@ -25,6 +25,8 @@ const LOCATION_DISPLAY_NAMES: Record<string, string> = {
 
 const TAB_KEYS = Object.keys(LOCATION_GROUPS)
 
+const CATEGORY_ORDER = ['Food and drink', 'Accessories and gifts', 'Entertainment']
+
 function getTabForLocation(location: string | null | undefined): string {
   if (!location) return 'Wider Auckland'
   for (const [tab, locations] of Object.entries(LOCATION_GROUPS)) {
@@ -37,22 +39,41 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
   const [search, setSearch] = useState('')
   const [activeTab, setActiveTab] = useState(TAB_KEYS[0])
   const [activeCategory, setActiveCategory] = useState('All')
+  const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false)
   const [openPopupId, setOpenPopupId] = useState<number | null>(null)
   const [popupPosition, setPopupPosition] = useState<PopupPosition>('center')
   const containerRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
-  // Derive unique categories from all sponsors for filter chips
+  // Derive unique categories from all sponsors, sorted by priority then alphabetically
   const categories = [
     'All',
     ...Array.from(
       new Set(
         sponsors
           .map((s) => s.category)
-          .filter((c): c is string => !!c)
-          .sort(),
+          .filter((c): c is string => !!c),
       ),
-    ),
+    ).sort((a, b) => {
+      const ai = CATEGORY_ORDER.indexOf(a)
+      const bi = CATEGORY_ORDER.indexOf(b)
+      if (ai !== -1 && bi !== -1) return ai - bi
+      if (ai !== -1) return -1
+      if (bi !== -1) return 1
+      return a.localeCompare(b)
+    }),
   ]
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setCategoryDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
 
   // Sponsors filtered by search + category
   const filteredSponsors = sponsors.filter((sponsor) => {
@@ -247,6 +268,12 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
   return (
     <div className="mt-15">
       <div className="max-w-6xl mx-auto px-4 pb-4">
+        {/* Hint text */}
+        <p className="text-white/70 text-xl mb-4 text-center font-neue-haas font-bold">
+          <span className="[@media(hover:hover)]:hidden">Tap a sponsor to see details</span>
+          <span className="hidden [@media(hover:hover)]:inline">Hover over a sponsor to see details</span>
+        </p>
+
         {/* Search */}
         <input
           type="text"
@@ -257,8 +284,38 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
           aria-label="Search sponsors"
         />
 
-        {/* Category filter chips */}
-        <div className="flex flex-wrap gap-2 mb-4">
+        {/* Category filter — dropdown on mobile, chips on desktop */}
+        <div ref={dropdownRef} className="relative flex justify-center mb-4 md:hidden">
+          <button
+            onClick={() => setCategoryDropdownOpen((o) => !o)}
+            className="flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold border bg-white text-brand-green border-white"
+          >
+            {activeCategory}
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-150 ${categoryDropdownOpen ? 'rotate-180' : ''}`}
+            />
+          </button>
+          {categoryDropdownOpen && (
+            <div className="absolute top-full mt-1 bg-white rounded-lg shadow-lg z-20 min-w-[180px] py-1">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => {
+                    setActiveCategory(cat)
+                    setCategoryDropdownOpen(false)
+                  }}
+                  className={`w-full text-left px-4 py-2 text-sm font-bold ${
+                    cat === activeCategory ? 'text-brand-green' : 'text-black hover:bg-gray-50'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="hidden md:flex flex-wrap gap-2 mb-4">
           {categories.map((cat) => (
             <button
               key={cat}
@@ -275,7 +332,7 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1 border-b border-white/20 mb-6">
+        <div className="flex justify-center md:justify-start gap-1 border-b border-white/20 mb-6">
           {visibleTabs.map((tab) => (
             <button
               key={tab}
@@ -293,7 +350,7 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
       </div>
 
       {/* Sponsor cards */}
-      <div ref={containerRef} className="max-w-6xl mx-auto px-4 pb-4">
+      <div ref={containerRef} className="max-w-6xl mx-auto px-4 pb-8">
         {visibleTabs.length === 0 ? (
           <p className="text-white/70 text-center font-neue-haas font-bold">No sponsors found.</p>
         ) : Object.keys(activeGrouped).length === 0 ? (
@@ -301,21 +358,16 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
         ) : (
           Object.entries(activeGrouped).map(([location, locationSponsors]) => (
             <div key={location} className="mb-8">
-              <h2 className="text-white font-bold text-lg mb-4 font-neue-haas">
+              <h2 className="text-white font-bold text-lg mb-4 font-neue-haas text-center md:text-left">
                 {LOCATION_DISPLAY_NAMES[location] ?? location}
               </h2>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap justify-center md:justify-start gap-4">
                 {locationSponsors.map((sponsor) => renderCard(sponsor))}
               </div>
             </div>
           ))
         )}
       </div>
-
-      <p className="text-white/70 text-xl mb-6 text-center font-neue-haas font-bold">
-        <span className="[@media(hover:hover)]:hidden">Tap a sponsor to see details</span>
-        <span className="hidden [@media(hover:hover)]:inline">Hover over a sponsor to see details</span>
-      </p>
     </div>
   )
 }

@@ -11,14 +11,14 @@ type Sponsor = {
  * Normalize a string for fuzzy matching:
  * - Lowercase
  * - Remove punctuation and special characters
- * - Remove extra whitespace
+ * - Remove all whitespace
  * - Trim
  */
 function normalizeForMatching(str: string): string {
   return str
     .toLowerCase()
     .replace(/[^\w\s]/g, '') // Remove punctuation
-    .replace(/\s+/g, ' ') // Collapse whitespace
+    .replace(/\s+/g, '') // Remove all whitespace
     .trim()
 }
 
@@ -97,6 +97,15 @@ export const Sponsors: CollectionConfig = {
       },
     },
     {
+      name: 'category',
+      type: 'text',
+      label: 'Category',
+      required: false,
+      admin: {
+        condition: (data) => data?.uploadType === 'single',
+      },
+    },
+    {
       name: 'sponsorshipDetails',
       type: 'text',
       label: 'Sponsorship Details',
@@ -123,7 +132,7 @@ export const Sponsors: CollectionConfig = {
       label: 'Upload CSV File',
       required: true,
       admin: {
-        description: 'Upload a CSV file to add multiple sponsors at once.',
+        description: 'Upload a CSV file to add multiple sponsors at once. Required columns (exact case): Name, Location, Sponsorship Details. Optional columns: Instagram, Category. Logos are automatically matched to sponsors by name.',
         condition: (data) => data?.uploadType === 'csv',
       },
     },
@@ -159,6 +168,7 @@ export const Sponsors: CollectionConfig = {
                     sponsors.push({
                       name: row['Name'],
                       location: row['Location'],
+                      category: row['Category'] || null,
                       instagram: row['Instagram'] || null,
                       sponsorshipDetails: row['Sponsorship Details'],
                       logo: null,

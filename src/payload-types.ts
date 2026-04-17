@@ -223,6 +223,7 @@ export interface Sponsor {
   uploadType?: ('single' | 'csv') | null;
   name?: string | null;
   location?: string | null;
+  category?: string | null;
   instagram?: string | null;
   sponsorshipDetails?: string | null;
   /**
@@ -230,7 +231,7 @@ export interface Sponsor {
    */
   logo?: (number | null) | Logo;
   /**
-   * Upload a CSV file to add multiple sponsors at once.
+   * Upload a CSV file to add multiple sponsors at once. Required columns (exact case): Name, Location, Sponsorship Details. Optional column: Instagram. Logos are automatically matched to sponsors by name.
    */
   csvFile?: (number | null) | CsvUpload;
   updatedAt: string;

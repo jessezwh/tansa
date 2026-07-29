@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
-import { generateUniqueReferralCode, awardReferralPoint } from '@/lib/referral'
-import { sendReferralCodeEmail } from '@/lib/referral-email'
+import { sendSignupConfirmationEmail } from '@/lib/signup-email'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
@@ -37,34 +36,6 @@ export async function POST(request: NextRequest) {
         try {
           const payload = await getPayload({ config })
 
-          // Generate unique referral code for the new member
-          const newMemberReferralCode = await generateUniqueReferralCode()
-
-          // Check if this member was referred by someone
-          const referredByCode = metadata.referralCode || ''
-          let newMemberPoints = 0
-
-          // If referred, award points to both parties
-          if (referredByCode) {
-            // Find the referrer
-            const referrerResult = await payload.find({
-              collection: 'registrations',
-              where: {
-                referralCode: {
-                  equals: referredByCode,
-                },
-              },
-              limit: 1,
-            })
-
-            if (referrerResult.docs.length > 0) {
-              // Award point to referrer
-              await awardReferralPoint(referrerResult.docs[0].id)
-              // New member also gets a point for being referred
-              newMemberPoints = 1
-            }
-          }
-
           // Process signedUpBy - convert to number or null
           const signedUpById = metadata.signedUpBy ? parseInt(metadata.signedUpBy, 10) : null
 
@@ -85,27 +56,22 @@ export async function POST(request: NextRequest) {
               paymentStatus: 'completed',
               stripePaymentId: paymentIntent.id,
               amount: paymentIntent.amount / 100, // Convert cents to dollars
-              // Referral system fields
-              referralCode: newMemberReferralCode,
-              referralPoints: newMemberPoints,
-              referredBy: referredByCode || null,
               signedUpBy: signedUpById || null,
             },
           })
 
-          console.log('Registration created successfully:', registration.id, 'with referral code:', newMemberReferralCode)
+          console.log('Registration created successfully:', registration.id)
 
-          // Send referral code by email so the member has a persistent copy (fire-and-forget)
-          sendReferralCodeEmail({
+          // Send confirmation email (fire-and-forget)
+          sendSignupConfirmationEmail({
             to: metadata.email,
             firstName: metadata.firstName,
-            referralCode: newMemberReferralCode,
           })
             .then((result) => {
-              if (!result.ok) console.error('Referral email failed:', result.error)
+              if (!result.ok) console.error('Confirmation email failed:', result.error)
             })
             .catch((err) => {
-              console.error('Referral email error:', err)
+              console.error('Confirmation email error:', err)
             })
         } catch (err) {
           console.error('Error creating registration:', err)

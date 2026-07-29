@@ -302,20 +302,9 @@ function CheckoutForm({
 
       {/* Additional Information Section */}
       <div className="space-y-4">
-        <RegistrationHeading
-          label="Additional Information"
-          subtitle="Be in to win Sony XM4s when you use a friend's referral code!"
-        />
+        <RegistrationHeading label="Additional Information" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
-          <RegistrationTextInput
-            label="Referral Code"
-            value={formData.referralCode}
-            subtitle="Enter a friend's referral code (e.g., TANSA-AB12)"
-            onChange={(e) => onFormChange('referralCode', e.target.value.toUpperCase())}
-            placeholder="TANSA-XXXX"
-          />
-
           <RegistrationDropdown
             label="Signed Up By"
             value={formData.signedUpBy}
@@ -377,7 +366,6 @@ export function StripeCheckoutForm() {
     upi: '',
     areaOfStudy: '',
     yearLevel: '',
-    referralCode: '',
     signedUpBy: '',
   })
 

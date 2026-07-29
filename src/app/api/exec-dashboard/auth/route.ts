@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { isExecDashboardPasswordValid } from '@/config/exec-dashboard'
+import { isExecDashboardPasswordValid } from '@/lib/exec-dashboard'
 import { setExecDashboardCookie } from '@/lib/exec-dashboard-auth'
 
 export async function POST(request: NextRequest) {

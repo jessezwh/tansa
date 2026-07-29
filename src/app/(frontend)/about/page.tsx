@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { getExecMembers } from '@/libs/server'
+import { getExecMembers } from '@/lib/server'
 import Image from 'next/image'
 import TeamSection from '@/components/team/TeamSection'
 import TeamSkeleton from '@/components/team/TeamSkeleton'

@@ -3,7 +3,7 @@ export const revalidate = 3600
 
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import { getEventBySlug, getEvents } from '@/libs/server'
+import { getEventBySlug, getEvents } from '@/lib/server'
 import { notFound } from 'next/navigation'
 import EventGalleryClient from '@/components/events/EventsGalleryClient'
 

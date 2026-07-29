@@ -2,7 +2,7 @@ export const revalidate = 3600
 
 import Image from 'next/image'
 import { Suspense } from 'react'
-import { getEvents } from '@/libs/server'
+import { getEvents } from '@/lib/server'
 import EventsGrid from '@/components/events/EventsGrid'
 import EventCardSkeleton from '@/components/events/EventSkeleton'
 

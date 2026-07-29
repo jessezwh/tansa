@@ -1,7 +1,7 @@
 // app/sponsors/page.tsx
 import React from 'react'
 import Image from 'next/image'
-import { getSponsors } from '@/libs/server'
+import { getSponsors } from '@/lib/server'
 import SponsorsList from '@/components/SponsorsList'
 
 export default async function SponsorsPage() {

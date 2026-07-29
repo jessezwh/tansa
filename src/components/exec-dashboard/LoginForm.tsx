@@ -1,10 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 
 export function LoginForm() {
-  const router = useRouter()
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -25,7 +23,7 @@ export function LoginForm() {
         setLoading(false)
         return
       }
-      router.refresh()
+      window.location.reload()
     } catch {
       setError('Something went wrong')
       setLoading(false)

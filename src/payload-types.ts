@@ -223,15 +223,15 @@ export interface Sponsor {
   uploadType?: ('single' | 'csv') | null;
   name?: string | null;
   location?: string | null;
-  category?: string | null;
   instagram?: string | null;
+  category?: string | null;
   sponsorshipDetails?: string | null;
   /**
    * Upload the sponsor logo
    */
   logo?: (number | null) | Logo;
   /**
-   * Upload a CSV file to add multiple sponsors at once. Required columns (exact case): Name, Location, Sponsorship Details. Optional column: Instagram. Logos are automatically matched to sponsors by name.
+   * Upload a CSV file to add multiple sponsors at once. Required columns (exact case): Name, Location, Sponsorship Details. Optional columns: Instagram, Category. Logos are automatically matched to sponsors by name.
    */
   csvFile?: (number | null) | CsvUpload;
   updatedAt: string;
@@ -674,6 +674,7 @@ export interface SponsorsSelect<T extends boolean = true> {
   name?: T;
   location?: T;
   instagram?: T;
+  category?: T;
   sponsorshipDetails?: T;
   logo?: T;
   csvFile?: T;

@@ -346,18 +346,6 @@ export interface Registration {
   stripePaymentId?: string | null;
   amount?: number | null;
   /**
-   * Unique code for this member to share (e.g., TANSA-AX7Y)
-   */
-  referralCode?: string | null;
-  /**
-   * Points earned from referrals
-   */
-  referralPoints?: number | null;
-  /**
-   * Referral code used during signup (if any)
-   */
-  referredBy?: string | null;
-  /**
    * Committee member who signed up this member (null = Online)
    */
   signedUpBy?: (number | null) | Exec;
@@ -749,9 +737,6 @@ export interface RegistrationsSelect<T extends boolean = true> {
   paymentStatus?: T;
   stripePaymentId?: T;
   amount?: T;
-  referralCode?: T;
-  referralPoints?: T;
-  referredBy?: T;
   signedUpBy?: T;
   updatedAt?: T;
   createdAt?: T;

@@ -8,10 +8,9 @@ const PAGE_THEMES: Record<string, string> = {
   '/events': 'blue',
   '/sponsors': 'green',
   '/contact': 'brown',
-  '/leaderboard': 'pink',
 }
 
-const INVERTED_FOOTER_PAGES = new Set(['/leaderboard', '/about', '/sign-up'])
+const INVERTED_FOOTER_PAGES = new Set(['/about', '/sign-up'])
 
 export function getPageTheme(pathname: string): string {
   if (PAGE_THEMES[pathname]) return PAGE_THEMES[pathname]

@@ -26,7 +26,7 @@ const STATUS_CONFIG: Record<
     title: 'Processing...',
     description: 'Please wait while we confirm your payment',
     color: 'text-muted-text',
-    message: 'We're verifying your payment details...',
+    message: "We're verifying your payment details...",
   },
   success: {
     icon: <CheckCircle className="h-12 w-12 mx-auto mb-4 text-success" />,

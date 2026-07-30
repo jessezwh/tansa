@@ -17,33 +17,20 @@ const Footer = () => {
     e.preventDefault()
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!email) {
-      console.log('No email was submitted.')
-    } else if (!emailRegex.test(email)) {
-      console.log(email, 'is an invalid email.')
-    } else {
-      await handleAddEmail(email)
-    }
-  }
+    if (!email || !emailRegex.test(email)) return
 
-  const handleAddEmail = async (email: string) => {
     try {
       const response = await fetch('/api/newsletter', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       })
 
-      const data = await response.json()
-
       if (response.status === 201) {
-        console.log(data.email, 'has been successfully subscribed to the newsletter!')
         setSubbed(true)
       }
-    } catch (error) {
-      console.error('Error during subscription:', error)
+    } catch {
+      // Silently fail — newsletter signup is non-critical
     }
   }
 

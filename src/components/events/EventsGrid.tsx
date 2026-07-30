@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import EventCard from './EventCard'
-import EventCardSkeleton from './EventSkeleton'
+import { deriveSlug } from '@/lib/utils'
 
 interface EventsGridProps {
   events: Array<{
@@ -14,13 +14,9 @@ interface EventsGridProps {
 
 export default function EventsGrid({ events, initialLoad = 8 }: EventsGridProps) {
   const [displayCount, setDisplayCount] = useState(initialLoad)
-  const [isLoadingMore, setIsLoadingMore] = useState(false)
 
-  const loadMore = async () => {
-    setIsLoadingMore(true)
-    await new Promise((resolve) => setTimeout(resolve, 500))
+  const loadMore = () => {
     setDisplayCount((prev) => Math.min(prev + 8, events.length))
-    setIsLoadingMore(false)
   }
 
   const displayedEvents = events.slice(0, displayCount)
@@ -35,26 +31,20 @@ export default function EventsGrid({ events, initialLoad = 8 }: EventsGridProps)
             title={title}
             date={date}
             photoUrls={photos}
-            slug={title
-              .toLowerCase()
-              .replace(/\s+/g, '-')
-              .replace(/[^a-z0-9-]/g, '')}
+            slug={deriveSlug(title)}
             priority={index < 4} // Prioritize first 4 images (above fold)
           />
         ))}
 
-        {isLoadingMore &&
-          Array.from({ length: 4 }).map((_, i) => <EventCardSkeleton key={`skeleton-${i}`} />)}
       </div>
 
       {hasMore && (
         <div className="flex justify-center mt-8">
           <button
             onClick={loadMore}
-            disabled={isLoadingMore}
-            className="bg-white text-brand-blue px-6 py-3 rounded-full font-medium hover:bg-white/90 transition-colors disabled:opacity-50"
+            className="bg-white text-brand-blue px-6 py-3 rounded-full font-medium hover:bg-white/90 transition-colors"
           >
-            {isLoadingMore ? 'Loading...' : `Load More (${events.length - displayCount} remaining)`}
+            Load More ({events.length - displayCount} remaining)
           </button>
         </div>
       )}

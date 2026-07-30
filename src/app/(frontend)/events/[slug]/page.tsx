@@ -1,9 +1,9 @@
-// src/app/(frontend)/events/[slug]/page.tsx
 export const revalidate = 3600
 
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { getEventBySlug, getEvents } from '@/lib/server'
+import { deriveSlug } from '@/lib/utils'
 import { notFound } from 'next/navigation'
 import EventGalleryClient from '@/components/events/EventsGalleryClient'
 
@@ -16,13 +16,6 @@ export async function generateStaticParams() {
   return events.map((e) => ({
     slug: e.slug ?? deriveSlug(e.title),
   }))
-}
-
-function deriveSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9-]/g, '')
 }
 
 export default async function EventGalleryPage({ params }: EventGalleryPageProps) {

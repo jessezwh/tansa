@@ -17,8 +17,6 @@ export const Registrations: CollectionConfig = {
       'gender',
       'ethnicity',
       'paymentStatus',
-      'referralCode',
-      'referralPoints',
       'signedUpBy',
       'createdAt',
     ],
@@ -166,39 +164,6 @@ export const Registrations: CollectionConfig = {
       admin: {
         readOnly: true,
         position: 'sidebar',
-      },
-    },
-    // Referral System Fields
-    {
-      name: 'referralCode',
-      type: 'text',
-      unique: true,
-      label: 'Referral Code',
-      admin: {
-        readOnly: true,
-        position: 'sidebar',
-        description: 'Unique code for this member to share (e.g., TANSA-AX7Y)',
-      },
-    },
-    {
-      name: 'referralPoints',
-      type: 'number',
-      defaultValue: 0,
-      label: 'Referral Points',
-      admin: {
-        readOnly: true,
-        position: 'sidebar',
-        description: 'Points earned from referrals',
-      },
-    },
-    {
-      name: 'referredBy',
-      type: 'text',
-      label: 'Referred By Code',
-      admin: {
-        readOnly: true,
-        position: 'sidebar',
-        description: 'Referral code used during signup (if any)',
       },
     },
     {

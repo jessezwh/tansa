@@ -40,6 +40,8 @@
   - Removed referral-related code from Stripe webhook and update-payment-intent route
   - `src/app/api/exec-dashboard/leaderboard/` kept — it tracks signups by exec member (still relevant)
   - Referral fields remain in the DB schema; just removed from active code paths
+  - **Remaining cleanup**: `src/scripts/seed-referrals.ts` is now dead code (referral seed script) — delete in C4
+  - **Remaining cleanup**: Referral fields still in `Registrations.ts` collection config (`referralCode`, `referralPoints`, `referredBy`) and `defaultColumns` — remove from config (DB columns can stay)
 
 - [x] **B2. Clean up registration form**
   - Removed referral code input field from `RegistrationForm.tsx`
@@ -54,51 +56,57 @@
 
 ## C. Dead Code & Cruft Removal
 
-- [ ] **C1. Resolve uncommitted working tree changes**
-  - Review and commit or revert:
-    - Deleted `src/components/CSVUpload.tsx` — determine if this was intentional
-    - Modified `src/components/exec-dashboard/LoginForm.tsx`
-    - Modified `package.json`
-    - Modified `src/payload-types.ts`
-  - The untracked `2026 Sponsors - Website Sponsors.csv` should be gitignored or removed
-  - The untracked migration files (`src/migrations/20260408_045642.json`, `.ts`) — determine if needed
+- [x] **C1. Resolve uncommitted working tree changes**
+  - Previous agent committed: CSVUpload deletion, LoginForm fix, package.json, payload-types changes
+  - Added `*.csv` to `.gitignore` (the `2026 Sponsors` CSV is data, not code)
+  - Migration files (`20260408_045642.json`, `.ts`) are needed — they're referenced by `migrations/index.ts` but were never committed. Will be committed with this batch.
+  - Fixed smart quote TypeScript error in `success/page.tsx` (introduced by previous agent)
 
 - [ ] **C2. Fix the startup migration prompt**
   - Running `pnpm dev` prompts to delete a collection — likely schema drift between Payload config and database
   - Identify which collection is being flagged and why
   - Resolve by either updating the Payload config or running/fixing the migration
+  - Note: committing the untracked migration files (C1) may resolve this
 
 - [ ] **C3. Audit and remove unused npm dependencies**
   - After archiving referral/leaderboard, check if any packages can be removed (e.g. `resend` if referral emails were its only use)
   - Look for any other unused dependencies
 
-- [ ] **C4. Clean up untracked/orphaned files**
-  - Review `src/migrations/20260408_045642.json` — is this a drizzle snapshot or orphaned?
-  - Check for any other files that shouldn't be in the repo
+- [x] **C4. Clean up untracked/orphaned files**
+  - `src/migrations/20260408_045642.json` is a drizzle schema snapshot — needed, will be committed
+  - Deleted `src/scripts/seed-referrals.ts` and removed empty `src/scripts/` directory
 
 ---
 
 ## D. Code Quality & Consistency
 
 - [ ] **D1. Standardize API route patterns**
-  - Review all routes in `src/app/api/` for consistent:
-    - Error handling (try/catch, error responses)
-    - Response format (consistent JSON shape)
-    - Auth patterns (cookie validation)
-    - HTTP status codes
+  - Audited all 9 API routes. Main inconsistencies:
+    - Auth endpoint uses `{ ok: boolean }`, update-payment-intent uses `{ success: true }`, others return data directly
+    - Newsletter returns 201 on create, others return 200
+    - Stripe webhook returns non-200 on internal errors (could trigger retries)
+  - These are minor and mostly cosmetic. Consider standardizing in a future pass, but not blocking.
 
-- [ ] **D2. Review photo gallery code quality**
-  - `src/components/events/EventsGalleryClient.tsx` — flagged as potentially containing hasty fixes
-  - Read through, verify code quality, clean up any inconsistencies
-  - Check the justified layout algorithm for correctness and clarity
+- [x] **D2. Review photo gallery code quality**
+  - Gallery layout algorithm is well-structured (justified layout with simulated aspect ratios — reasonable when CMS doesn't provide real dimensions)
+  - Fixed: removed redundant `containerWidth <= 0` condition (duplicate of `< 640` branch)
+  - Fixed: blob URL memory leak in download function (missing `URL.revokeObjectURL`)
+  - Fixed: removed unused `url` parameter from `getImageDimensions()`
+  - Fixed: removed artificial 500ms delay in `EventsGrid.loadMore()` (bootleg loading simulation)
+  - Fixed: extracted `deriveSlug()` to `src/lib/utils.ts` (was duplicated in EventsGrid and event detail page)
+  - Fixed: deduplicated overlay JSX in `EventsCarousel.tsx`
+  - Fixed: simplified nav arrow condition in carousel (removed dead `images.length === 0` branch)
+  - Removed stale file-path comments from component headers
 
-- [ ] **D3. Audit component exports and imports**
-  - Verify no orphaned or redundant components after feature archival
-  - Check for inconsistent export patterns (default vs named)
-  - Remove any unused imports
+- [x] **D3. Audit component exports and imports**
+  - All components are actively used — no orphaned components found
+  - Removed unused `EventCardSkeleton` import from `EventsGrid.tsx` (was only used for the removed loading state)
+  - Cleaned up debug `console.log` statements in `Footer.tsx` (newsletter subscription)
+  - Export patterns are consistent within categories (UI = named, feature components = default)
 
-- [ ] **D4. Review `page-themes.ts` clarity**
-  - Ensure the page theming system is straightforward — future devs will need to understand how page colors work
+- [x] **D4. Review `page-themes.ts` clarity**
+  - Removed dead `/leaderboard` entry from `PAGE_THEMES` and `INVERTED_FOOTER_PAGES`
+  - The system is clean and self-explanatory: route → color name mapping, with a fallback to 'pink'
 
 ---
 
@@ -109,6 +117,7 @@
   - Search for year references (`2026`, `26`)
   - Search for club-specific text that might change
   - Document every location that needs updating for a rebrand
+  - Known: `src/lib/signup-email.ts` has hardcoded `EMAIL_COLORS` with brand hex values (needed for email HTML, can't use CSS vars)
 
 - [ ] **E2. Centralize rebrandable assets**
   - Bear SVGs are in `public/bears/` (good)
@@ -148,6 +157,66 @@
   - `"echo y | payload migrate && next start"` auto-approves migrations
   - Verify this is safe and intentional — could silently run destructive migrations
   - Consider if there's a safer pattern
+
+---
+
+## G. Yearly Reset Process
+
+> Each year the club "resets": new exec team, new sponsors, registrations cleared before O-Week, some events kept/pruned. This section covers building a reliable process for that transition.
+
+**Collections and their yearly behavior:**
+| Collection | Reset? | Notes |
+|---|---|---|
+| Registrations | Clear all | Membership resets yearly. Export to CSV/Google Sheets first. |
+| Exec | Replace all | Entirely new exec team each year. |
+| Sponsors | Replace most | Some sponsors may carry over, but most change. |
+| Events | Prune | Keep a few key events so the page isn't empty; remove the rest. |
+| Media | Prune | Remove media orphaned by deleted events. |
+| Logos | Prune | Remove logos orphaned by deleted sponsors. |
+| Newsletter Emails | Keep or clear | Decision needed — do subscribers carry over? |
+| Users (admin) | Update | Hand over admin credentials to new exec. |
+
+- [ ] **G1. Decide on yearly reset approach** *(decision deferred — does not block C/D/E cleanup)*
+
+  The key architectural question: should the yearly reset (and brand/theme changes) be fully manageable through the Payload admin UI, or require some CLI/dev work?
+
+  **Context from discussion:**
+  - The club is non-technical; CLI access is high friction in future years
+  - Moving brand assets (SVGs, colors) into a Payload Global is feasible and performant (assets served from S3/CDN, colors injected as CSS vars in layout, Next.js caches the queries)
+  - Fonts are the one tricky area — may be kept as static files in `public/fonts/`
+  - Full Payload approach = more upfront work but zero CLI for future years
+  - Hybrid approach = reset script now, brand-in-Payload later
+
+  **Options under consideration:**
+  - **Option A**: Payload admin export + manual delete (no custom code, but tedious)
+  - **Option B**: CLI reset script (`pnpm yearly-reset`) — one command, handles orphaned media
+  - **Option C**: Admin UI reset action + Brand Settings global in Payload — most accessible, most implementation effort
+  - **Hybrid**: Option B now, move brand into Payload later
+
+  **Newsletter subscribers**: Clear each year (confirmed).
+
+- [ ] **G2. Implement chosen reset approach** *(blocked on G1)*
+
+- [ ] **G3. Extend Payload import/export plugin**
+  - Currently only covers `users` and `registrations` in `payload.config.ts`
+  - Add `exec`, `sponsors`, `events`, `logos` to the plugin's `collections` array
+  - This is useful regardless of which reset approach is chosen — gives admin-level export/import for all content
+
+- [x] **G4. Remove referral fields from Registrations collection config**
+  - `referralCode`, `referralPoints`, `referredBy` fields still in `src/collections/Registrations.ts`
+  - Remove from the `fields` array and from `defaultColumns`
+  - DB columns can remain (no migration needed) — they'll just be unused
+  - This simplifies the admin view and reduces confusion for future maintainers
+
+- [ ] **G5. Document the yearly handover process** *(blocked on G1/G2)*
+  - Write a step-by-step handover checklist covering:
+    1. Export/backup current year's data
+    2. Reset collections (via chosen method)
+    3. Update brand assets (cross-ref with E3 rebranding checklist)
+    4. Update admin credentials
+    5. Update env vars if any services change (Stripe, Resend, Google Sheets, etc.)
+    6. Update `.env` on Fly.io
+    7. Deploy
 
 ---
 

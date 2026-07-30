@@ -70,52 +70,39 @@ const EventsCarousel: React.FC<EventsCarouselProps> = ({
               }`}
               style={{ pointerEvents: index === currentIndex ? 'auto' : 'none' }}
             >
-              {image.href ? (
-                <Link
-                  href={image.href}
-                  className="absolute inset-0 cursor-pointer rounded-lg block"
-                  aria-label={`View event: ${image.title ?? image.alt}`}
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="object-cover rounded-lg"
-                    priority={index === 0}
-                  />
-                  {/* Image Overlay with Title and Description */}
-                  {(image.title || image.description) && (
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent py-4 px-6 sm:py-6 sm:px-14">
-                      {image.title && (
-                        <h3 className="text-white text-xl font-bold mb-2">{image.title}</h3>
-                      )}
-                      {image.description && (
-                        <p className="text-white/90 text-sm">{image.description}</p>
-                      )}
-                    </div>
-                  )}
-                </Link>
-              ) : (
-                <>
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="object-cover rounded-lg"
-                    priority={index === 0}
-                  />
-                  {(image.title || image.description) && (
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent py-4 px-6 sm:py-6 sm:px-14">
-                      {image.title && (
-                        <h3 className="text-white text-xl font-bold mb-2">{image.title}</h3>
-                      )}
-                      {image.description && (
-                        <p className="text-white/90 text-sm">{image.description}</p>
-                      )}
-                    </div>
-                  )}
-                </>
-              )}
+              {(() => {
+                const content = (
+                  <>
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-cover rounded-lg"
+                      priority={index === 0}
+                    />
+                    {(image.title || image.description) && (
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent py-4 px-6 sm:py-6 sm:px-14">
+                        {image.title && (
+                          <h3 className="text-white text-xl font-bold mb-2">{image.title}</h3>
+                        )}
+                        {image.description && (
+                          <p className="text-white/90 text-sm">{image.description}</p>
+                        )}
+                      </div>
+                    )}
+                  </>
+                )
+
+                return image.href ? (
+                  <Link
+                    href={image.href}
+                    className="absolute inset-0 cursor-pointer rounded-lg block"
+                    aria-label={`View event: ${image.title ?? image.alt}`}
+                  >
+                    {content}
+                  </Link>
+                ) : content
+              })()}
             </div>
           ))
         ) : (
@@ -125,15 +112,14 @@ const EventsCarousel: React.FC<EventsCarouselProps> = ({
         )}
 
         {/* Navigation Arrows */}
-        {(images.length > 1 || images.length === 0) && (
+        {images.length > 1 && (
           <>
             <Button
               variant="ghost"
               size="icon"
-              className={`absolute left-4 top-1/2 -translate-y-1/2 z-30 ${images.length > 1 ? 'bg-black/20 hover:bg-black/40 text-white' : 'bg-black/10 text-muted-text cursor-not-allowed'} border-0 rounded-full h-12 w-12`}
-              onClick={images.length > 1 ? goToPrevious : undefined}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/20 hover:bg-black/40 text-white border-0 rounded-full h-12 w-12"
+              onClick={goToPrevious}
               aria-label="Previous image"
-              disabled={images.length === 0}
             >
               <ChevronLeft className="h-6 w-6" />
             </Button>
@@ -141,10 +127,9 @@ const EventsCarousel: React.FC<EventsCarouselProps> = ({
             <Button
               variant="ghost"
               size="icon"
-              className={`absolute right-4 top-1/2 -translate-y-1/2 z-30 ${images.length > 1 ? 'bg-black/20 hover:bg-black/40 text-white' : 'bg-black/10 text-muted-text cursor-not-allowed'} border-0 rounded-full h-12 w-12`}
-              onClick={images.length > 1 ? goToNext : undefined}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/20 hover:bg-black/40 text-white border-0 rounded-full h-12 w-12"
+              onClick={goToNext}
               aria-label="Next image"
-              disabled={images.length === 0}
             >
               <ChevronRight className="h-6 w-6" />
             </Button>

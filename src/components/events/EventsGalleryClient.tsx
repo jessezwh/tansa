@@ -1,4 +1,3 @@
-// src/components/EventGalleryClient.tsx
 'use client'
 
 import { useState, useRef, useEffect, useMemo } from 'react'
@@ -14,9 +13,6 @@ interface EventGalleryClientProps {
 
 // Responsive layout params by container width (matches common breakpoints)
 function getLayoutParams(containerWidth: number) {
-  if (containerWidth <= 0) {
-    return { targetHeight: 120, minPhotosPerRow: 2, maxPhotosPerRow: 3 }
-  }
   if (containerWidth < 640) {
     return { targetHeight: 120, minPhotosPerRow: 2, maxPhotosPerRow: 3 }
   }
@@ -26,7 +22,7 @@ function getLayoutParams(containerWidth: number) {
   return { targetHeight: 180, minPhotosPerRow: 5, maxPhotosPerRow: 7 }
 }
 
-function getImageDimensions(url: string, idx: number) {
+function getImageDimensions(idx: number) {
   const aspectRatios = [
     { width: 4, height: 3 },
     { width: 16, height: 9 },
@@ -51,7 +47,7 @@ function calculateRowLayout(
   let currentRowWidth = 0
 
   for (const photo of photos) {
-    const dimensions = getImageDimensions(photo.url, photo.idx)
+    const dimensions = getImageDimensions(photo.idx)
     const aspectRatio = dimensions.width / dimensions.height
     const photoWidth = targetHeight * aspectRatio
 
@@ -145,11 +141,13 @@ export default function EventGalleryClient({ title, date, photos }: EventGallery
       const res = await fetch(url)
       const blob = await res.blob()
       const link = document.createElement('a')
-      link.href = URL.createObjectURL(blob)
+      const blobUrl = URL.createObjectURL(blob)
+      link.href = blobUrl
       link.download = `${title}-photo-${idx + 1}.jpg`
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
+      URL.revokeObjectURL(blobUrl)
     } catch (err) {
       console.error('Download failed', err)
     }

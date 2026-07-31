@@ -3,7 +3,7 @@ import { CollectionConfig } from 'payload'
 export const Exec: CollectionConfig = {
   slug: 'exec',
   admin: {
-    group: 'Members',
+    group: 'Content',
   },
   access: {
     read: () => true,

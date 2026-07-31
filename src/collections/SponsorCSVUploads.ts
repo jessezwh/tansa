@@ -15,7 +15,7 @@ export const SponsorCSVUploads: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'filename',
-    group: 'Sponsors',
+    group: 'Admin (ignore)',
     description: 'Stores CSV files used for bulk sponsor import. Use the Sponsors collection to trigger an import.',
   },
   fields: [],

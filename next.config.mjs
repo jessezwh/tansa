@@ -6,7 +6,7 @@ const isDev = process.env.NODE_ENV !== 'production'
 const nextConfig = {
   experimental: {
     staleTimes: {
-      dynamic: 300,
+      dynamic: 0,
       static: 3600,
     },
   },

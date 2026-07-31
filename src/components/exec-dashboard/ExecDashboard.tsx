@@ -13,7 +13,6 @@ type SearchResult = {
   upi?: string | null
   universityId?: string | null
   createdAt: string
-  referralCode?: string | null
   areaOfStudy?: string | null
   yearLevel?: string | null
 }
@@ -196,7 +195,6 @@ export function ExecDashboard() {
                     </p>
                     <p className="text-sm text-gray-600">
                       Signed up: {formatDate(r.createdAt)}
-                      {r.referralCode ? ` · Code: ${r.referralCode}` : ''}
                     </p>
                     {(r.areaOfStudy || r.yearLevel) && (
                       <p className="text-sm text-gray-500">

@@ -26,7 +26,7 @@ const Footer = () => {
         body: JSON.stringify({ email }),
       })
 
-      if (response.status === 201) {
+      if (response.ok) {
         setSubbed(true)
       }
     } catch {

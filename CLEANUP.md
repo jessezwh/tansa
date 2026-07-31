@@ -80,13 +80,13 @@
 
 ## D. Code Quality & Consistency
 
-- [ ] **D1. Standardize API route patterns**
-  - Audited all 9 API routes. Main inconsistencies:
-    - Auth endpoint uses `{ ok: boolean }`, update-payment-intent uses `{ success: true }`, others return data directly
-    - Newsletter returns 201 on create, others return 200
-    - Stripe webhook returns non-200 on internal errors (could trigger Stripe retries — Stripe re-sends webhooks for non-2xx responses)
-  - **Status**: Deferred — these are cosmetic inconsistencies with no user-facing impact. Standardizing response shapes risks introducing bugs in working code for zero functional benefit. The Stripe webhook retry behavior is the only one with potential operational impact, but hasn't caused issues in practice.
-  - **When to do this**: Best paired with other work that already touches API routes, so changes get tested naturally. Most likely triggers: (1) yearly reset implementation (G2) if it adds/modifies routes, (2) a Payload version upgrade that forces route changes, or (3) any new feature that adds API endpoints. Avoid doing this as a standalone refactor.
+- [x] **D1. Standardize API route patterns**
+  - All routes now return 200 on success with descriptive data, `{ error: string }` + appropriate status on failure
+  - Removed inconsistent success flags (`ok`, `success`) — consumers already use `response.ok` for status checking
+  - Newsletter: changed 201 → 200, updated Footer consumer to check `response.ok` instead of `status === 201`
+  - Newsletter: standardized config import (`@/payload.config`) and function style to match other routes
+  - Stripe webhook: outer catch now returns 200 (per Stripe docs — non-2xx triggers automatic retries)
+  - Exec dashboard search: removed dead `referralCode` from response and consumer type/display
 
 - [x] **D2. Review photo gallery code quality**
   - Gallery layout algorithm is well-structured (justified layout with simulated aspect ratios — reasonable when CMS doesn't provide real dimensions)

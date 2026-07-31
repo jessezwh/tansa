@@ -45,7 +45,6 @@ export async function GET(request: NextRequest) {
       upi: doc.upi,
       universityId: doc.universityId,
       createdAt: doc.createdAt,
-      referralCode: doc.referralCode ?? null,
       areaOfStudy: doc.areaOfStudy ?? null,
       yearLevel: doc.yearLevel ?? null,
     }))

@@ -8,13 +8,13 @@ export async function POST(request: NextRequest) {
     const password = typeof body?.password === 'string' ? body.password : ''
 
     if (!isExecDashboardPasswordValid(password)) {
-      return NextResponse.json({ ok: false, error: 'Invalid password' }, { status: 401 })
+      return NextResponse.json({ error: 'Invalid password' }, { status: 401 })
     }
 
-    const response = NextResponse.json({ ok: true })
+    const response = NextResponse.json({ authenticated: true })
     setExecDashboardCookie(response)
     return response
   } catch {
-    return NextResponse.json({ ok: false, error: 'Bad request' }, { status: 400 })
+    return NextResponse.json({ error: 'Bad request' }, { status: 400 })
   }
 }

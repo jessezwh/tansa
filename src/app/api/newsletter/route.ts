@@ -1,26 +1,23 @@
-import configPromise from '@payload-config'
 import { NextRequest, NextResponse } from 'next/server'
 import { getPayload } from 'payload'
+import config from '@/payload.config'
 
-export const POST = async (req: NextRequest) => {
-  const payload = await getPayload({
-    config: configPromise,
-  })
-
+export async function POST(req: NextRequest) {
   try {
     const { email } = await req.json()
 
-    // Check that we receive an email, and its of valid type.
     if (!email || typeof email !== 'string') {
-      return NextResponse.json({ error: 'Invalid email.' }, { status: 400 })
+      return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
     }
-    const data = await payload.create({
+
+    const payload = await getPayload({ config })
+    await payload.create({
       collection: 'newsletter-emails',
       data: { email },
     })
-    return NextResponse.json(data, { status: 201 })
-  } catch (error) {
-    // Most likely duplicate email in system.
-    return NextResponse.json({ error: 'Internal Server Error. ' }, { status: 500 })
+
+    return NextResponse.json({ subscribed: true })
+  } catch {
+    return NextResponse.json({ error: 'Failed to subscribe' }, { status: 500 })
   }
 }

@@ -14,9 +14,8 @@ export const POST = async (req: NextRequest) => {
     if (!email || typeof email !== 'string') {
       return NextResponse.json({ error: 'Invalid email.' }, { status: 400 })
     }
-    // Add the data to the newsletter_email collection.
     const data = await payload.create({
-      collection: 'newsletter_emails',
+      collection: 'newsletter-emails',
       data: { email },
     })
     return NextResponse.json(data, { status: 201 })

@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 export const NewsletterEmails: CollectionConfig = {
-  slug: 'newsletter_emails',
+  slug: 'newsletter-emails',
   access: {
     read: ({ req }) => !!req.user,    // Admin only - contains personal emails
     create: () => true,                // Public signup form needs this

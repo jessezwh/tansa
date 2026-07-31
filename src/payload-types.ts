@@ -70,7 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     events: Event;
-    newsletter_emails: NewsletterEmail;
+    'newsletter-emails': NewsletterEmail;
     sponsors: Sponsor;
     'csv-uploads': CsvUpload;
     logos: Logo;
@@ -88,7 +88,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
-    newsletter_emails: NewsletterEmailsSelect<false> | NewsletterEmailsSelect<true>;
+    'newsletter-emails': NewsletterEmailsSelect<false> | NewsletterEmailsSelect<true>;
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
     'csv-uploads': CsvUploadsSelect<false> | CsvUploadsSelect<true>;
     logos: LogosSelect<false> | LogosSelect<true>;
@@ -206,7 +206,7 @@ export interface Event {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "newsletter_emails".
+ * via the `definition` "newsletter-emails".
  */
 export interface NewsletterEmail {
   id: number;
@@ -227,7 +227,7 @@ export interface Sponsor {
   category?: string | null;
   sponsorshipDetails?: string | null;
   /**
-   * Upload the sponsor logo
+   * Upload the sponsor logo. After CSV import, assign logos manually to any sponsors that were not auto-matched.
    */
   logo?: (number | null) | Logo;
   /**
@@ -518,7 +518,7 @@ export interface PayloadLockedDocument {
         value: number | Event;
       } | null)
     | ({
-        relationTo: 'newsletter_emails';
+        relationTo: 'newsletter-emails';
         value: number | NewsletterEmail;
       } | null)
     | ({
@@ -646,7 +646,7 @@ export interface EventsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "newsletter_emails_select".
+ * via the `definition` "newsletter-emails_select".
  */
 export interface NewsletterEmailsSelect<T extends boolean = true> {
   email?: T;

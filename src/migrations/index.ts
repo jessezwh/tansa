@@ -1,6 +1,7 @@
 import * as migration_20260215_referral_system from './20260215_referral_system';
 import * as migration_20260408_045642 from './20260408_045642';
 import * as migration_20260417_sponsors_category from './20260417_sponsors_category';
+import * as migration_20260731_010136_rename_newsletter_emails from './20260731_010136_rename_newsletter_emails';
 
 export const migrations = [
   {
@@ -17,5 +18,10 @@ export const migrations = [
     up: migration_20260417_sponsors_category.up,
     down: migration_20260417_sponsors_category.down,
     name: '20260417_sponsors_category',
+  },
+  {
+    up: migration_20260731_010136_rename_newsletter_emails.up,
+    down: migration_20260731_010136_rename_newsletter_emails.down,
+    name: '20260731_010136_rename_newsletter_emails'
   },
 ];

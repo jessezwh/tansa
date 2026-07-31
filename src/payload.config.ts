@@ -78,7 +78,7 @@ export default buildConfig({
       },
     }),
     importExportPlugin({
-      collections: ['users', 'registrations', 'exec', 'sponsors', 'events', 'logos', 'newsletter_emails'],
+      collections: ['users', 'registrations', 'exec', 'sponsors', 'events', 'logos', 'newsletter-emails'],
     }),
   ],
 })

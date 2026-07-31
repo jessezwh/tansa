@@ -2,6 +2,9 @@ import { CollectionConfig } from 'payload'
 
 export const Exec: CollectionConfig = {
   slug: 'exec',
+  admin: {
+    group: 'Members',
+  },
   access: {
     read: () => true,
     create: ({ req }) => !!req.user,

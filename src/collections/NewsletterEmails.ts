@@ -10,6 +10,7 @@ export const NewsletterEmails: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'email',
+    group: 'Members',
   },
   fields: [
     {

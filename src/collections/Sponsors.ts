@@ -40,7 +40,7 @@ export const Sponsors: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'location', 'sponsorshipDetails'],
-    group: 'Collections',
+    group: 'Sponsors',
   },
   fields: [
     {
@@ -91,7 +91,7 @@ export const Sponsors: CollectionConfig = {
       name: 'instagram',
       type: 'text',
       label: 'Instagram Handle',
-      required: false,
+      required: true,
       admin: {
         condition: (data) => data?.uploadType === 'single',
       },

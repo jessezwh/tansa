@@ -62,15 +62,15 @@
   - Migration files (`20260408_045642.json`, `.ts`) are needed — they're referenced by `migrations/index.ts` but were never committed. Will be committed with this batch.
   - Fixed smart quote TypeScript error in `success/page.tsx` (introduced by previous agent)
 
-- [ ] **C2. Fix the startup migration prompt**
-  - Running `pnpm dev` prompts to delete a collection — likely schema drift between Payload config and database
-  - Identify which collection is being flagged and why
-  - Resolve by either updating the Payload config or running/fixing the migration
-  - Note: committing the untracked migration files (C1) may resolve this
+- [x] **C2. Fix the startup migration prompt**
+  - **Root cause**: Schema drift between the Payload config and the live database. In dev mode, Payload uses `db.push` (Drizzle schema push), which compares the *current Payload config* directly against the *live DB schema* — migration files are not involved in dev mode (they're only used in production via `payload migrate`).
+  - The mismatch was caused by referral fields (`referralCode`, `referralPoints`, `referredBy`) existing in the DB but being removed from the Payload config during the referral archival (B1/G4). Payload detected the orphaned columns and prompted to drop them.
+  - **Fix**: The prompt resolved after the schema push was accepted during a dev session, syncing the DB to match the updated config. No longer prompts on `pnpm dev`.
 
-- [ ] **C3. Audit and remove unused npm dependencies**
-  - After archiving referral/leaderboard, check if any packages can be removed (e.g. `resend` if referral emails were its only use)
-  - Look for any other unused dependencies
+- [x] **C3. Audit and remove unused npm dependencies**
+  - Removed: `@payloadcms/payload-cloud` (template leftover, never imported), `lucide` (only `lucide-react` is used), `xlsx` (unused after CSV upload refactor), `tsx` (no scripts remain after seed-referrals deletion)
+  - Kept: `resend` (signup confirmation emails), `csv-parser` (sponsor CSV import), `googleapis` (Google Sheets sync), `graphql` (Payload peer dep)
+  - **`src/lib/signup-email.ts`** — already simplified in prior cleanup (no referral content remaining)
 
 - [x] **C4. Clean up untracked/orphaned files**
   - `src/migrations/20260408_045642.json` is a drizzle schema snapshot — needed, will be committed
@@ -84,8 +84,9 @@
   - Audited all 9 API routes. Main inconsistencies:
     - Auth endpoint uses `{ ok: boolean }`, update-payment-intent uses `{ success: true }`, others return data directly
     - Newsletter returns 201 on create, others return 200
-    - Stripe webhook returns non-200 on internal errors (could trigger retries)
-  - These are minor and mostly cosmetic. Consider standardizing in a future pass, but not blocking.
+    - Stripe webhook returns non-200 on internal errors (could trigger Stripe retries — Stripe re-sends webhooks for non-2xx responses)
+  - **Status**: Deferred — these are cosmetic inconsistencies with no user-facing impact. Standardizing response shapes risks introducing bugs in working code for zero functional benefit. The Stripe webhook retry behavior is the only one with potential operational impact, but hasn't caused issues in practice.
+  - **When to do this**: Best paired with other work that already touches API routes, so changes get tested naturally. Most likely triggers: (1) yearly reset implementation (G2) if it adds/modifies routes, (2) a Payload version upgrade that forces route changes, or (3) any new feature that adds API endpoints. Avoid doing this as a standalone refactor.
 
 - [x] **D2. Review photo gallery code quality**
   - Gallery layout algorithm is well-structured (justified layout with simulated aspect ratios — reasonable when CMS doesn't provide real dimensions)
@@ -134,10 +135,10 @@
     5. Year-specific text: update any hardcoded year strings
   - This checklist should live in `CLEANUP.md` or a separate `REBRANDING.md`
 
-- [ ] **E4. Review Payload CMS admin UX for non-technical users**
-  - Ensure collection fields have helpful `description` text in Payload configs
-  - Verify the admin panel is intuitive for managing execs, sponsors, events
-  - Add any missing field descriptions or admin labels
+- [x] **E4. Review Payload CMS admin UX for non-technical users**
+  - Admin panel collections now grouped: Content (Events, Media), Sponsors (Sponsors, Logos, SponsorCSVUploads), Members (Registrations, Exec, NewsletterEmails), Admin (Users)
+  - Instagram field on Sponsors now required
+  - SponsorCSVUploads and Sponsors CSV upload field already have admin descriptions explaining usage
 
 ---
 
@@ -148,10 +149,10 @@
   - `fly.toml`: shared-cpu-1x, 512MB RAM, Sydney region — confirm this is still appropriate
   - Document any deployment steps not captured in config
 
-- [ ] **F2. Update `.env.example`**
-  - Ensure all required env vars are listed after cleanup
-  - Remove any referral/leaderboard-specific env vars if applicable (e.g. `RESEND_API_KEY` if no longer used)
-  - Add comments explaining what each var is for
+- [x] **F2. Update `.env.example`**
+  - Added Google Sheets env vars (`GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_PRIVATE_KEY`, `GOOGLE_SHEET_ID`) with comments
+  - Added `NEXT_PUBLIC_SITE_URL` (used in confirmation emails)
+  - `RESEND_API_KEY` and `RESEND_FROM_EMAIL` already present with O-Week volume note
 
 - [ ] **F3. Review the `start` script**
   - `"echo y | payload migrate && next start"` auto-approves migrations
@@ -197,10 +198,9 @@
 
 - [ ] **G2. Implement chosen reset approach** *(blocked on G1)*
 
-- [ ] **G3. Extend Payload import/export plugin**
-  - Currently only covers `users` and `registrations` in `payload.config.ts`
-  - Add `exec`, `sponsors`, `events`, `logos` to the plugin's `collections` array
-  - This is useful regardless of which reset approach is chosen — gives admin-level export/import for all content
+- [x] **G3. Extend Payload import/export plugin**
+  - Extended to all content collections: `users`, `registrations`, `exec`, `sponsors`, `events`, `logos`, `newsletter_emails`
+  - Enables admin-panel export of any collection's data before yearly reset
 
 - [x] **G4. Remove referral fields from Registrations collection config**
   - `referralCode`, `referralPoints`, `referredBy` fields still in `src/collections/Registrations.ts`

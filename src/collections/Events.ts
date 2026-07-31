@@ -3,6 +3,9 @@ import { CollectionConfig } from 'payload'
 
 export const Events: CollectionConfig = {
   slug: 'events',
+  admin: {
+    group: 'Content',
+  },
   access: {
     read: () => true,
     create: ({ req }) => !!req.user,

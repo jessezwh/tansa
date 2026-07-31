@@ -5,6 +5,7 @@ export const Registrations: CollectionConfig = {
   slug: 'registrations',
   admin: {
     useAsTitle: 'email',
+    group: 'Members',
     defaultColumns: [
       'email',
       'firstName',

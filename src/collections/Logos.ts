@@ -2,6 +2,9 @@ import { CollectionConfig } from 'payload'
 
 export const Logos: CollectionConfig = {
   slug: 'logos',
+  admin: {
+    group: 'Sponsors',
+  },
   access: {
     read: () => true,
     create: ({ req }) => !!req.user,

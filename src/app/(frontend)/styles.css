@@ -13,13 +13,6 @@
   --color-brand-green: #417B3A;
   --color-brand-orange: #F58120;
   --color-brand-brown: #5C3E1F;
-  
-  /* Legacy aliases - can remove after full rebrand */
-  --color-tansa-blue: #4A9BAD;
-  --color-tansa-cream: #F0F3F3;
-  --color-tansa-primary-text: #F0F3F3;
-  --color-tansa-secondary-text: #4A9BAD;
-  
   /* Status colors - can be customized to match brand */
   --color-success: hsl(142, 71%, 45%);
   --color-success-light: hsl(142, 76%, 95%);
@@ -35,15 +28,6 @@
   /* Accent color for interactive elements (buttons, hover states) */
   --color-accent-light: hsl(45, 100%, 88%);
   --color-accent-light-hover: hsl(45, 100%, 80%);
-  
-  /* Leaderboard podium colors */
-  --color-podium-gold: hsl(48, 96%, 53%);
-  --color-podium-gold-text: hsl(45, 92%, 30%);
-  --color-podium-silver: hsl(210, 14%, 76%);
-  --color-podium-silver-text: hsl(215, 14%, 40%);
-  --color-podium-bronze: hsl(30, 75%, 47%);
-  --color-podium-bronze-text: hsl(25, 75%, 30%);
-  
   /* Font */
   --font-draplink: 'draplink', 'sans-serif';
   --font-neue-haas: 'neue-haas', 'sans-serif';

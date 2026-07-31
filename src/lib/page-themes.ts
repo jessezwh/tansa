@@ -1,4 +1,5 @@
 /**
+ * REBRAND: Update color names if brand palette changes.
  * Maps routes to their theme color names.
  * Used by Header and Footer to set per-page accent colors.
  */

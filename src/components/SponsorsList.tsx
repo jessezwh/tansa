@@ -269,7 +269,7 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
     <div className="mt-15">
       <div className="max-w-6xl mx-auto px-4 pb-4">
         {/* Hint text */}
-        <p className="text-white/70 text-xl mb-4 text-center font-neue-haas font-bold">
+        <p className="text-white/70 text-xl mb-4 text-center font-body font-bold">
           <span className="[@media(hover:hover)]:hidden">Tap a sponsor to see details</span>
           <span className="hidden [@media(hover:hover)]:inline">Hover over a sponsor to see details</span>
         </p>
@@ -352,13 +352,13 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
       {/* Sponsor cards */}
       <div ref={containerRef} className="max-w-6xl mx-auto px-4 pb-8">
         {visibleTabs.length === 0 ? (
-          <p className="text-white/70 text-center font-neue-haas font-bold">No sponsors found.</p>
+          <p className="text-white/70 text-center font-body font-bold">No sponsors found.</p>
         ) : Object.keys(activeGrouped).length === 0 ? (
-          <p className="text-white/70 text-center font-neue-haas font-bold">No sponsors in this area.</p>
+          <p className="text-white/70 text-center font-body font-bold">No sponsors in this area.</p>
         ) : (
           Object.entries(activeGrouped).map(([location, locationSponsors]) => (
             <div key={location} className="mb-8">
-              <h2 className="text-white font-bold text-lg mb-4 font-neue-haas text-center md:text-left">
+              <h2 className="text-white font-bold text-lg mb-4 font-body text-center md:text-left">
                 {LOCATION_DISPLAY_NAMES[location] ?? location}
               </h2>
               <div className="flex flex-wrap justify-center md:justify-start gap-4">

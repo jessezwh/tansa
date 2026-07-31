@@ -113,27 +113,21 @@
 
 ## E. Theming & Rebranding Prep
 
-- [ ] **E1. Audit hardcoded brand references**
-  - Search for hardcoded color hex values (e.g. `#ED2E88`, `#4A9BAD`)
-  - Search for year references (`2026`, `26`)
-  - Search for club-specific text that might change
-  - Document every location that needs updating for a rebrand
-  - Known: `src/lib/signup-email.ts` has hardcoded `EMAIL_COLORS` with brand hex values (needed for email HTML, can't use CSS vars)
+- [x] **E1. Audit hardcoded brand references**
+  - All rebrandable locations now marked with `/* REBRAND */` comments (11 markers across 6 files)
+  - Run `grep -r "REBRAND" src/` to find all locations needing yearly updates
+  - Covers: colors (styles.css, brand.ts, signup-email.ts), fonts (styles.css, layout.tsx), assets (page.tsx), metadata (layout.tsx), page themes (page-themes.ts)
 
-- [ ] **E2. Centralize rebrandable assets**
-  - Bear SVGs are in `public/bears/` (good)
-  - Logos are scattered in `public/` root (`TANSA-LOGO.svg`, `tansa-text.svg`, `20.svg`, `26.svg`, etc.)
-  - Consider organizing into `public/brand/` with clear naming
-  - Favicon (`favicon2026.png`) needs a clear replacement path
+- [x] **E2. Centralize rebrandable assets**
+  - Moved brand assets to `public/brand/`: logo.svg, wordmark.svg, year-short.svg, year-full.svg, year-prefix.svg, favicon.png
+  - Renamed font files: display.otf, body-regular.ttf, body-medium.ttf, body-bold.ttf
+  - Removed unused font file (NewKansasBold.otf) and deeply nested font subdirectory
+  - Updated all references in CSS, layout.tsx, and components
 
-- [ ] **E3. Create a rebranding checklist**
-  - Document the exact steps for a yearly rebrand:
-    1. Colors: update `src/app/(frontend)/styles.css` custom properties + `src/lib/brand.ts` Stripe colors
-    2. Assets: replace SVGs in `public/bears/` and `public/brand/`
-    3. Fonts: replace files in `public/fonts/`, update `@font-face` in layout or CSS
-    4. Favicon: replace and update references
-    5. Year-specific text: update any hardcoded year strings
-  - This checklist should live in `CLEANUP.md` or a separate `REBRANDING.md`
+- [x] **E3. Create a rebranding checklist**
+  - Replaced with searchable `REBRAND` markers throughout codebase — no separate doc needed
+  - All locations discoverable via `grep -r "REBRAND" src/`
+  - Font CSS variables renamed from font-specific (`font-draplink`, `font-neue-haas`) to role-based (`font-display`, `font-body`)
 
 - [x] **E4. Review Payload CMS admin UX for non-technical users**
   - Admin panel collections now grouped: Content (Events, Media), Sponsors (Sponsors, Logos, SponsorCSVUploads), Members (Registrations, Exec, NewsletterEmails), Admin (Users)

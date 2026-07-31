@@ -9,7 +9,7 @@ export default function ContactPage() {
       <div className="bg-brand-bg">
         <div className="max-w-6xl h-30 lg:h-55 mx-auto flex items-center justify-between relative overflow-visible">
           <div className="relative z-20 pl-4 lg:pl-0 lg:mt-10 ">
-            <div className="font-draplink font-bold text-brand-brown leading-none text-5xl lg:text-8xl">
+            <div className="font-display font-bold text-brand-brown leading-none text-5xl lg:text-8xl">
               <h1>CONTACT US</h1>
             </div>
           </div>
@@ -34,7 +34,7 @@ export default function ContactPage() {
 
       {/* Contact Info Section */}
       <div className="min-h-[300px] flex flex-col items-center justify-center px-6 py-10 pb-20">
-        <h2 className="text-3xl font-neue-haas font-medium mb-8 text-brand-brown">Get in Touch!</h2>
+        <h2 className="text-3xl font-body font-medium mb-8 text-brand-brown">Get in Touch!</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl w-full">
           {/* Email */}

@@ -9,10 +9,11 @@ const dmSans = DM_Sans({
   weight: ['400', '500', '700'], // pick weights you need
 })
 
+// REBRAND: Update title and favicon
 export const metadata = {
   title: "Taiwanese and New Zealand Students' Association",
   icons: {
-    icon: '/favicon2026.png',
+    icon: '/brand/favicon.png',
   },
 }
 
@@ -25,28 +26,28 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         {/* Preload custom fonts to reduce FOUT when navigating between pages */}
         <link
           rel="preload"
-          href="/fonts/draplink.otf"
+          href="/fonts/display.otf"
           as="font"
           type="font/otf"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="/fonts/neue-haas-grotesk-display-pro-cufonfonts/NeueHaasDisplayRoman.ttf"
+          href="/fonts/body-regular.ttf"
           as="font"
           type="font/ttf"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="/fonts/neue-haas-grotesk-display-pro-cufonfonts/NeueHaasDisplayMediu.ttf"
+          href="/fonts/body-medium.ttf"
           as="font"
           type="font/ttf"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="/fonts/neue-haas-grotesk-display-pro-cufonfonts/NeueHaasDisplayBold.ttf"
+          href="/fonts/body-bold.ttf"
           as="font"
           type="font/ttf"
           crossOrigin="anonymous"

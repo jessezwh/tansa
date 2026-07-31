@@ -79,7 +79,7 @@ function EventCard({ title, date, photoUrls, slug, priority = false }: EventCard
 
         {/* Event Info */}
         <div className="p-4">
-          <h3 className="font-semibold text-lg text-brand-blue font-neue-haas truncate group-hover:text-brand-blue/80 transition-colors">
+          <h3 className="font-semibold text-lg text-brand-blue font-body truncate group-hover:text-brand-blue/80 transition-colors">
             {title}
           </h3>
           <p className="text-sm text-muted-text mt-1">{formattedDate}</p>

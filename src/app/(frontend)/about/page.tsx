@@ -44,7 +44,7 @@ async function TeamContent() {
       <div className="bg-brand-orange">
         <div className="max-w-6xl h-48 lg:h-72 mx-auto flex items-center justify-between relative overflow-y-clip overflow-x-visible">
           <div className="relative z-20 pl-4 lg:pl-0 lg:mt-4">
-            <div className="font-draplink font-bold text-white leading-none text-6xl lg:text-9xl">
+            <div className="font-display font-bold text-white leading-none text-6xl lg:text-9xl">
               <h1 className='text-4xl lg:text-7xl'>Meet Our</h1>
               <h1>TEAM!</h1>
             </div>

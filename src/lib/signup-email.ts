@@ -1,6 +1,6 @@
 import { Resend } from 'resend'
 
-// Brand colors aligned with styles.css (email-safe hex)
+// REBRAND: Update these hex values to match new brand colors (must be hardcoded for email HTML)
 const EMAIL_COLORS = {
   bg: '#F0F3F3', // brand-bg
   pink: '#ED2E88', // brand-pink

@@ -22,7 +22,7 @@ const page = () => {
           </div>
 
           <div className="relative text-center z-20 pl-4 lg:pl-0 lg:mt-4">
-            <h1 className="text-7xl lg:text-9xl font-bold text-white font-draplink z-10 relative">
+            <h1 className="text-7xl lg:text-9xl font-bold text-white font-display z-10 relative">
               JOIN US
             </h1>
             <p className="text-xs lg:text-xl text-white z-10 relative px-4">

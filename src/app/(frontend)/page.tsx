@@ -65,14 +65,14 @@ export default async function HomePage() {
         {/* Text content - stacked from top */}
         <div className="flex flex-col items-center text-center flex-1 justify-end pb-14 lg:pb-4">
           {/* Hello text */}
-          <h2 className="font-neue-haas font-medium text-brand-blue text-3xl lg:text-[clamp(2.19rem,5.25vw,3.5rem)]">
+          <h2 className="font-body font-medium text-brand-blue text-3xl lg:text-[clamp(2.19rem,5.25vw,3.5rem)]">
             Hello! We are
           </h2>
           
           {/* TANSA text SVG */}
           <div className="w-[90vw] lg:w-[40vw] mt-5">
             <Image
-              src="/tansa-text.svg"
+              src="/brand/wordmark.svg"
               alt="TANSA"
               width={500}
               height={100}
@@ -107,27 +107,28 @@ export default async function HomePage() {
         
         {/* Scroll indicator - desktop only */}
         <div className="hidden lg:flex absolute bottom-4 right-6 z-20 flex-col items-center text-black animate-gentle-bounce">
-          <p className="text-[10px] sm:text-xs font-medium font-neue-haas">Scroll Down</p>
+          <p className="text-[10px] sm:text-xs font-medium font-body">Scroll Down</p>
           <div className="text-lg sm:text-xl">↓</div>
         </div>
 
+        {/* REBRAND: Replace year SVGs in public/brand/ */}
         {/* Desktop: 20 - Bear - 26 side by side */}
         <div className="hidden lg:flex items-end justify-center w-full">
           <div className="w-[28vw] -mr-[11vw] z-0">
-            <Image src="/20.svg" alt="20" width={200} height={200} className="w-full h-auto" />
+            <Image src="/brand/year-prefix.svg" alt="20" width={200} height={200} className="w-full h-auto" />
           </div>
           <div className="w-[35vw] z-10">
             <Image src="/bears/peek_bear.svg" alt="TANSA Bear peeking" width={400} height={300} className="w-full h-auto" priority />
           </div>
           <div className="w-[28vw] -ml-[11vw] z-0">
-            <Image src="/26.svg" alt="26" width={200} height={200} className="w-full h-auto" />
+            <Image src="/brand/year-short.svg" alt="26" width={200} height={200} className="w-full h-auto" />
           </div>
         </div>
 
         {/* Mobile: 2026 above bear, stacked */}
         <div className="flex lg:hidden flex-col items-center w-full">
           <div className="w-[125%] -mb-[8vh] z-0">
-            <Image src="/2026.svg" alt="2026" width={400} height={200} className="w-full h-auto" />
+            <Image src="/brand/year-full.svg" alt="2026" width={400} height={200} className="w-full h-auto" />
           </div>
           <div className="w-[75vw] z-10">
             <Image src="/bears/peek_bear.svg" alt="TANSA Bear peeking" width={400} height={300} className="w-full h-auto" priority />
@@ -138,7 +139,7 @@ export default async function HomePage() {
       <div className="bg-brand-pink pt-12 sm:pt-16 lg:pt-20">
         <div className="flex flex-col items-center justify-center w-full">
           <div className="w-full max-w-7xl px-4">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 font-neue-haas">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 font-body">
               Recent Events
             </h2>
             <EventsCarousel images={carouselImages} />

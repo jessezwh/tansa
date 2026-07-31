@@ -148,10 +148,10 @@
   - Added `NEXT_PUBLIC_SITE_URL` (used in confirmation emails)
   - `RESEND_API_KEY` and `RESEND_FROM_EMAIL` already present with O-Week volume note
 
-- [ ] **F3. Review the `start` script**
-  - `"echo y | payload migrate && next start"` auto-approves migrations
-  - Verify this is safe and intentional — could silently run destructive migrations
-  - Consider if there's a safer pattern
+- [x] **F3. Review the `start` script**
+  - `"echo y | payload migrate && next start"` auto-approves migrations — this is intentional for Fly.io deployment where there's no interactive terminal
+  - Safe in practice: migrations are generated from the Payload config, so they reflect intended schema changes
+  - The `staleTimes.dynamic` warning was fixed by setting it to 0 in `next.config.mjs`
 
 ---
 
@@ -168,29 +168,29 @@
 | Events | Prune | Keep a few key events so the page isn't empty; remove the rest. |
 | Media | Prune | Remove media orphaned by deleted events. |
 | Logos | Prune | Remove logos orphaned by deleted sponsors. |
-| Newsletter Emails | Keep or clear | Decision needed — do subscribers carry over? |
+| Newsletter Emails | Clear all | Subscribers do not carry over. |
 | Users (admin) | Update | Hand over admin credentials to new exec. |
 
-- [ ] **G1. Decide on yearly reset approach** *(decision deferred — does not block C/D/E cleanup)*
+- [x] **G1. Decide on yearly reset approach**
 
-  The key architectural question: should the yearly reset (and brand/theme changes) be fully manageable through the Payload admin UI, or require some CLI/dev work?
+  **Decision**: No admin-configurable brand assets. Page layouts change too much yearly to justify a Payload Global approach. Instead, the codebase is standardized so a developer can efficiently make changes (searchable `REBRAND` markers, role-based font names, organized asset folders).
 
-  **Context from discussion:**
-  - The club is non-technical; CLI access is high friction in future years
-  - Moving brand assets (SVGs, colors) into a Payload Global is feasible and performant (assets served from S3/CDN, colors injected as CSS vars in layout, Next.js caches the queries)
-  - Fonts are the one tricky area — may be kept as static files in `public/fonts/`
-  - Full Payload approach = more upfront work but zero CLI for future years
-  - Hybrid approach = reset script now, brand-in-Payload later
+  **Yearly reset process** (manual via Payload admin + dev for rebrand):
+  1. Export data via Payload import/export plugin (all collections now supported)
+  2. Copy Google Sheet as archive, clear original tabs
+  3. Delete/reset collections through Payload admin panel
+  4. Upload new exec, sponsors (CSV bulk import), seed events
+  5. Dev updates brand assets (grep for `REBRAND` markers)
+  6. Deploy via `fly deploy`
 
-  **Options under consideration:**
-  - **Option A**: Payload admin export + manual delete (no custom code, but tedious)
-  - **Option B**: CLI reset script (`pnpm yearly-reset`) — one command, handles orphaned media
-  - **Option C**: Admin UI reset action + Brand Settings global in Payload — most accessible, most implementation effort
-  - **Hybrid**: Option B now, move brand into Payload later
+  **Services that carry over**: Stripe (same account/keys), Resend (same account, `noreply@tansa.co.nz`), Cloudflare R2 (same bucket — Payload S3 plugin handles deletion), Google service account (shared TANSA Gmail). Domain `tansa.co.nz` is on Cloudflare, needs annual renewal.
 
-  **Newsletter subscribers**: Clear each year (confirmed).
+  **Newsletter subscribers**: Clear each year.
 
-- [ ] **G2. Implement chosen reset approach** *(blocked on G1)*
+- [x] **G2. Implement chosen reset approach**
+  - No custom reset script needed — admin export + manual delete through Payload admin is sufficient
+  - Import/export plugin covers all collections (G3)
+  - Rebrand is dev-assisted using `REBRAND` markers (E1-E3)
 
 - [x] **G3. Extend Payload import/export plugin**
   - Extended to all content collections: `users`, `registrations`, `exec`, `sponsors`, `events`, `logos`, `newsletter_emails`
@@ -202,15 +202,9 @@
   - DB columns can remain (no migration needed) — they'll just be unused
   - This simplifies the admin view and reduces confusion for future maintainers
 
-- [ ] **G5. Document the yearly handover process** *(blocked on G1/G2)*
-  - Write a step-by-step handover checklist covering:
-    1. Export/backup current year's data
-    2. Reset collections (via chosen method)
-    3. Update brand assets (cross-ref with E3 rebranding checklist)
-    4. Update admin credentials
-    5. Update env vars if any services change (Stripe, Resend, Google Sheets, etc.)
-    6. Update `.env` on Fly.io
-    7. Deploy
+- [ ] **G5. Document the yearly handover process**
+  - Will be a Google Drive document (not in-repo), written after all code changes are deployed
+  - Covers: data backup, collection reset, brand update (`REBRAND` markers), service verification, deployment
 
 ---
 

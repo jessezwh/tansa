@@ -121,7 +121,7 @@ export const Sponsors: CollectionConfig = {
       label: 'Sponsor Logo',
       required: false,
       admin: {
-        description: 'Upload the sponsor logo',
+        description: 'Upload the sponsor logo. After CSV import, assign logos manually to any sponsors that were not auto-matched.',
         condition: (data) => data?.uploadType === 'single',
       },
     },
@@ -202,15 +202,19 @@ export const Sponsors: CollectionConfig = {
             }
 
             let matchedCount = 0
+            let failedCount = 0
+            const unmatchedNames: string[] = []
+
             for (const sponsor of sponsors) {
               try {
-                // Try to find a matching logo by normalized sponsor name
                 const normalizedSponsorName = normalizeForMatching(sponsor.name)
                 const matchedLogoId = logoMap.get(normalizedSponsorName)
 
                 if (matchedLogoId) {
                   sponsor.logo = matchedLogoId
                   matchedCount++
+                } else {
+                  unmatchedNames.push(sponsor.name)
                 }
 
                 await req.payload.create({
@@ -218,14 +222,26 @@ export const Sponsors: CollectionConfig = {
                   data: sponsor,
                 })
               } catch (error) {
-                console.error('Error creating sponsor:', error)
+                failedCount++
+                console.error(`Error creating sponsor "${sponsor.name}":`, error)
               }
             }
 
-            console.log(`CSV Import: Created ${sponsors.length} sponsors, matched ${matchedCount} logos`)
+            const created = sponsors.length - failedCount
+            console.log(
+              `CSV Import: ${created} created, ${matchedCount} logos matched, ${unmatchedNames.length} unmatched, ${failedCount} failed` +
+              (unmatchedNames.length > 0 ? `\n  Unmatched: ${unmatchedNames.join(', ')}` : ''),
+            )
+
+            const params = new URLSearchParams({
+              imported: String(created),
+              matched: String(matchedCount),
+              unmatched: String(unmatchedNames.length),
+              failed: String(failedCount),
+            })
 
             return {
-              __redirect: '/admin/collections/sponsors',
+              __redirect: `/admin/collections/sponsors?${params.toString()}`,
             }
           } catch (error) {
             console.error('Error in CSV processing:', error)
